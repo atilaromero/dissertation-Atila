@@ -1,0 +1,26 @@
+\chapter{\label{chap:introduction}Introduction}
+
+In a forensic context, file recovery is a frequent task that can be motivated by several situations, like physical media malfunction, intentional attempt to hide data, and the need to access deleted or older versions of files. When the filesystem no longer provides the physical location of a file on the media, data carving is often the only procedure capable of retrieving its content.
+
+% \subsection{Motivation}
+
+The patterns searched by data carving software are generally manually coded, taking advantage of fixed byte sequences found on headers and footers. But the amount of different file types combined with the slow process of manually coding each of those patterns makes the development of data carving software a tedious task \cite{mcdaniel_content_2003}.
+
+The application of machine learning solutions to this manual task has the potential to make it easier and faster. An initial strategy could be to train a classifier to, given a chunk of data, provide a label indicating a file type. That could be used to recover unfragmented deleted files.
+
+The recovery of fragmented files through data carving would require some sort of pattern recognition on the identified chunks, in order to reconstruct the correct sequence.
+
+% \subsection{Research questions}
+
+\todo[inline]{review objectives}
+This work explores the use of Long Short-Term Memory (LSTM) neural networks to perform data carving, investigates how the construction of data carving software can be fully or partially automated using this technology, and apply the findings towards a practical solution in which the forensic examiners community     can collaboratively build models for several file types.
+
+% \subsection{Outline}
+
+The remainder of this document is organized as follows.
+\todo[inline]{check document outline}
+    Chapter 2 analyses the current status of data carving tools and research. 
+    Chapter 3 analyses how current research on sequence labeling can improve data carving solutions.
+    Chapter 4 proposes solutions to some of the data carving problems.
+    Chapter 5, for each performed experiment, describes the chosen method, presents the results obtained and offers an discussion of the results.
+    Chapter 6 summarizes the work, analysing achievements and limitations, and including suggestions for future work.
