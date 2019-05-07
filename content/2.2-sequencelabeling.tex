@@ -9,13 +9,18 @@
 %Another example of a sequence labeling task is found in speech recognition.
 %The sound of a spoken sentence is split into parts and each part receives a label corresponding to a phoneme. But those labels are not independent since some combinations of phonemes are meaningful while others are not. Thus, taking this context into account increases the accuracy of the results.
 
-
+\todo[inline]{Maybe change section from 'sequence labeling' to 'Long Short-Term Memory'?}
 \todo[inline]{What is sequence labeling}
+\todo[inline]{Describe following subsections}
 
 \subsection{\label{sec:lstm}Long Short-Term Memory}
 % Hochreiter schmidhuber, 1997
 % Hochreiter, S., & Schmidhuber, J. (1997). Long ShortTerm Memory. Neural Computation, 9, 1735–1780.
 \todo[inline]{What is LSTM}
+Long Short-Term Memory\cite{hochreiter_long_1997} (LSTM) is a type of Recurrent Neural Network (RNN) architecture that address the problem of vanishing or exploding gradients through time. This problem occurs in simple RNNs because the signal transmitted from one time-step to another is influenced at each interaction, both on forward and backward propagation phases, limiting the potential interaction between distant time-steps. The solution offered by LSTM introduces the concept of a memory cell, adding gates units to each node. The initial proposal included only input and output gates \cite{hochreiter_long_1997}. The input gate is responsible for regulating if the cell internal state will be affected by the cell inputs. Similarly, the output gate regulates if the internal state will influence the outputs. The concept of a forget gate was introduced later \cite{gers_learning_1999}, to control whether the internal state of the cell should be reset.
+
+\todo[inline]{Are peephole connections worth mentioning?}
+
 
 \subsection{\label{sec:ctc}Connectionist Temporal Classification}
 % Connectionist Temporal Classification: Labelling Unsegmented Sequence Data with Recurrent Neural Networks
