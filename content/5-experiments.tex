@@ -1,1 +1,89 @@
 \chapter{\label{chap:methods}Experiments}
+
+\section{Framework}
+\todo[inline]{TensorFlow}
+\todo[inline]{symbolic computation}
+\todo[inline]{gradients}
+
+\todo[inline]{keras}
+
+\todo[inline]{GPU vs. CPU processing}
+\todo[inline]{pip, go, docker, colab; cuda9.0,9.2,10, cuDNN7.4.2}
+\todo[inline]{python -m venv}
+
+\section{Tests with algorithms and procedures}
+%Use of different problems to validate algorithms and procedures
+\todo[inline]{explain why and what}
+
+\subsection{Dinosaurs names}
+\todo[inline]{make a fluent text}
+Dino - RNN - 
+transform python jupyter notebook in python testing files to have reproducible results
+replicate tests using keras
+necessary to use custom loss function
+\begin{verbatim}
+def myloss(y_true, y_pred):
+    r = -tf.keras.backend.log(y_pred)
+    r = y_true * r
+    return tf.keras.backend.sum(r)
+\end{verbatim}
+Use of two models, one to train and one to generate data. The difference between them is that only the second one is stateful, meaning that its internal state is not automatically reset at the end of a batch.
+Z problem - necessity to shuffle data
+
+\subsection{Shakespeare}
+\todo[inline]{make a fluent text}
+LSTM
+
+In the Coursera exercise, the model was already trained but there were references to the original sources, 
+\todo{locate source}, made using Keras. Since neural network training involves some degree of randomization, the previous experiment approach of comparing exact weights and outputs could not be applied in this case. This experiment was instead to achieve similar results, checking if the network could be trained and, more important, if any problems would arise.
+
+The application of the algorithms was straightforward and provided similar results to the original trained model. It was interesting to notice the usage of variance scaling initializers and dropout on the model, which seems to give better results compared to results obtained without them.
+
+
+\subsection{Speech recognition}
+The input of a speech recognition task, which is some kind of wave sound representation, has a very different size when compared to the output, which is text. CTC, as described in section \ref{sec:ctc}, is a convenient solution to perform end to end speech to text conversion because it provides a way to perform back-propagation in this scenario where an unknown number of several consecutive input units are related to to a single output unit.
+
+But, while Keras already has a build-in CTC loss function, called ctc\_batch\_cost, its usage is not as simple as other loss functions of the same framework. These functions only require the predicted and the correct labels, while this CTC loss function also requires the input size and the predicted label size. 
+
+ An example included in Kera's own repository \todo{include reference to imageocr.py} suggests as a solution to include the loss computation as an extra layer in the network. This layer would receive, besides the previous layer input, the required sizes as two extra inputs, arguing that Keras has no support for a loss function with extra parameters coming from the network. 
+ While this certainly works, it is unusual. The alternative approach used in this dissertation was to encode the required information as two extra columns on the correct label matrix, which is only used by the loss function anyway.
+ 
+ Fig XXX\todo{table? fig? XXX} shows the code used to split the y\_pred input matrix into three inputs required by Kera's ctc\_batch\_cost function. The result can then be passed to the model.fit() function.
+
+\noindent
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, caption={ctc\_loss}]
+def ctc_loss(y_shape):
+  def f(y_true, y_pred):
+    y_true = tf.reshape(y_true, y_shape)
+    k_inputs = y_pred
+    k_input_lens = y_true[:,0:1]
+    k_label_lens = y_true[:,1:2]
+    k_labels = y_true[:,2:]
+    cost = K.ctc_batch_cost(k_labels, k_inputs,
+        k_input_lens,k_label_lens)
+    return cost
+  return f
+\end{lstlisting}
+\end{minipage}
+
+\todo[inline]{Dataset: gTTS vs espeak vs recorded audio}
+\todo[inline]{amplitude vs. fft}
+\todo[inline]{ctc\_loss}
+\todo[inline]{}
+\todo[inline]{}
+\todo[inline]{}
+
+
+ctc - not straightforward in Keras
+image ocr uses ctc as a layer instead of a loss function
+
+raw audio vs fft
+
+espeak
+
+loss stagnated due to dropout
+
+\section{Carving experiments}
+3 files
+identification of sectors
