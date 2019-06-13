@@ -1,0 +1,8 @@
+\subsection{Shakespeare}
+
+The second test, located in the folder ``coursera-tests/shakespeare'',  was based on another exercise of the same course. In this exercise the model was already trained but there were references to the original source code, 
+\todo{locate source}, made using Keras. Since neural network training involves some degree of randomization, the previous experiment approach of comparing outputs using unit tests was not applied in this case. The focus of this test was instead to achieve similar results, checking if the network could be trained and, more important, if any problems would arise.
+
+The model of the network uses two LSTM layers with dropout, followed by a fully-connected layer.
+
+The execution of the algorithms was straightforward and provided similar results to the original trained model. It was interesting to notice the usage of variance scaling initializers and dropout on the model, which seemed to give better results compared to results obtained without them.

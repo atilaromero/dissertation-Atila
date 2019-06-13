@@ -1,0 +1,189 @@
+\subsection{Speech recognition}
+The third test, located in the folder ``speech-experiments'', is actually an experiment. Many of the works available using this type of network are focused at speech or text recognition. Therefore speech recognition was chosen as an experiment whose objective was to discover what are the challenges that the use of a LSTM neural network imposes. Using similar works on the speech recognition field, it was expected that the occurrence of eventual problems could be solved using these works as reference or inspiration.
+
+The input of a speech recognition task, which is some kind of wave sound representation, has a very different size when compared to the output, which is text. CTC, as described in section \ref{sec:ctc}\todo{CTC will be detailed?}, is a convenient solution to perform end to end speech to text conversion because it provides a way to perform back-propagation in this scenario where an unknown number of several consecutive input units are related to to a single output unit.
+
+But, while Keras already has a build-in CTC cost function, called ctc\_batch\_cost, its usage is not as simple as other cost functions of the same framework. These functions only require the predicted and the correct labels, while this CTC cost function also requires the input size and the predicted label size. 
+
+An example included in Kera's own repository \todo{include reference to imageocr.py} suggests as a solution to include the loss computation as an extra layer in the network. This layer would receive, besides the previous layer input, the required sizes as two extra inputs, arguing that Keras has no support for a loss function with extra parameters coming from the network. 
+While this certainly works, it is unusual. The alternative approach used in this dissertation was to encode the required information as two extra columns on the correct label matrix, which is only used by the loss function anyway.
+ 
+Algorithm \ref{alg:ctcloss} shows the code used to split the y\_pred input matrix into three inputs required by Kera's ctc\_batch\_cost function. The result can then be passed to the model.fit() function.
+
+\noindent
+\begin{algorithm}
+\begin{lstlisting}[frame=single, numbers=left]
+def ctc_loss(y_shape):
+  def f(y_true, y_pred):
+    y_true = tf.reshape(y_true, y_shape)
+    k_inputs = y_pred
+    k_input_lens = y_true[:,0:1]
+    k_label_lens = y_true[:,1:2]
+    k_labels = y_true[:,2:]
+    cost = K.ctc_batch_cost(k_labels, k_inputs,
+        k_input_lens,k_label_lens)
+    return cost
+  return f
+\end{lstlisting}
+\caption{\label{alg:ctcloss}ctc\_loss}
+\end{algorithm}
+
+The code that prepares the labels matrix, including the sizes as the two first columns, is presented in algorithm \ref{alg:toctcformat}.
+
+\noindent
+\begin{algorithm}
+
+\begin{lstlisting}[frame=single, numbers=left]
+def to_ctc_format(xs,ys, max_ty=None):
+  max_tx = np.max([len(i) for i in xs])
+  if max_ty == None:
+    max_ty = np.max([len(i) for i in ys]) + 3
+  assert max_ty >= np.max([len(i) for i in ys]) + 3
+  xarr = np.zeros((len(xs), max_tx, xs[0].shape[1]))
+  yarr = np.zeros((len(ys), max_ty))
+  for i, x in enumerate(xs):
+    xarr[i,:len(x)] = x
+  for i, y in enumerate(ys):
+    yarr[i,:len(y)+2] = [len(x), len(y), *y]
+  return xarr, yarr
+\end{lstlisting}
+\caption{\label{alg:toctcformat}to\_ctc\_format}
+\end{algorithm}
+
+\subsubsection{Datasets}
+\todo[inline]{Dataset: gTTS vs espeak vs recorded audio}
+\todo[inline]{Dataset: v, cv, cvs}
+
+\todo[inline]{amplitude vs. fft}
+
+\subsubsection{Model}
+
+In the first attempts, the models had only one LSTM layer, usually with 128 units, using dropout of 0.5 and a fully connected layer of 27 outputs. But the results with this configuration, and some variations of it, were unsatisfactory.
+
+The first problem was that the loss would stagnate after some time, resulting in poor accuracy. After the removal of dropout, this behavior was corrected. It is possible that smaller values of dropout could also give the same result, but this alternative was not tested.
+
+But even with a decreasing loss, the network training still was a slow process. It was taking xxxxx \todo{rollback and measure} to learn to recognize only 5 audios of 5 vowels.
+Without a similar working model to compare, it was difficult to judge if that training time was normal or not. Some alternative models were tried. While the increase in number of LSTM layers and variations on the quantity of units did not change the results enough, the inclusion of three 1D convolutional layers before the LSTM layer gave dramatic changes in training time.
+
+\todo[inline]{describe naming, folder structure, objective, adam, hardware, accuracy(exact match) vs loss, and limitations of experiments with vowels, loss vs cost}
+
+% Because the accuracy measure used in the experiments considered only exact matches as correct answers, it only increased above zero after the loss was very low. 
+
+\subsubsection{v-001}
+
+Experiment v-001 uses a model with three convolutional layers of 16, 8 and 4 units each, followed by a LSTM layer of 64 units and a fully connected layer of 27 output units, with softmax activation.
+
+The code is configured to run for 1000 epochs, with only 5 samples each, one for each vowel, taking 1m08s to run in the hardware used.
+
+\noindent
+\begin{algorithm}
+\begin{lstlisting}[language=Python, frame=single, numbers=left]
+last = l0 = Input(shape=(None,221))
+last = Conv1D(16, (3,), padding="same", activation="relu")(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+last = LSTM(64, return_sequences=True)(last)
+last = Dense(27)(last)
+last = Activation('softmax')(last)
+
+model = tf.keras.Model([l0], last)
+\end{lstlisting}
+\caption{\label{alg:v001}Experiment v-001}
+\end{algorithm}
+
+\subsubsection{v-002}
+Experiment v-002 uses the same model structure of v-001, but uses an abstract class to handle common tasks and uses callbacks to save checkpoints and to decide when to stop training.
+
+It achieves 1.00 accuracy in 1330 epochs, taking 2m14s.
+
+\subsubsection{v-003}
+
+Experiment v-003 adds more convolutional layers to the previous model.  It also adds a TensorBoard callback, which saves more details of the training process in a format that can be read by TensorBoard and used to perform analysis and create graphics.
+
+It achieved 1.00 accuracy in 600 epochs, taking 0m44s.
+
+\noindent
+\begin{algorithm}
+\begin{lstlisting}[language=Python, frame=single, numbers=left]
+last = l0 = Input(shape=(None,221))
+last = Conv1D(16, (3,), padding="same", activation="relu")(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+last = LSTM(64, return_sequences=True)(last)
+last = Dense(27)(last)
+last = Activation('softmax')(last)
+
+model = tf.keras.Model([l0], last)
+\end{lstlisting}
+\caption{\label{alg:v003}Experiment v-003}
+\end{algorithm}
+
+\subsubsection{v-004}
+Experiment v-004 adds a maxpool layer after each convolutional layer. The ``data\_format=`channels\_first`'' option specifies the dimension that should be reduced, which should be the data of a single time step. With the default option the MaxPool1D function would reduce the number of time steps.
+
+It achieved 1.00 accuracy in 500 epochs, taking 0m40s.
+
+\noindent
+\begin{algorithm}
+\begin{lstlisting}[language=Python, frame=single, numbers=left]
+maxpool = MaxPool1D(pool_size=2,
+                    strides=1,
+                    data_format='channels_first')
+last = l0 = Input(shape=(None,221))
+last = Conv1D(16, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = Conv1D(8, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = Conv1D(4, (3,), padding="same", activation="relu")(last)
+last = maxpool(last)
+last = LSTM(64, return_sequences=True)(last)
+last = Dense(27)(last)
+last = Activation('softmax')(last)
+
+model = tf.keras.Model([l0], last)
+\end{lstlisting}
+\caption{\label{alg:v004}Experiment v-004}
+\end{algorithm}
+
+\subsubsection{cv-001}
+Experiment cv-001 is based on experiment v-001, but applied the model on a dataset of syllables consisting of a consonant followed by a vowel. It uses a stop condition of accuracy $>=$ 0.6.
+
+The experiment took 3m52s to reach an accuracy of 0.6, but the loss presented stagnation after after that.
+
+But it was noticeable that the application of a type of transfer learning\todo{insert reference} improved the decrease speed of the loss value. Transfer learning is usually implemented through the insertion of an immutable copy of the first layers of an already trained model in a new model that will be trained with a different dataset, usually smaller. In the current experiment the same model trained in experiment v-001 was used as a starting point in experiment cv-001, but none of the layers were protected against back propagation updates because the new dataset was a superset of the initial one and updates on the first layers could be necessary.
+
+
+\subsubsection{cv-002}
+
+Experiment cv-002 uses a source code based on  experiment v-002, but the inclusion of items on the training sample was done gradually. Given that in cv-001 it was observed that training the vowels first improved training time, in experiment cv-002 the initial training dataset included only the vowels first. Then, five new items were added to the training set each time the accuracy was greater than 0.5. This was implemented in Keras using a fit\_generator function.
+
+This change prevented stagnation of the loss value.
+
+% time and accuracy
+
+\subsubsection{cv-003}
+Experiment cv-003 also uses a source code based on experiment v-002, but does not use the alterations introduced in experiment cv-002.
+
+A key difference between experiment cv-001 and cv-003 is that in the first the ``fit'' function was called many times, one for each epoch, while in the later the ``fit'' function was called only once, specifying the maximum number of epochs that should be run. The disadvantage of calling the ``fit'' function many times is that the internal state of the optimizer algorithm is reset at each interaction, thus causing the observed stagnation of the loss value.
+
+\subsubsection{cvs-001}
+
+
+
+\subsubsection{failed}
+\subsubsection{speech.ipynb}
+
+
+

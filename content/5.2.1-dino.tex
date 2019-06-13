@@ -1,0 +1,27 @@
+\subsection{Dinosaurs names}
+The first test, located in the folder ``coursera-tests/dino'', was an attempt to replicate the results of an exercise of a dinosaur name generator, originally written in python, using Keras. This exercise is part of the Coursera course Sequence Models \todo{include reference}.
+
+The exercise uses a Recurrent Neural Network (RNN) to learn sequences of characters of a list of dinosaurs names. The original source code is provided as a jupyter notebook \todo{include reference} and includes some checks where specific variables are expected to have certain values.
+
+These checks required the user to visually compare the values. To automatize such comparison, the checks were converted in python unit tests.
+
+Then, for each cell in the original jupyter notebook, an equivalent Keras code was created, using python unit tests to check that the values obtained in the original exercise were the same obtained using Keras.
+
+Two almost identical models were used, one to train and one to generate data. The difference between them was that only the second one was stateful, meaning that its internal state was not automatically reset at the end of a batch. After training, the learned weights were copied to the stateful model.
+
+Three main difficulties were faced during the entire experiment. The first was that, due to precision divergences in floating point operations and the common use of randomization on some machine learning tasks, some checks had to be altered in both the jupyter notebook and in the unit tests, to make the results more deterministic. One of such alterations was the use of predetermined weights during initialization of some layers.
+
+The second main difficulty was that the categorical loss function used in the original exercise used a different algorithm than that provided by Keras. The solution was to make a custom loss function replicating the original behavior, which is available in listing \ref{lst:dinoloss}.
+
+\noindent
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, frame=single, caption={Rnn loss}, label={lst:dinoloss}]
+def myloss(y_true, y_pred):
+    r = -tf.keras.backend.log(y_pred)
+    r = y_true * r
+    return tf.keras.backend.sum(r)
+\end{lstlisting}
+\end{minipage}
+
+The third problem was that, initially, all generated dinosaurs names started with ``Z''. After some exploration, it became clear that this was occurring because the training data was always in alphabetical order, so the last examples in the dataset were sufficient to teach the network that ``Z'' was the most probable letter to start a name. This bias was removed by shuffling the training data.
+
