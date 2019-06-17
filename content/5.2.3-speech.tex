@@ -50,8 +50,12 @@ def to_ctc_format(xs,ys, max_ty=None):
 \caption{\label{alg:toctcformat}to\_ctc\_format}
 \end{algorithm}
 
+\subsubsection{Objectives}
+The main objective of this set of experiments was to implement a neural network model that could translate a sound to the correspondent text, being fast and accurate. The purpose of those experiments, rather than create a speech recognition algorithm that generalizes well and could be used in real life applications, was to learn how different algorithms,  parameters, and model choices could affect the training time. This focus on speed of learning and disregard for generalization simplifies the dataset handling, as it allows an aim for overfitting and the use of the same dataset for both training and validation, because the resulting model will not be used for anything else and the intended application is data carving, which will use the same technology but will require a different model. For each experiment, the goal was to track how long would take to reach maximum accuracy. Given that some Portuguese syllables have indistinguishable sounds, like ``ci'' and ``si'', 100\% accuracy would be unreachable.
+
 \subsubsection{Datasets}
-\todo[inline]{Dataset: gTTS vs espeak vs recorded audio}
+Three dataset sources were considered to these experiments, recorded audio files of people speaking, Google's Text To Speech (gTTS) API, and easpeak software. Easpeak was the selected source, as it was the fastest way to generate audio data corresponding to each syllable. Google's gTTS sounds are more realistic and less ``robotic'', but they are generated remotely and have some restrictions on frequency of requests. Also, there may exist licence restrictions on its use, but this was not checked. Recording people speaking syllables would generate a dataset more adequate for generalization, but also would be the most time consuming option.
+
 \todo[inline]{Dataset: v, cv, cvs}
 
 \todo[inline]{amplitude vs. fft}
@@ -94,13 +98,13 @@ model = tf.keras.Model([l0], last)
 \subsubsection{v-002}
 Experiment v-002 uses the same model structure of v-001, but uses an abstract class to handle common tasks and uses callbacks to save checkpoints and to decide when to stop training.
 
-It achieves 1.00 accuracy in 1330 epochs, taking 2m14s.
+It achieves 1.00 accuracy in 1331 epochs, taking 2m14s.
 
 \subsubsection{v-003}
 
 Experiment v-003 adds more convolutional layers to the previous model.  It also adds a TensorBoard callback, which saves more details of the training process in a format that can be read by TensorBoard and used to perform analysis and create graphics.
 
-It achieved 1.00 accuracy in 600 epochs, taking 0m44s.
+It achieved 1.00 accuracy in 601 epochs, taking 0m44s.
 
 \noindent
 \begin{algorithm}
@@ -125,7 +129,7 @@ model = tf.keras.Model([l0], last)
 \subsubsection{v-004}
 Experiment v-004 adds a maxpool layer after each convolutional layer. The ``data\_format=`channels\_first`'' option specifies the dimension that should be reduced, which should be the data of a single time step. With the default option the MaxPool1D function would reduce the number of time steps.
 
-It achieved 1.00 accuracy in 500 epochs, taking 0m40s.
+It achieved 1.00 accuracy in 501 epochs, taking 0m40s.
 
 \noindent
 \begin{algorithm}
@@ -164,26 +168,22 @@ The experiment took 3m52s to reach an accuracy of 0.6, but the loss presented st
 
 But it was noticeable that the application of a type of transfer learning\todo{insert reference} improved the decrease speed of the loss value. Transfer learning is usually implemented through the insertion of an immutable copy of the first layers of an already trained model in a new model that will be trained with a different dataset, usually smaller. In the current experiment the same model trained in experiment v-001 was used as a starting point in experiment cv-001, but none of the layers were protected against back propagation updates because the new dataset was a superset of the initial one and updates on the first layers could be necessary.
 
-
 \subsubsection{cv-002}
+Experiment cv-002 also uses a source code based on experiment v-002, just changing the dataset and batch size.
 
-Experiment cv-002 uses a source code based on  experiment v-002, but the inclusion of items on the training sample was done gradually. Given that in cv-001 it was observed that training the vowels first improved training time, in experiment cv-002 the initial training dataset included only the vowels first. Then, five new items were added to the training set each time the accuracy was greater than 0.5. This was implemented in Keras using a fit\_generator function.
+A key difference between experiment cv-001 and cv-002 is that in the first, the ``fit'' function was called many times, one for each epoch, while in the later, the ``fit'' function was called only once, specifying the maximum number of epochs that should be run. The disadvantage of calling the ``fit'' function many times is that the internal state of the optimizer algorithm is reset at each interaction, thus causing the observed stagnation of the loss value.
 
-This change prevented stagnation of the loss value.
-
-% time and accuracy
+Using a model previously trained with vowels, it achieved 0.90 accuracy on 140 syllables in 4301 epochs , taking 8m6s.
 
 \subsubsection{cv-003}
-Experiment cv-003 also uses a source code based on experiment v-002, but does not use the alterations introduced in experiment cv-002.
 
-A key difference between experiment cv-001 and cv-003 is that in the first the ``fit'' function was called many times, one for each epoch, while in the later the ``fit'' function was called only once, specifying the maximum number of epochs that should be run. The disadvantage of calling the ``fit'' function many times is that the internal state of the optimizer algorithm is reset at each interaction, thus causing the observed stagnation of the loss value.
+Experiment cv-003 also uses a source code based on  experiment v-002, but the inclusion of items on the training sample was done gradually. Given that in cv-001 it was observed that training the vowels first improved training time, in experiment cv-003 the initial training dataset included only the vowels first. Then, a new item was added to the training set each time the loss was less than 0.5. This was implemented in Keras using a ``fit\_generator'' function and callbacks.
+
+Using a model previously trained with vowels, it achieved 0.90 accuracy on 140 syllables in XXX epochs , taking XXmXXs. Since the number of examples in the training dataset was changing, is hard to compare the epoch count of this experiment to the others.
+
 
 \subsubsection{cvs-001}
 
+Experiment cvs-001 uses a source code based on experiment cv-002, which is based on v-002. The difference was the dataset, that also included the suffixes ``s'', ``r'', ``l'', and ``m''.
 
-
-\subsubsection{failed}
-\subsubsection{speech.ipynb}
-
-
-
+Using a model previously trained with vowels, it achieved 0.90 accuracy on 140 syllables in 4301 epochs , taking 8m6s.
