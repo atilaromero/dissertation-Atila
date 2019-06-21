@@ -1,6 +1,7 @@
 \section{Research methods}
 % providing a synopsis of the research method(s)
 
+
 Due to the lack of reproducible research applying LSTM to perform data carving, the research method adopted in this study starts with the validation of the development environment. 
 
 This step aims to ensure that both the tools and the techniques used the rest of the study are properly employed. An error on an algorithm implementation could disrupt the neural network training in various degrees, which could lead to the incorrect discard of an otherwise valid solution or to an excessive training time, invalidating further comparison of the resulting models. A validation procedure applied on the development environment mitigates those possible risks. 
@@ -9,16 +10,32 @@ To perform this validation, three set of tasks were used. The first was to repro
 
 Each of these three tasks is more difficult than the previous one and check for higher levels of abstraction. First the base framework is checked for exact results, then the procedure of creation of a LSTM model is checked, and finally the procedure of exploration of different models is checked.
 
-Each task can rely on some external reference in the case of eventual failure. For the first two, the implementation reference is the obvious fallback. For the third one, if the attempts of training a neural network for speech recognition were unsuccessful, some of the successful results in the literature could be used to identify the problem. In contrast, should the data carving experiment fail, there would be no other implementation to compare solutions to.
+Each task can rely on some external reference in the case of eventual failure. For the first two, the implementation reference is the obvious fallback. For the third one, if the attempts of training a neural network for speech recognition were unsuccessful, some of the successful results in the literature could be used to identify the problem. In contrast, should the data carving experiment fail, there would be no other implementation with available source code to compare solutions to.
+
+% TensorFlow \cite{abadi_tensorflow:_2016} and Keras \cite{chollet_keras_2019} are the basic tools used in the development environment of this work. 
+
+The research data used in the speech recognition task was generated using Espeak \todo{reference}, an open source text-to-speech software. 
+
+Following the validation of the development environment, the next step is to use this environment to conduct the data carving experiments.
+
+Andrew Ng\todo{reference} recommends the practice of having three types of datasets: ``training'', ``development'' and ``test''. Only the training dataset should be used to train the neural network. The development dataset is used to evaluate the chosen metrics, and may be splitted in ``eyeball'' and ``blackbox''. The optional eyeball dataset can have its errors manually inspected, while the blackbox dataset should be uninspected, to avoid overfitting. The test dataset is used to check if the development dataset have overfitted.
+
+Both the development and test dataset must come from the same distribution, and is preferable that this distribution represents the data where the neural network is supposed to perform well. An often disregarded characteristic, specially relevant to small datasets, is that the train dataset does not have the same requirement.
+
+Using this assumption, two datasets frequently mentioned in the literature when comparing data carving solutions were selected to be used as development and test datasets, the dfrws-2007-challenge \todo{reference} and the Govdocs1 \todo{reference}, while the training dataset would be constructed from other sources.
 
 
-TensorFlow \cite{abadi_tensorflow:_2016} and Keras \cite{chollet_keras_2019} are the basic tools used in the development environment of this work. 
 
-To check if they were being used properly, 
+starting with a identification task of a few file types, to try to achieve results similar to those described by Hiester \cite{hiester_file_2018}.
+
+At this stage, accuracy is the main target metric, with training time as a secondary metric and constraint.
 
 
+The datasets 
 
-The research data in this work is drawn from XXXX main sources:
+
+\todo[inline]{git/folders procedure}
+
 
 
 \section{text from pep}
