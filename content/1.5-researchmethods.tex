@@ -1,0 +1,65 @@
+\section{Research methods}
+% providing a synopsis of the research method(s)
+
+Due to the lack of reproducible research applying LSTM to perform data carving, the research method adopted in this study starts with the validation of the development environment. 
+
+This step aims to ensure that both the tools and the techniques used the rest of the study are properly employed. An error on an algorithm implementation could disrupt the neural network training in various degrees, which could lead to the incorrect discard of an otherwise valid solution or to an excessive training time, invalidating further comparison of the resulting models. A validation procedure applied on the development environment mitigates those possible risks. 
+
+To perform this validation, three set of tasks were used. The first was to reproduce results of an Recurrent Neural Network (RNN) exercise from Coursera \todo{reference}, originally in python, using Keras. The second was to recreate the model of a Keras' LSTM exercise, also from the same Coursera course. The third was to train a model for a speech recognition problem, without a reference model to rely on, but knowing that the task is possible. 
+
+Each of these three tasks is more difficult than the previous one and check for higher levels of abstraction. First the base framework is checked for exact results, then the procedure of creation of a LSTM model is checked, and finally the procedure of exploration of different models is checked.
+
+Each task can rely on some external reference in the case of eventual failure. For the first two, the implementation reference is the obvious fallback. For the third one, if the attempts of training a neural network for speech recognition were unsuccessful, some of the successful results in the literature could be used to identify the problem. In contrast, should the data carving experiment fail, there would be no other implementation to compare solutions to.
+
+
+TensorFlow \cite{abadi_tensorflow:_2016} and Keras \cite{chollet_keras_2019} are the basic tools used in the development environment of this work. 
+
+To check if they were being used properly, 
+
+
+
+The research data in this work is drawn from XXXX main sources:
+
+
+\section{text from pep}
+%Metrics and datasets
+
+% %from pep 4.2
+% In order to compare solutions, a methodology of comparison must be defined in the early stages of the research, specifying datasets and metrics.
+
+% %from pep 4.2
+% For datasets, some of the most used ones were the Digital Forensic Research Workshop (DFRWS) 2006-2007 dataset \cite{qiu_new_2014}, \cite{ali_review_2018}, and GovDocs \cite{hiester_file_2018}, \cite{fitzgerald_using_2012}, \cite{beebe_sceadan:_2013}.
+
+% %from pep 4.2
+% Classic data carving tools, namely Scalpel \cite{richard_iii_scalpel:_2005}, Foremost \cite{kendall_foremost_2019} and Photorec \cite{grenier_photorec_2019}, can be used to process those datasets, to create a research baseline.
+
+% %from pep 4.2
+% For metrics, usual choices like accuracy, precision, recall, and f1-score can be used to measure the quality of the results. Model training time is also an important metric to consider.
+
+% %from pep 4.2
+% To measure the ease with which the end user could add new file types, a possible solution is to use a survey, but that can only be made in the later stages of the work after a minimal working tool is devised.
+
+% Test environment
+
+% %from pep 4.3
+% Before starting the tests, an appropriate environment must be built. This requires an evaluation of available machine learning tools and frameworks. Prominent options include Keras \cite{chollet_keras_2019} and TensorFlow \cite{google_brain_tensorflow_2019}.
+
+% %from pep 4.3
+% During evaluation of those tools, while building the environment, some of the most simple solution alternatives can begin to be tested, probably training binary classification of file types, using a simple dataset consisting of small files. This will allow to both compare frameworks and to begin the tests.
+
+%from pep 4.4
+Following the environment preparation, the next step should be to compare solutions, starting with the most simple solutions first, and increasing complexity next. Planned neural networks to test include feedforward, convolutional, LSTM and BLSTM. For comparison of results, SVM and kNN can also be explored.
+
+%from pep 4.4
+Some of the possible experiments that can be conducted are:
+%
+manipulation of datasets to measure results on different scenarios,  shuffling data to simulate fragmentation, for example, or by removing portions of files to simulate data corruption;
+%
+increase in the number of supported file types, investigating the best strategy to scale the solution;
+%
+try to reassemble fragmented files using different neural network architectures;
+%
+research ways to share trained models, an essential requirement to give practical applicability to the research;
+%. Some alternatives should be probed and some solutions outlined.
+%
+adaption of visualization techniques of neural networks, attempting to infer file structure.

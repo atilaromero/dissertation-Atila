@@ -1,4 +1,4 @@
-\chapter{Development environment and tools}
+\chapter{Validation of environment}
 TensorFlow and Keras are the main parts of the environment used to develop and test the neural network models considered in this work.
 
 TensorFlow \cite{abadi_tensorflow:_2016} is a open-source machine learning framework that uses dataflow graphs to represent computation and state in a symbolic form. Its basic unit, the tensor, is a multidimensional array. In the case of neural networks, the use of dataflow graphs to represent forward propagation allows TensorFlow to infer the partial derivatives needed to construct the backpropagation phase, relieving the user from manually performing this task.
@@ -22,3 +22,4 @@ TensorFlow with GPU support requires the installation of CUDA and cuDNN. Since t
 Most of the development done on the current work was made using a CPU-only version of TensorFlow inside a docker container. The tests and experiments performed were organized in folders that reflect the history of these trials. The resulting code increases redundancy, since in many cases the differences between two similar folders are minimal, a change in the number of units of a layer for example, but facilitates comparison between them. The initial approach of relying only on git history to keep this information was not practical as it would not provide the same ease of comparison.
 
 The repository containing the tests and experiments is available at \url{http://github.com/atilaromero/ML}. The file ``Dockerfile'' can be used to create an environment with the required dependencies installed. Within most experiment folders there is a ``main.py'' file that runs the experiment, usually a training procedure. In other cases, python unit tests where used.
+
