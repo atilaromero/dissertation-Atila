@@ -1,19 +1,20 @@
 \section{\label{sec:datacarving}Data carving}
 % \subsection{Description}
+%from pep 1, paragrafo 2
 Data carving is a forensic process that attempts to recover files without previous information of where the file starts or ends \cite{garfinkel_carving_2007}.
 To accomplish this, a software has to analyze a source of raw data, searching for patterns indicating a known file type and making attempts to locate and reconstruct each of its constituent parts.
+
+%from pep 1, paragrafo 2b
 That process commonly disregards the filesystem \cite{veenman_statistical_2007}, being able to recover deleted files from unallocated areas, but faces the problem of fragmentation \cite{veenman_statistical_2007}  \cite{pal_evolution_2009}: in many cases, files are not written sequentially on disk and deleted files may have missing parts.
 
 This procedure is frequently used in forensic environments, but it may also be beneficial in other areas, such as reverse engineering, network traffic analysis, and data mining.
 
 This observation is related to the fact that many types of data sources contains embedded files. Therefore, they may be used as input to a data carving process. This includes network traffic, memory dumps, hard drive images, and files containing other files.
 
-
-
- To show how a data carving process work, a hard drive with a deleted video file is here used as an example.
- Normally, the average user of a computer does not need to deal with hard disk sectors directly and has contact only with the already mounted filesystem, which presents directories and files for the user. But in order to present such view, the operating system has to interpret the raw hard drive data, which is simply a stream of data blocks. The first blocks of the drive contain a partition table, indicating ranges of blocks belonging to each of the drive partitions. Inside a partition, the operating system expects to find a filesystem. The filesystem stores metadata about each file or directory and keeps an index indicating the position of each file on disk. This way, when a user opens a file, the operating system uses the filesystem to find where in the disk the file is stored, accessing those areas directly and returning its content to the user, who sees the returned data as the file content. 
+To show how a data carving process work, a hard drive with a deleted video file is here used as an example.
+Normally, the average user of a computer does not need to deal with hard disk sectors directly and has contact only with the already mounted filesystem, which presents directories and files for the user. But in order to present such view, the operating system has to interpret the raw hard drive data, which is simply a stream of data blocks. The first blocks of the drive contain a partition table, indicating ranges of blocks belonging to each of the drive partitions. Inside a partition, the operating system expects to find a filesystem. The filesystem stores metadata about each file or directory and keeps an index indicating the position of each file on disk. This way, when a user opens a file, the operating system uses the filesystem to find where in the disk the file is stored, accessing those areas directly and returning its content to the user, who sees the returned data as the file content. 
  
- If video file in the example had not been deleted, the filesystem could use the index to find the video location on disk. But after deletion, the corresponding index entry is erased, while the actual content of the file may be left untouched to avoid disk access. In this circumstance, a data carving procedure may successfully retrieve the file, even if the filesystem cannot. One common data carving approach that does not deal with fragmentation consists in searching for headers and footers patterns. To retrieve the hypothetical video file in the example, a software using this approach would sequentially read each drive sector, find a known header of a video file and save the following sectors until a footer is found or a size limit is reached. 
+If video file in the example had not been deleted, the filesystem could use the index to find the video location on disk. But after deletion, the corresponding index entry is erased, while the actual content of the file may be left untouched to avoid disk access. In this circumstance, a data carving procedure may successfully retrieve the file, even if the filesystem cannot. One common data carving approach that does not deal with fragmentation consists in searching for headers and footers patterns. To retrieve the hypothetical video file in the example, a software using this approach would sequentially read each drive sector, find a known header of a video file and save the following sectors until a footer is found or a size limit is reached. 
  
 \input{content/2.1.1-evolution.tex}
 

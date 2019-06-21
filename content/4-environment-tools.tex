@@ -1,4 +1,4 @@
-\section{Framework}
+\chapter{Development environment and tools}
 TensorFlow and Keras are the main parts of the environment used to develop and test the neural network models considered in this work.
 
 TensorFlow \cite{abadi_tensorflow:_2016} is a open-source machine learning framework that uses dataflow graphs to represent computation and state in a symbolic form. Its basic unit, the tensor, is a multidimensional array. In the case of neural networks, the use of dataflow graphs to represent forward propagation allows TensorFlow to infer the partial derivatives needed to construct the backpropagation phase, relieving the user from manually performing this task.
@@ -8,9 +8,6 @@ Performance, scalability and easy of use were main concerns during TensorFlow de
 As described in its site, https://keras.io/\cite{chollet_keras_2019}, ``Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK, or Theano.'' In recent versions, TensorFlow includes Keras in its core as a python module, and TensorFlow documentation and guides present Keras as the first option when learning TensorFlow.
 
 Keras simplifies the creation of layers and models, and standardize how they can be saved and shared. Instead of specifying each mathematical operation required to build a layer, using Keras the user would instantiate a layer of the desired type. This approach facilitates experimentation with different types of neural network models, since the addition of a layer can be done in a single line of code, and with reduced chance of bugs.
-
-
-\subsection{Environment}
 
 There are several options on how to build an environment that uses TensorFlow and Keras. For fast experimentation, Google's Colaboratory\cite{carneiro_performance_2018} is among the most practical solutions. Since it is processed remotely in Google's infrastructure, it can be accessed via browser, providing choices for CPU, GPU or TPU usage, without any installation requirement.
 
