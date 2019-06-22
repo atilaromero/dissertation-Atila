@@ -8,9 +8,31 @@ This step aims to ensure that both the tools and the techniques used the rest of
 
 To perform this validation, three set of tasks were used. The first was to reproduce results of an Recurrent Neural Network (RNN) exercise from Coursera \todo{reference}, originally in python, using Keras. The second was to recreate the model of a Keras' LSTM exercise, also from the same Coursera course. The third was to train a model for a speech recognition problem, without a reference model to rely on, but knowing that the task is possible. 
 
-Each of these three tasks is more difficult than the previous one and check for higher levels of abstraction. First the base framework is checked for exact results, then the procedure of creation of a LSTM model is checked, and finally the procedure of exploration of different models is checked.
+Each of these three tasks is more difficult than the previous one and check for higher levels of abstraction. First the base framework is checked for exact results, then the implementation procedure of a LSTM model is checked using a qualitative comparison, and finally the procedure of exploration of different models is conducted in an attempted to reach satisfactory results.
 
 Each task can rely on some external reference in the case of eventual failure. For the first two, the implementation reference is the obvious fallback. For the third one, if the attempts of training a neural network for speech recognition were unsuccessful, some of the successful results in the literature could be used to identify the problem. In contrast, should the data carving experiment fail, there would be no other implementation with available source code to compare solutions to.
+
+Table \ref{tab:validation} summarizes the environment validation tasks.
+
+\begin{table*}[!ht]
+    \centering
+    \caption{Validation of environment}
+    \label{tab:validation}
+    \begin{tabular}{ l | l | l | l | l }
+Task                 & Difficulty & Reference       & Level of abstraction              & Type of comparison \\
+                     &            &                 &                      under test   &                    \\ 
+\hline
+Reproduce            & Easiest   & Python code     & Base framework                    & Numeric            \\
+          RNN values &            &                 &                                   &                    \\
+\hline
+Reproduce            & Medium     & LSTM model      & Implementation                    & Qualitative        \\
+          LSTM model &            &                 &                procedure of model &                    \\
+\hline
+Create               & Hardest    & None/literature & Exploration of                    & Success or failure \\
+       LSTM model    &            &                 &                different models   &                    \\
+\hline
+    \end{tabular}
+\end{table*}
 
 % TensorFlow \cite{abadi_tensorflow:_2016} and Keras \cite{chollet_keras_2019} are the basic tools used in the development environment of this work. 
 
@@ -20,25 +42,49 @@ Following the validation of the development environment, the next step is to use
 
 Andrew Ng\todo{reference} recommends the practice of having three types of datasets: ``training'', ``development'' and ``test''. Only the training dataset should be used to train the neural network. The development dataset is used to evaluate the chosen metrics, and may be splitted in ``eyeball'' and ``blackbox''. The optional eyeball dataset can have its errors manually inspected, while the blackbox dataset should be uninspected, to avoid overfitting. The test dataset is used to check if the development dataset have overfitted.
 
-Both the development and test dataset must come from the same distribution, and is preferable that this distribution represents the data where the neural network is supposed to perform well. An often disregarded characteristic, specially relevant to small datasets, is that the train dataset does not have the same requirement.
+Both the development and test dataset must come from the same distribution, and is preferable that this distribution represents the data where the neural network is supposed to perform well.
 
-Using this assumption, two datasets frequently mentioned in the literature when comparing data carving solutions were selected to be used as development and test datasets, the dfrws-2007-challenge \todo{reference} and the Govdocs1 \todo{reference}, while the training dataset would be constructed from other sources.
+But, an often disregarded characteristic, specially relevant to small datasets, is that the train dataset does not have the same requirement, it can be constructed from a different data source, as long as the trained model also perform well in the development dataset.
+Using this assumption, two datasets frequently mentioned in the literature when comparing data carving solutions were selected to be used as development and test datasets, the dfrws-2007-challenge \todo{reference} and the Govdocs1 \todo{reference}, while the training dataset was constructed from other sources. 
+
+This approach reserves the DFRWS and Govdocs1 datasets, which are limited, only to validate the resulting models, while the training phase can benefit from potentially unlimited sources of data, since every time more examples of a file type are needed they can be obtained online or generated.
+
+To preserve those two datasets even further, the sources of data used to compose the training dataset are also used to generate a second group of development and test datasets, that will be used more often during training. Table \ref{tab:datasets} summarizes those divisions.
+
+\begin{table*}[!ht]
+    \centering
+    \caption{Datasets}
+    \label{tab:datasets}
+    \begin{tabular}{ l || l | l | l }
+                        & Training      & Development   & Test       \\
+        \hline
+        \hline
+        Online sources  & \checkmark    & \checkmark    & \checkmark \\
+        \hline
+        DFRWS           &               & \checkmark    & \checkmark \\
+        \hline
+        Govdocs1        &               & \checkmark    & \checkmark \\
+        \hline
+    \end{tabular}
+\end{table*}
+
+To make reproducibility of the experiments easier, the source code for all experiments is available at \url{http://github.com/atilaromero/ML}\todo{reference}, using the pattern ``name-counter'' to label each experiment. In addition to the history feature of Git, each time a significant change was made to a existing experiment, it would be copied to another folder, increasing the counter in its name.
+
+The experiments with data carving started with a identification task targeting a few file types, to try to achieve results similar to those described by Hiester \cite{hiester_file_2018}.
+
+At this stage, accuracy was the main target metric, with training time as a secondary metric and constraint.
+
+\todo[inline]{compare solutions - possible candidates: feedforward, convolutional, LSTM, BLSTM, SVM, kNN, Photorec, Foremost, scalpel}
+\todo[inline]{shuffling data to simulate fragmentation}
+\todo[inline]{removal of portions of files to simulate data corruption}
+\todo[inline]{increase in the number of supported file types, investigating the best strategy to scale the solution}
+\todo[inline]{reassembling}
+\todo[inline]{model share}
+\todo[inline]{adaption of visualization techniques of neural networks, attempting to infer file structure.}
 
 
 
-starting with a identification task of a few file types, to try to achieve results similar to those described by Hiester \cite{hiester_file_2018}.
-
-At this stage, accuracy is the main target metric, with training time as a secondary metric and constraint.
-
-
-The datasets 
-
-
-\todo[inline]{git/folders procedure}
-
-
-
-\section{text from pep}
+% \section{text from pep}
 %Metrics and datasets
 
 % %from pep 4.2
@@ -65,18 +111,18 @@ The datasets
 % During evaluation of those tools, while building the environment, some of the most simple solution alternatives can begin to be tested, probably training binary classification of file types, using a simple dataset consisting of small files. This will allow to both compare frameworks and to begin the tests.
 
 %from pep 4.4
-Following the environment preparation, the next step should be to compare solutions, starting with the most simple solutions first, and increasing complexity next. Planned neural networks to test include feedforward, convolutional, LSTM and BLSTM. For comparison of results, SVM and kNN can also be explored.
+% Following the environment preparation, the next step should be to compare solutions, starting with the most simple solutions first, and increasing complexity next. Planned neural networks to test include feedforward, convolutional, LSTM and BLSTM. For comparison of results, SVM and kNN can also be explored.
 
 %from pep 4.4
-Some of the possible experiments that can be conducted are:
+% Some of the possible experiments that can be conducted are:
 %
-manipulation of datasets to measure results on different scenarios,  shuffling data to simulate fragmentation, for example, or by removing portions of files to simulate data corruption;
+% manipulation of datasets to measure results on different scenarios,  shuffling data to simulate fragmentation, for example, or by removing portions of files to simulate data corruption;
 %
-increase in the number of supported file types, investigating the best strategy to scale the solution;
+% increase in the number of supported file types, investigating the best strategy to scale the solution;
 %
-try to reassemble fragmented files using different neural network architectures;
+% try to reassemble fragmented files using different neural network architectures;
 %
-research ways to share trained models, an essential requirement to give practical applicability to the research;
+% research ways to share trained models, an essential requirement to give practical applicability to the research;
 %. Some alternatives should be probed and some solutions outlined.
 %
-adaption of visualization techniques of neural networks, attempting to infer file structure.
+% adaption of visualization techniques of neural networks, attempting to infer file structure.

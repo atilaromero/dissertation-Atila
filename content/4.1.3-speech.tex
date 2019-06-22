@@ -9,8 +9,8 @@ is a convenient solution to perform end to end speech to text conversion because
 But, while Keras already has a build-in CTC cost function, called ctc\_batch\_cost, its usage is not as simple as other cost functions of the same framework. These functions only require the predicted and the correct labels, while this CTC cost function also requires the input size and the predicted label size. 
 
 An example included in Kera's own repository
-%%%%%
-\todo{include reference to imageocr.py}
+%%%%% imageocr.py
+\todo{reference}
 suggests as a solution to include the loss computation as an extra layer in the network. This layer would receive, besides the previous layer input, the required sizes as two extra inputs, arguing that Keras has no support for a loss function with extra parameters coming from the network. 
 While this certainly works, it is unusual. The alternative approach used in this dissertation was to encode the required information as two extra columns on the matrix that stores the correct labels and implement the CTC algorithm as a loss function instead of a layer.
  
@@ -67,8 +67,8 @@ This approach makes experimentation fast in the current scenario, where the goal
 In the current set of experiments, the time to reach maximum accuracy was measured. Given that some Portuguese syllables have indistinguishable sounds, like ``ci'' and ``si'', 100\% accuracy would be unreachable and the target value was lowered.
 
 \subsubsection{Datasets}
-%%%%%
-\todo{references for gTTS and espeak}
+%%%%% gTTS and espeak
+\todo{reference}
 Three dataset sources were hypothetically considered to these experiments, recorded audio files of people speaking, Google's Text To Speech (gTTS) API, and espeak software. Espeak was the selected source, as it was the fastest way to generate audio data corresponding to each syllable. Google's gTTS sounds are more realistic and less ``robotic'', but they are generated remotely and have some restrictions on frequency of requests. Also, there may exist licence restrictions on its use, but this was not checked. Recording people speaking syllables would generate a dataset more adequate for generalization, but also would be the most time consuming option.
 
 Three datasets were generated using espeak for syllables in Portuguese. The first contains only the five vowels, 'a', 'e', 'i', 'o', 'u'. The second contains 140 syllables, created using a vowel optionally preceded by one of 27 consonant prefixes, 'b', 'br','c', 'cr','d', 'dr','f', 'fr','g', 'gr','j','l', 'lh','m','n', 'nh','p','pr','qu','r','s','t', 'tr','v','vr','x', and 'z'.
@@ -77,8 +77,8 @@ The third adds an optional suffix to the previous syllables, 's', 'r', 'l', and 
 It is important to notice that the direct use of the written text as a label to each sound, without the use of a phonetic alphabet, was possible because the Portuguese language has a good correspondence between the sound and written representation of each syllable. In other languages, like English, the same approach would not be feasible.
 
 Each generated sound was preprocessed by a Fast Fourier Transform (FFT) algorithm obtained from XXXX,
-%%%%%
-\todo{reference to ba-dls-deepspeech}
+%%%%% ba-dls-deepspeech
+\todo{reference}
 to convert an audio file containing amplitude vs time data to a representation that express frequency vs amplitude vs time. This facilitates the recognition of features by the neural network, as it is expected that the frequency of each sound will have an important role at those features.
 
 \subsubsection{Model}
@@ -96,9 +96,10 @@ Without a similar working model to compare, it was difficult to judge if that tr
 \subsubsection{Experiment procedure}
 Each experiment was separated in a folder, whose name starts with ``v'', ``cv'' or ``cvs'', that indicates the dataset used, and a number to individualize it. On each folder, a Makefile was included to run the experiment.
 
+All the experiments use the Adam
 %%%%%
-\todo[inline]{reference to Adam}
-All the experiments use the Adam algorithm to perform backpropagation.
+\todo{reference}
+algorithm to perform backpropagation.
 
 The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
 The distance measure used in the experiments considered only exact matches as correct answers. As a consequence, the resulting accuracy value only increased above zero after the loss was very low. For a more robust speech recognition application, a less strict distance measure could be a better option.
