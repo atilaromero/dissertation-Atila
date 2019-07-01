@@ -23,7 +23,12 @@ The PGN images were obtained from \url{http://data.vision.ee.ethz.ch/cvl/DIV2K/D
 % year = {2017}
 % }
 
-\subsection{File type identification experiments}
+\subsection{Results}
+
+\input{content/5.3-z-tab-carving1-6.tex}
+
+
+
 
 % def compile(model):
 %     model.compile(loss=tf.keras.losses.categorical_crossentropy,
@@ -277,24 +282,6 @@ model = tf.keras.Model([l0], last)
 
 \subsubsection{3-files-011}
 
-based on previous, use sample\_sector instead of first\_sector
-
-did not reach 0.9, interrupted on 281 epochs
-
-% Epoch 280/1000
-% 100/100 [==============================] - 1s 10ms/step - loss: 2.1047 - acc: 0.7490
-% 1000/1000 [==============================] - 6s 6ms/step - loss: 1.5175 - acc: 0.8150 - val_loss: 2.1047 - val_acc: 0.7490
-
-
-\noindent
-\begin{algorithm}
-\begin{lstlisting}[language=Python, frame=single, numbers=left]
-\end{lstlisting}
-\caption{\label{alg:3-files-011}Experiment 3-files-011}
-\end{algorithm}
-
-\subsubsection{3-files-012}
-
 
 first sector
 testing convolution sizes and strides
@@ -334,8 +321,27 @@ last = tf.keras.layers.Activation('softmax')(last)
 
 model = tf.keras.Model([l0], last)
 \end{lstlisting}
+\caption{\label{alg:3-files-011}Experiment 3-files-011}
+\end{algorithm}
+
+\subsubsection{3-files-012}
+
+based on previous, use sample\_sector instead of first\_sector
+
+did not reach 0.9, interrupted on 281 epochs
+
+% Epoch 280/1000
+% 100/100 [==============================] - 1s 10ms/step - loss: 2.1047 - acc: 0.7490
+% 1000/1000 [==============================] - 6s 6ms/step - loss: 1.5175 - acc: 0.8150 - val_loss: 2.1047 - val_acc: 0.7490
+
+
+\noindent
+\begin{algorithm}
+\begin{lstlisting}[language=Python, frame=single, numbers=left]
+\end{lstlisting}
 \caption{\label{alg:3-files-012}Experiment 3-files-012}
 \end{algorithm}
+
 
 \subsubsection{3-files-013}
 
