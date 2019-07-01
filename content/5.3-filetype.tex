@@ -96,3 +96,19 @@ Table \ref{tab:carving12-27} gives a summary of the results of experiments 12 to
 
 Experiment 12 uses the simple single fully connected layer approach used in experiment 10, but the results were not as impressive as before. Two factors are considered to be responsible for such difference. While in the first sector is reasonable to find patterns in specific positions in relation to the beginning of the sector, this correspondence is not normally preserved in the remaining sectors. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
+13) Conv1D(32, (32,), strides=32), LSTM(64), LSTM(3)
+16) Conv1D(32, (32,), strides=32), maxpooling, LSTM(3)
+18) 2 camadas de convolução + maxpooling, LSTM(3)
+19) mesma strutura de modelo
+20) 2 camadas de convolução + maxpooling, LSTM(64), LSTM(3)
+23) Conv1D(256, (16,), strides=16), LSTM(128), LSTM(3)
+
+14) Conv1D(3, (32,), strides=16),  LSTM(3)
+15) Conv1D(32, (32,), strides=32),  LSTM(3)
+17) Conv1D(256, (16,), strides=16), LSTM(3)
+21) TimeDistributed(Dense(32)), LSTM(64), LSTM(3)
+22) Conv1D(128, (32,), strides=1), LSTM(64), LSTM(3)
+24) 4 camadas de convolução, LSTM(32), Dense(3)
+25) Conv1D(64,(64,),strides=8), Flatten(), Dense(3)
+26) Conv1D(3, (32,), strides=1), MaxPooling1D(481)
+27) 2 camadas de convolução, maxpooling, sem LSTM
