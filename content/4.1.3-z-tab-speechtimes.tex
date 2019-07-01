@@ -4,8 +4,8 @@
     \label{tab:speechtimes}
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|}
 \hline
-Experiment & Conv.              & MaxP.      & LSTM  & Dense & Dataset & Inicial       & Epochs & Time   & Based    \\       
-           &                    &            &       &       &         &         model &        &        &       on \\ \hline
+Experiment & \multicolumn{4}{c|}{Layers}                     & Dataset & Inicial       & Epochs & Time   & Based    \\ \cline{2-5}
+           & C                  & M          & L     & D     &         &         model &        &        &       on \\ \hline
 v-001      &   3                &            &  1    &  1    & v       & -             & 1000   & 1m8s   &          \\ \hline
 v-002      &   3                &            &  1    &  1    & v       & -             & 1331   & 2m14s  & v-001    \\ \hline
 v-003      &   7                &            &  1    &  1    & v       & -             & 601    & 0m44s  & v-002    \\ \hline

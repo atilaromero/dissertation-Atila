@@ -84,7 +84,7 @@ to convert an audio file containing amplitude vs time data to a representation t
 \subsubsection{Experiment procedure}
 
 The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
-\todo[inline]{copy to datacarving experiments}
+
 The distance measure used in the experiments considered only exact matches as correct answers. As a consequence, the resulting accuracy value only increased above zero after the loss was very low. For a more robust speech recognition application, a less strict distance measure could be a better option.
 
 In the first attempts, the models had only one LSTM layer, usually with 128 units, using dropout of 0.5 and a fully connected layer of 27 outputs. But the results with this configuration, and some variations of it, were unsatisfactory.
@@ -104,7 +104,7 @@ All the experiments use the Adam
 \todo{reference}
 optimization algorithm to guide backpropagation.
 
-Table \ref{tab:speechtimes} gives a summary of the experiments results. The ``Conv.'', ``MaxP.'', ``LSTM'', and ``Dense'' collums indicate the number of convolutional, maxpooling, LSTM and fully connected layers in each model structure. The ``Initial model'' column indicates if the training starts with a model already trained with a smaller dataset. 
+Table \ref{tab:speechtimes} gives a summary of the experiments results. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure. The ``Initial model'' column indicates if the training starts with a model already trained with a smaller dataset. 
 
 \input{content/4.1.3-z-tab-speechtimes.tex}
 
