@@ -74,7 +74,7 @@ Experiments 7 to 11 uses the 300 files from the test dataset as input, but only 
 
 All experiments of this set were able to reach the desired accuracy of 90\% in a few epochs. This can be explained by the regularity in the structure which is a characteristic of the beginning of the files.
 
-Table \ref{tab:carving7-11} gives a summary of the results of experiments 1 to 6. The ``C'', ``R'', ``L'', and ``D'' columns indicate the number of convolutional, recurrent, LSTM and dense layers in each model structure.
+Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``R'', ``L'', and ``D'' columns indicate the number of convolutional, recurrent, LSTM and dense layers in each model structure.
 \input{content/5.3-z-tab-carving7-11.tex}
 
 Experiment 7 uses almost the same code of experiment 5, it is a single LSTM layer with 0.5 dropout and a output fully connected layer of 3 units, one for each filetype in consideration, PDF, JPG, and PNG.
@@ -87,55 +87,12 @@ Experiment 10 is the simplest network, only a fully connected layer with 131072 
 
 Experiment 11 uses a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
 
-\subsection{Experiments 12 to 25}
-\subsection{Experiments 26 and 27}
+\subsection{Experiments 12 to 27}
 
+Experiments 12 to 27 use a random sector (512 bytes chunks) from each file, instead of only use the first one as was done in the previous set of experiments.
 
+Table \ref{tab:carving12-27} gives a summary of the results of experiments 12 to 27. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
+\input{content/5.3-z-tab-carving12-27.tex}
 
-% 
-\subsubsection{3-files-012}
-
-based on previous, use sample\_sector instead of first\_sector
-
-did not reach 0.9, interrupted on 281 epochs
-
-% Epoch 280/1000
-% 100/100 [==============================] - 1s 10ms/step - loss: 2.1047 - acc: 0.7490
-% 1000/1000 [==============================] - 6s 6ms/step - loss: 1.5175 - acc: 0.8150 - val_loss: 2.1047 - val_acc: 0.7490
-
-
-\noindent
-\begin{algorithm}
-\begin{lstlisting}[language=Python, frame=single, numbers=left]
-\end{lstlisting}
-\caption{\label{alg:3-files-012}Experiment 3-files-012}
-\end{algorithm}
-
-
-\subsubsection{3-files-013}
-
-sample sector, model
-
-% Epoch 134/1000
-% 100/100 [==============================] - 1s 13ms/step - loss: 0.4387 - acc: 0.8900
-% 1000/1000 [==============================] - 39s 39ms/step - loss: 0.4144 - acc: 0.9020 - val_loss: 0.4387 - val_acc: 0.8900
-
-% real	84m37.671s
-% user	385m11.711s
-% sys	98m3.540s
-
-
-\noindent
-\begin{algorithm}
-\begin{lstlisting}[language=Python, frame=single, numbers=left]
-last = l0 = tf.keras.layers.Input(shape=(512,256))
-last = tf.keras.layers.Conv1D(32, (32,), strides=32)(last)
-last = tf.keras.layers.LSTM(64, return_sequences=True)(last)
-last = tf.keras.layers.LSTM(3)(last)
-last = tf.keras.layers.Activation('softmax')(last)
-
-model = tf.keras.Model([l0], last)
-\end{lstlisting}
-\caption{\label{alg:3-files-013}Experiment 3-files-013}
-\end{algorithm}
+Experiment 12 uses the simple single fully connected layer approach used in experiment 10, but the results were not as impressive as before. Two factors are considered to be responsible for such difference. While in the first sector is reasonable to find patterns in specific positions in relation to the beginning of the sector, this correspondence is not normally preserved in the remaining sectors. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
