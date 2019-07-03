@@ -1,38 +1,38 @@
-\section{Research methods}
+\chapter{Research methods}
 % providing a synopsis of the research method(s)
 
 
-Due to the lack of reproducible research applying LSTM to perform data carving, the research method adopted in this study starts with the validation of the development environment. 
+% Due to the lack of reproducible research applying LSTM to perform data carving, the research method adopted in this study starts with the validation of the development environment. 
 
-This step aims to ensure that both the tools and the techniques used the rest of the study are properly employed. An error on an algorithm implementation could disrupt the neural network training in various degrees, which could lead to the incorrect discard of an otherwise valid solution or to an excessive training time, invalidating further comparison of the resulting models. A validation procedure applied on the development environment mitigates those possible risks. 
+% This step aims to ensure that both the tools and the techniques used the rest of the study are properly employed. An error on an algorithm implementation could disrupt the neural network training in various degrees, which could lead to the incorrect discard of an otherwise valid solution or to an excessive training time, invalidating further comparison of the resulting models. A validation procedure applied on the development environment mitigates those possible risks. 
 
-To perform this validation, three set of tasks were used. The first was to reproduce results of an Recurrent Neural Network (RNN) exercise from Coursera \todo{reference}, originally in python, using Keras. The second was to recreate the model of a Keras' LSTM exercise, also from the same Coursera course. The third was to train a model for a speech recognition problem, without a reference model to rely on, but knowing that the task is possible. 
+% To perform this validation, three set of tasks were used. The first was to reproduce results of an Recurrent Neural Network (RNN) exercise from Coursera \todo{reference}, originally in python, using Keras. The second was to recreate the model of a Keras' LSTM exercise, also from the same Coursera course. The third was to train a model for a speech recognition problem, without a reference model to rely on, but knowing that the task is possible. 
 
-Each of these three tasks is more difficult than the previous one and check for higher levels of abstraction. First the base framework is checked for exact results, then the implementation procedure of a LSTM model is checked using a qualitative comparison, and finally the procedure of exploration of different models is conducted in an attempted to reach satisfactory results.
+% Each of these three tasks is more difficult than the previous one and check for higher levels of abstraction. First the base framework is checked for exact results, then the implementation procedure of a LSTM model is checked using a qualitative comparison, and finally the procedure of exploration of different models is conducted in an attempted to reach satisfactory results.
 
-Each task can rely on some external reference in the case of eventual failure. For the first two, the implementation reference is the obvious fallback. For the third one, if the attempts of training a neural network for speech recognition were unsuccessful, some of the successful results in the literature could be used to identify the problem. In contrast, should the data carving experiment fail, there would be no other implementation with available source code to compare solutions to.
+% Each task can rely on some external reference in the case of eventual failure. For the first two, the implementation reference is the obvious fallback. For the third one, if the attempts of training a neural network for speech recognition were unsuccessful, some of the successful results in the literature could be used to identify the problem. In contrast, should the data carving experiment fail, there would be no other implementation with available source code to compare solutions to.
 
-Table \ref{tab:validation} summarizes the environment validation tasks.
+% Table \ref{tab:validation} summarizes the environment validation tasks.
 
-\begin{table*}[!ht]
-    \centering
-    \caption{Validation of environment}
-    \label{tab:validation}
-    \begin{tabular}{ l | l | l | l | l }
-Task                 & Difficulty & Reference       & Level of abstraction              & Type of comparison \\
-                     &            &                 &                      under test   &                    \\ 
-\hline
-Reproduce            & Easiest   & Python code     & Base framework                    & Numeric            \\
-          RNN values &            &                 &                                   &                    \\
-\hline
-Reproduce            & Medium     & LSTM model      & Implementation                    & Qualitative        \\
-          LSTM model &            &                 &                procedure of model &                    \\
-\hline
-Create               & Hardest    & None/literature & Exploration of                    & Success or failure \\
-       LSTM model    &            &                 &                different models   &                    \\
-\hline
-    \end{tabular}
-\end{table*}
+% \begin{table*}[!ht]
+%     \centering
+%     \caption{Validation of environment}
+%     \label{tab:validation}
+%     \begin{tabular}{ l | l | l | l | l }
+% Task                 & Difficulty & Reference       & Level of abstraction              & Type of comparison \\
+%                      &            &                 &                      under test   &                    \\ 
+% \hline
+% Reproduce            & Easiest   & Python code     & Base framework                    & Numeric            \\
+%           RNN values &            &                 &                                   &                    \\
+% \hline
+% Reproduce            & Medium     & LSTM model      & Implementation                    & Qualitative        \\
+%           LSTM model &            &                 &                procedure of model &                    \\
+% \hline
+% Create               & Hardest    & None/literature & Exploration of                    & Success or failure \\
+%       LSTM model    &            &                 &                different models   &                    \\
+% \hline
+%     \end{tabular}
+% \end{table*}
 
 % TensorFlow \cite{abadi_tensorflow:_2016} and Keras \cite{chollet_keras_2019} are the basic tools used in the development environment of this work. 
 

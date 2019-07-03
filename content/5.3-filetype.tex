@@ -96,19 +96,40 @@ Table \ref{tab:carving12-27} gives a summary of the results of experiments 12 to
 
 Experiment 12 uses the simple single fully connected layer approach used in experiment 10, but the results were not as impressive as before. Two factors are considered to be responsible for such difference. While in the first sector is reasonable to find patterns in specific positions in relation to the beginning of the sector, this correspondence is not normally preserved in the remaining sectors. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
-13) Conv1D(32, (32,), strides=32), LSTM(64), LSTM(3)
-16) Conv1D(32, (32,), strides=32), maxpooling, LSTM(3)
-18) 2 camadas de convolução + maxpooling, LSTM(3)
-19) mesma strutura de modelo
-20) 2 camadas de convolução + maxpooling, LSTM(64), LSTM(3)
-23) Conv1D(256, (16,), strides=16), LSTM(128), LSTM(3)
+Experiments 14, 15, 17, 21, 22, 24, 25, 26, and 27 did not achieve the minimum desired performance, as they did not achieve 90\% accuracy in less than 150 epochs.
 
-14) Conv1D(3, (32,), strides=16),  LSTM(3)
-15) Conv1D(32, (32,), strides=32),  LSTM(3)
-17) Conv1D(256, (16,), strides=16), LSTM(3)
-21) TimeDistributed(Dense(32)), LSTM(64), LSTM(3)
-22) Conv1D(128, (32,), strides=1), LSTM(64), LSTM(3)
-24) 4 camadas de convolução, LSTM(32), Dense(3)
-25) Conv1D(64,(64,),strides=8), Flatten(), Dense(3)
-26) Conv1D(3, (32,), strides=1), MaxPooling1D(481)
-27) 2 camadas de convolução, maxpooling, sem LSTM
+Experiments 14, 15, and 17 use variations of a dual layer network consisting of a convolutional layer followed by a LSTM layer.
+
+Experiment 21 used a TimeDistributed Keras' layer with a fully connected layer inside, followed by two LSTM layers.
+
+Experiment 22 used a convolutional layer followed by two LSTM layers, but the experiment was interrupted because the training performance was too slow, probably because the higher number of parameters when compared to experiment 13.
+
+Experiment 24 uses four convolutional layers followed by a LSTM layer, and a fully connected layer after.
+
+Experiments 25, 26, and 27 do not use LSTM. Experiment 25 uses a convolutional layer followed by a fully connected layer. Experiment 26 uses a convolutional layer followed by a maxpooling layer. Experiment 27 uses 2 convolutional layers and a maxpooling layer.
+
+% 14) Conv1D(3, (32,), strides=16),  LSTM(3)
+% 15) Conv1D(32, (32,), strides=32),  LSTM(3)
+% 17) Conv1D(256, (16,), strides=16), LSTM(3)
+%  21) TimeDistributed(Dense(32)), LSTM(64), LSTM(3)
+%  22) Conv1D(128, (32,), strides=1), LSTM(64), LSTM(3)
+%  24) 4 camadas de convolução, LSTM(32), Dense(3)
+
+% 25) Conv1D(64,(64,),strides=8), Flatten(), Dense(3)
+% 26) Conv1D(3, (32,), strides=1), MaxPooling1D(481)
+% 27) 2 camadas de convolução, maxpooling, sem LSTM
+
+Experiments 16 and 23 also did not achieve \%90 accuracy in 150 epochs, but their accuracy X time curve was similar to the one of experiment 13. This three experiments are one of the two groups which had acceptable performance.
+Experiment 16 uses a convolutional layer with maxpooling followed by a LSTM layer. Experiment 23 uses a convolutional layer followed by a LSTM layer and a fully connected layer.
+Experiment 13 uses a convolutional layer followed by two LSTM layers.
+
+% 13) Conv1D(32, (32,), strides=32), LSTM(64), LSTM(3)
+%  16) Conv1D(32, (32,), strides=32), maxpooling, LSTM(3)
+%  23) Conv1D(256, (16,), strides=16), LSTM(128), Dense(3)
+
+Experiments 18, 19 and 20 are the group that presented best training performance. They start with two convolutional layers, with a maxpooling layer after each one. Experiment 18 and 19 use essentially the same structure and finishes the network with a single LSTM layer, while experiment 20 finishes with two LSTM layers.
+
+% 18) 2 camadas de convolução + maxpooling, LSTM(3)
+% 19) mesma strutura de modelo
+% 20) 2 camadas de convolução + maxpooling, LSTM(64), LSTM(3)
+
