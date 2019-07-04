@@ -16,8 +16,3 @@ Normally, the average user of a computer does not need to deal with hard disk se
  
 If video file in the example had not been deleted, the filesystem could use the index to find the video location on disk. But after deletion, the corresponding index entry is erased, while the actual content of the file may be left untouched to avoid disk access. In this circumstance, a data carving procedure may successfully retrieve the file, even if the filesystem cannot. One common data carving approach that does not deal with fragmentation consists in searching for headers and footers patterns. To retrieve the hypothetical video file in the example, a software using this approach would sequentially read each drive sector, find a known header of a video file and save the following sectors until a footer is found or a size limit is reached. 
  
-\input{content/2.1.1-evolution.tex}
-
-\input{content/2.1.2-tools.tex}
-
-\input{content/2.1.3-nn.tex}
