@@ -13,10 +13,13 @@ The patterns searched by data carving software are generally manually coded, tak
 
 % ml as a solution
 %from pep 1, paragrafo 5
-The application of machine learning solutions to this manual task has the potential to make it easier and faster. An initial strategy could be to train a classifier to, given a chunk of data, provide a label indicating a file type. That could be used to recover unfragmented deleted files.
-% novo
-Then, that same classifier can be applied in small chunks of data to produce input to a second algorithm, responsible to reassemble the fragments of a file.
+% The application of machine learning solutions to this manual task has the potential to make it easier and faster. An initial strategy could be to train a classifier to, given a chunk of data, provide a label indicating a file type. That could be used to recover unfragmented deleted files.
+% % novo
+% Then, that same classifier can be applied in small chunks of data to produce input to a second algorithm, responsible to reassemble the fragments of a file.
 
 % ml as a solution
 %from pep 1, paragrafo 6
 % The recovery of fragmented files through data carving would require some sort of pattern recognition on the identified chunks, in order to reconstruct the correct sequence.
+
+%from pep 4, paragrafo 3
+The amount of work required to support the vast amount of file types in existence is here assumed as the main obstacle to the use of new technologies on data carving software. Most of the attention paid to the results of data carving research is focused on increasing some statistical measurement of success, like accuracy. While these advances are undoubtedly important, they may not be the kind of research needed to transform these findings into practical tools. If this is the case, then the forensic community would benefit from researches that could make the task of supporting the carving of a new file type easier. Machine learning techniques have the potential to achieve that goal because they can replace the step of manually encoding a structure parser by automatically recognizing patterns in large amounts of data.
