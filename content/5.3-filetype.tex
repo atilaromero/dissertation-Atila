@@ -1,16 +1,28 @@
-\section{Filetype identification}
-The objective of the experiments described in this section was to investigate which neural network models would be more adequate to the filetype identification task and to be used in subsequent research stages.
+\section{Objective}
+The objective of the experiments described in this section 
+was to compare the training time of different neural network models, given an target accuracy level, at the filetype identification task.
 
-The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
+\section{Methodology}
+
+Minimize the training time is important when the task of create new models to new filetypes is delegated to the forensic examiners community, since they may not have expensive hardware or time to train a more demanding neural network.
+
+For similar reasons, models that require too much tuning to perform well are undesirable, since it would require a higher knowledge and work from the forensic examiner.
+
+
+%metricas
+To find models with such requirements, each experiment use two stop conditions, a limit of 150 epochs or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the first preliminary results. 
 
 All the experiments use the Adam
 %%%%%
 \todo{reference}
-optimization algorithm to guide backpropagation.
+%https://arxiv.org/abs/1412.6980v8
+%https://openreview.net/forum?id=ryQu7f-RZ
+optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without requiring tuning the learning rate.
 
-Each experiment use two stop conditions, a limit of 150 epochs or an accuracy of 90\% in the training set, whichever occurs first.
+%modelos
+Several different combinations of convolutional, maxpooling, LSTM, and fully connected layers were explored.
 
-\subsection{Datasets}
+\section{Datasets}
 
 Datasets for three different file types, JPG, PDF, and PNG, were obtained from online sources.
 
@@ -33,6 +45,14 @@ The PGN images were obtained from \url{http://data.vision.ee.ethz.ch/cvl/DIV2K/D
 % year = {2017}
 % }
 
+\section{Environment}
+The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
+
+The source code for the experiments is available at \url{http://github.com/atilaromero/ML}.
+
+\section{Results}
+
+\todo[inline]{Refactor experiments description}
 \subsection{Experiments 1 to 6}
 
 Experiments 1 to 6 use a limited dataset, with only 3 files as source. Each input to the network is a random sector from one of these files. During these first tests, different strategies to structure the tests were being tried, and that was their main contribution.

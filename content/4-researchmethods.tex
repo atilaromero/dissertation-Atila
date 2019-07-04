@@ -36,9 +36,11 @@
 
 % TensorFlow \cite{abadi_tensorflow:_2016} and Keras \cite{chollet_keras_2019} are the basic tools used in the development environment of this work. 
 
-The research data used in the speech recognition task was generated using Espeak \todo{reference}, an open source text-to-speech software. 
+% The research data used in the speech recognition task was generated using Espeak \todo{reference}, an open source text-to-speech software. 
 
-Following the validation of the development environment, the next step is to use this environment to conduct the data carving experiments.
+% Following the validation of the development environment, the next step is to use this environment to conduct the data carving experiments.
+
+\section{Datasets}
 
 Andrew Ng\todo{reference} recommends the practice of having three types of datasets: ``training'', ``development'' and ``test''. Only the training dataset should be used to train the neural network. The development dataset is used to evaluate the chosen metrics, and may be splitted in ``eyeball'' and ``blackbox''. The optional eyeball dataset can have its errors manually inspected, while the blackbox dataset should be uninspected, to avoid overfitting. The test dataset is used to check if the development dataset have overfitted.
 
@@ -68,19 +70,13 @@ To preserve those two datasets even further, the sources of data used to compose
     \end{tabular}
 \end{table*}
 
-To make reproducibility of the experiments easier, the source code for all experiments is available at \url{http://github.com/atilaromero/ML}\todo{reference}, using the pattern ``name-counter'' to label each experiment folder. In addition to the history feature of Git, each time a significant change was made to a existing experiment, it would be copied to another folder, increasing the counter in its name.
+% \section{Source code}
+% To make reproducibility of the experiments easier, the source code for all experiments is available at \url{http://github.com/atilaromero/ML}\todo{reference}, using the pattern ``name-counter'' to label each experiment folder. In addition to the history feature of Git, each time a significant change was made to a existing experiment, it would be copied to another folder, increasing the counter in its name.
 
-The experiments with data carving started with a identification task targeting a few file types, to try to achieve results similar to those described by Hiester \cite{hiester_file_2018}.
+\section{Metric}
+Accuracy was the main target metric, with training time as a secondary metric and constraint.
 
-At this stage, accuracy was the main target metric, with training time as a secondary metric and constraint.
 
-\todo[inline]{compare solutions - possible candidates: feedforward, convolutional, LSTM, BLSTM, SVM, kNN, Photorec, Foremost, scalpel}
-\todo[inline]{shuffle data to simulate fragmentation}
-\todo[inline]{removal of portions of files to simulate data corruption}
-\todo[inline]{increase the number of supported file types, investigating the best strategy to scale the solution}
-\todo[inline]{reassembling}
-\todo[inline]{model share}
-\todo[inline]{adaption of visualization techniques of neural networks, attempting to infer file structure.}
 
 
 
