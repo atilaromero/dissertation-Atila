@@ -1,16 +1,16 @@
 \section{Objective}
 The objective of the experiments described in this section 
-was to compare the training time of different neural network models, given an target accuracy level, at the filetype identification task.
+was to compare the training time of different neural networks, given an target accuracy level, at the filetype identification task.
 
 \section{Methodology}
 
 Minimize the training time is important when the task of create new models to new filetypes is delegated to the forensic examiners community, since they may not have expensive hardware or time to train a more demanding neural network.
 
-For similar reasons, models that require too much tuning to perform well are undesirable, since it would require a higher knowledge and work from the forensic examiner.
+For similar reasons, networks that require too much tuning to perform well are undesirable, since it would require a higher knowledge and work from the forensic examiner.
 
 
 %metricas
-To find models with such requirements, each experiment use two stop conditions, a limit of 150 epochs or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the first preliminary results. 
+To identify networks with such requirements, each experiment use two stop conditions, a limit of 150 epochs or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the first preliminary results. Since the rate of change of accuracy may present oscillations during training, a visual comparison of accuracy versus time curves is important to confirm which network has better training times.
 
 All the experiments use the Adam
 %%%%%
@@ -92,7 +92,7 @@ The source code for the experiments is available at \url{http://github.com/atila
 
 
 \subsection{First block as input}
-In the first set of experiments, for each file selected as input sample from the test dataset, only the first 512 bytes of that file were used. For most filetypes, including the three ones under consideration, these first bytes contains regular patterns in fixed positions, which makes them easy to recognize
+In the first set of experiments, for each file selected as input sample from the test dataset, only the first 512 bytes of that file were used. For most filetypes, including those three under consideration, these first bytes contains regular patterns in fixed positions, which makes them easy to recognize.
 
 Each epoch was configured to draw 1000 samples from the training dataset. Validation was performed using the development dataset, with another 300 files and and also using only the first 512 bytes.
 
@@ -104,7 +104,7 @@ Another used a LSTM layer with 16 output units, using a dropout of 0.5, followed
 
 The last one used a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
 
-Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``R'', ``L'', and ``D'' columns indicate the number of convolutional, recurrent, LSTM and dense layers in each model structure.
+Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``L'', and ``D'' columns indicate the number of convolutional, LSTM and dense layers in each model structure.
 \input{content/5.3-z-tab-carving7-11.tex}
 
 The simple feedforward network was by far the fastest networking concerning training time, and was able to reach 100\% accuracy in only one epoch. It is interesting to notice that the LSTM without a previous convolutional network had a slow training time.
@@ -133,10 +133,12 @@ The simple feedforward network was by far the fastest networking concerning trai
 The next set of experiments use a random block (512 bytes chunks) from each file, instead of just the first one. This is a harder classification task because, while in the first block is reasonable to find patterns in specific positions in relation to the beginning of the block, this correspondence is not normally preserved in the remaining blocks, the pattern may start anywhere in the block. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
 
-XXXX configurations were compared. The simple feedforward network that performed well classifying the first block was unable to...
+XXXX configurations were compared.
+The two best configurations use two convolutional layers with a maxpooling followed by one or two LSTM layers. The results for using one or two LSTM layers were very similar, taking 33m8s and 30m8s each, and with 88.9\% and 88.6\% of accuracy on the validation dataset. 
 
-The best configuration found among those tested start with two convolutional layers, with a maxpooling layer after each one, and  finishes with two LSTM layers. It reached 90\% accuracy on the training set XXXXXXXXXXXXXX
+The simple feedforward network that performed well classifying the first block was unable to achieve similar results when classifying a random block. In 600 epochs, it only reached an accuracy of 77.5\% on the validation dataset, taking 62 minutes and 56 seconds.
 
+A configuration using one less LSTM layer provided similar results to the best one. It reached 
 
 
 LSTM followed by dense
