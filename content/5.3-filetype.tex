@@ -22,6 +22,9 @@ optimization algorithm to guide backpropagation, which was selected because it p
 %modelos
 Several different combinations of convolutional, maxpooling, LSTM, and fully connected layers were explored.
 
+\todo[inline]{inputs}
+\todo[inline]{outputs}
+
 \section{Datasets}
 
 Datasets for three different file types, JPG, PDF, and PNG, were obtained from online sources.
@@ -52,25 +55,24 @@ The source code for the experiments is available at \url{http://github.com/atila
 
 \section{Results}
 
-\todo[inline]{Refactor experiments description}
-\subsection{Experiments 1 to 6}
+% \subsection{Experiments 1 to 6}
 
-Experiments 1 to 6 use a limited dataset, with only 3 files as source. Each input to the network is a random sector from one of these files. During these first tests, different strategies to structure the tests were being tried, and that was their main contribution.
+% Experiments 1 to 6 use a limited dataset, with only 3 files as source. Each input to the network is a random sector from one of these files. During these first tests, different strategies to structure the tests were being tried, and that was their main contribution.
 
-Table \ref{tab:carving1-6} gives a summary of the results of experiments 1 to 6. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
-\input{content/5.3-z-tab-carving1-6.tex}
+% Table \ref{tab:carving1-6} gives a summary of the results of experiments 1 to 6. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
+% \input{content/5.3-z-tab-carving1-6.tex}
 
-Experiment 1 uses a convolutional layer of 16 units followed by a maxpooling layer, a LSTM layer of 16 units and a dense layer of 3 units.
+% Experiment 1 uses a convolutional layer of 16 units followed by a maxpooling layer, a LSTM layer of 16 units and a dense layer of 3 units.
 
-Experiment 2 increases the number of convolutional layers, but it was unable to finish the training in less than 150 epochs.
+% Experiment 2 increases the number of convolutional layers, but it was unable to finish the training in less than 150 epochs.
 
-Experiment 3 introduces the use of the ``fit\_generator'' function, which makes the sampling sectors from the training files easier, avoid manual counting of the epochs, uses callbacks, and uses the development dataset in validation.
+% Experiment 3 introduces the use of the ``fit\_generator'' function, which makes the sampling sectors from the training files easier, avoid manual counting of the epochs, uses callbacks, and uses the development dataset in validation.
 
-Experiment 4 skips the initialization with ones that was being used in the LSTM layer at the previous experiments as an attempt to increase reproducibility. It also introduces periodic saving of TensorBoard data.
+% Experiment 4 skips the initialization with ones that was being used in the LSTM layer at the previous experiments as an attempt to increase reproducibility. It also introduces periodic saving of TensorBoard data.
 
-Experiment 5 skips the convolutional layer, but the resulting network was too slow to train.
+% Experiment 5 skips the convolutional layer, but the resulting network was too slow to train.
 
-Experiment 6 skips the maxpooling layer.
+% Experiment 6 skips the maxpooling layer.
 
 % \noindent
 % \begin{algorithm}
@@ -89,32 +91,75 @@ Experiment 6 skips the maxpooling layer.
 % \end{algorithm}
 
 
-\subsection{Experiments 7 to 11}
-Experiments 7 to 11 uses the 300 files from the test dataset as input, but only using the first 512 bytes of each selected file. The validation is performed using the development dataset, with another 300 files and and also using only the first 512 bytes.
+\subsection{First block as input}
+In the first set of experiments, for each file selected as input sample from the test dataset, only the first 512 bytes of that file were used. For most filetypes, including the three ones under consideration, these first bytes contains regular patterns in fixed positions, which makes them easy to recognize
 
-All experiments of this set were able to reach the desired accuracy of 90\% in a few epochs. This can be explained by the regularity in the structure which is a characteristic of the beginning of the files.
+Each epoch was configured to draw 1000 samples from the training dataset. Validation was performed using the development dataset, with another 300 files and and also using only the first 512 bytes.
+
+
+
+Three configurations were compared. The simplest one was a feedforward network, with only a single fully connected layer, with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units, one for each output class, PDF, JPG, or PNG.
+
+Another used a LSTM layer with 16 output units, using a dropout of 0.5, followed by a fully connected layer of 3 output units.
+
+The last one used a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
 
 Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``R'', ``L'', and ``D'' columns indicate the number of convolutional, recurrent, LSTM and dense layers in each model structure.
 \input{content/5.3-z-tab-carving7-11.tex}
 
-Experiment 7 uses almost the same code of experiment 5, it is a single LSTM layer with 0.5 dropout and a output fully connected layer of 3 units, one for each filetype in consideration, PDF, JPG, and PNG.
+The simple feedforward network was by far the fastest networking concerning training time, and was able to reach 100\% accuracy in only one epoch. It is interesting to notice that the LSTM without a previous convolutional network had a slow training time.
 
-Experiment 8 uses four RNN layers followed by a LSTM layer.
 
-Experiment 9 is similar to the previous one, but uses only 1 RNN instead of 4.
 
-Experiment 10 is the simplest network, only a fully connected layer with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units. It was by far the fastest networking concerning training time, and was able to reach the desired accuracy in only one epoch.
+%%%%%%%%%%%%%%%%%%%%%%%
 
-Experiment 11 uses a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
+% All experiments of this set were able to reach the desired accuracy of 90\% in a few epochs. This can be explained by the regularity in the structure which is a characteristic of the beginning of the files.
 
-\subsection{Experiments 12 to 27}
+% Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``R'', ``L'', and ``D'' columns indicate the number of convolutional, recurrent, LSTM and dense layers in each model structure.
+% \input{content/5.3-z-tab-carving7-11.tex}
 
-Experiments 12 to 27 use a random sector (512 bytes chunks) from each file, instead of only use the first one as was done in the previous set of experiments.
+% Experiment 7 uses almost the same code of experiment 5, it is a single LSTM layer with 0.5 dropout and a output fully connected layer of 3 units, one for each filetype in consideration, PDF, JPG, and PNG.
 
+% Experiment 8 uses four RNN layers followed by a LSTM layer.
+
+% Experiment 9 is similar to the previous one, but uses only 1 RNN instead of 4.
+
+% Experiment 10 is the simplest network, only a fully connected layer with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units. It was by far the fastest networking concerning training time, and was able to reach the desired accuracy in only one epoch.
+
+% Experiment 11 uses a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
+
+\subsection{Random block as input}
+
+The next set of experiments use a random block (512 bytes chunks) from each file, instead of just the first one. This is a harder classification task because, while in the first block is reasonable to find patterns in specific positions in relation to the beginning of the block, this correspondence is not normally preserved in the remaining blocks, the pattern may start anywhere in the block. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
+
+
+XXXX configurations were compared. The simple feedforward network that performed well classifying the first block was unable to...
+
+The best configuration found among those tested start with two convolutional layers, with a maxpooling layer after each one, and  finishes with two LSTM layers. It reached 90\% accuracy on the training set XXXXXXXXXXXXXX
+
+
+
+LSTM followed by dense
+
+CL
+
+
+
+CL
+Experiments 14, 15, and 17 use variations of a dual layer network consisting of a convolutional layer followed by a LSTM layer.
+
+
+no L
+Experiments 25, 26, and 27 do not use LSTM. Experiment 25 uses a convolutional layer followed by a fully connected layer. Experiment 26 uses a convolutional layer followed by a maxpooling layer. Experiment 27 uses 2 convolutional layers and a maxpooling layer.
+
+
+\todo[inline]{Refactor experiments description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Table \ref{tab:carving12-27} gives a summary of the results of experiments 12 to 27. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
 \input{content/5.3-z-tab-carving12-27.tex}
 
-Experiment 12 uses the simple single fully connected layer approach used in experiment 10, but the results were not as impressive as before. Two factors are considered to be responsible for such difference. While in the first sector is reasonable to find patterns in specific positions in relation to the beginning of the sector, this correspondence is not normally preserved in the remaining sectors. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
+% Experiment 12 uses the simple single fully connected layer approach used in experiment 10, but the results were not as impressive as before. Two factors are considered to be responsible for such difference. While in the first sector is reasonable to find patterns in specific positions in relation to the beginning of the sector, this correspondence is not normally preserved in the remaining sectors. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
 Experiments 14, 15, 17, 21, 22, 24, 25, 26, and 27 did not achieve the minimum desired performance, as they did not achieve 90\% accuracy in less than 150 epochs.
 
