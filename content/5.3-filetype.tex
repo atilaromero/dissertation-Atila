@@ -4,13 +4,21 @@ was to compare the training time of different neural networks, given an target a
 
 \section{Methodology}
 
+The input of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero.
+
+Each epoch was configured to draw 1000 samples from the training dataset. Validation was performed using the development dataset, with another 300 files and and also using only the first 512 bytes.
+
+
+The output of the network for a given instance is a vector with 3 elements, subjected to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to each of the three classes, PDF, JPG or PNG.
+
 Minimize the training time is important when the task of create new models to new filetypes is delegated to the forensic examiners community, since they may not have expensive hardware or time to train a more demanding neural network.
 
 For similar reasons, networks that require too much tuning to perform well are undesirable, since it would require a higher knowledge and work from the forensic examiner.
 
 
 %metricas
-To identify networks with such requirements, each experiment use two stop conditions, a limit of 150 epochs or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the first preliminary results. Since the rate of change of accuracy may present oscillations during training, a visual comparison of accuracy versus time curves is important to confirm which network has better training times.
+To identify networks with such requirements, each experiment use two stop conditions, a limit of 150 epochs or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the first preliminary results.
+%Since the rate of change of accuracy may present oscillations during training, a visual comparison of accuracy versus time curves is important to confirm which network has better training times.
 
 All the experiments use the Adam
 %%%%%
@@ -20,10 +28,8 @@ All the experiments use the Adam
 optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without requiring tuning the learning rate.
 
 %modelos
-Several different combinations of convolutional, maxpooling, LSTM, and fully connected layers were explored.
+The networks considered used different combinations of convolutional, maxpooling, LSTM, and fully connected layers.
 
-\todo[inline]{inputs}
-\todo[inline]{outputs}
 
 \section{Datasets}
 
@@ -37,7 +43,7 @@ The JPG samples were obtained in ftp://ftp.inrialpes.fr/pub/lear/douze/data/jpg1
 % "Hamming Embedding and Weak geometry consistency for large scale image search"
 % Proceedings of the 10th European conference on Computer vision, October, 2008
 
-The PGN images were obtained from \url{http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip}\todo{reference}, and 100 images were assignet to training, 100 to development and the remaining 700 to test.
+The PNG images were obtained from \url{http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip}\todo{reference}, and 100 images were assignet to training, 100 to development and the remaining 700 to test.
 
 %dataset paper: http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf
 % @InProceedings{Agustsson_2017_CVPR_Workshops,
@@ -94,11 +100,9 @@ The source code for the experiments is available at \url{http://github.com/atila
 \subsection{First block as input}
 In the first set of experiments, for each file selected as input sample from the test dataset, only the first 512 bytes of that file were used. For most filetypes, including those three under consideration, these first bytes contains regular patterns in fixed positions, which makes them easy to recognize.
 
-Each epoch was configured to draw 1000 samples from the training dataset. Validation was performed using the development dataset, with another 300 files and and also using only the first 512 bytes.
 
 
-
-Three configurations were compared. The simplest one was a feedforward network, with only a single fully connected layer, with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units, one for each output class, PDF, JPG, or PNG.
+Three network configurations were compared. The simplest one was a feedforward network, with only a single fully connected layer, with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units, one for each output class, PDF, JPG, or PNG.
 
 Another used a LSTM layer with 16 output units, using a dropout of 0.5, followed by a fully connected layer of 3 output units.
 
@@ -133,70 +137,24 @@ The simple feedforward network was by far the fastest networking concerning trai
 The next set of experiments use a random block (512 bytes chunks) from each file, instead of just the first one. This is a harder classification task because, while in the first block is reasonable to find patterns in specific positions in relation to the beginning of the block, this correspondence is not normally preserved in the remaining blocks, the pattern may start anywhere in the block. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
 
-XXXX configurations were compared.
-The two best configurations use two convolutional layers with a maxpooling followed by one or two LSTM layers. The results for using one or two LSTM layers were very similar, taking 33m8s and 30m8s each, and with 88.9\% and 88.6\% of accuracy on the validation dataset. 
+XXXX network configurations are here compared.
+The best group of results are composed by two network configurations that use two convolutional layers with a maxpooling followed by one or two LSTM layers. The results for using one or two LSTM layers were very similar, taking 33 and 30 minutes each, with 88.9\% and 88.6\% of accuracy in the validation dataset. 
 
-The simple feedforward network that performed well classifying the first block was unable to achieve similar results when classifying a random block. In 600 epochs, it only reached an accuracy of 77.5\% on the validation dataset, taking 62 minutes and 56 seconds.
+The simple feedforward network that performed well classifying the first block was unable to achieve similar results when classifying a random block. In 600 epochs, it only reached an accuracy of 77.5\% on the validation dataset, taking 62 minutes.
 
-A configuration using one less LSTM layer provided similar results to the best one. It reached 
-
-
-LSTM followed by dense
-
-CL
+%%%% 13 23 16 15
+The second best group of results was achieved by four networks with similar characteristics. One of then uses a convolutional layer followed by a LSTM layer, and the other three are variations of it, by adding a second LSTM layer, or by adding a fully connected layer at the end, or by adding maxpooling to the convolutional layer. These four networks presented similar results.
 
 
-
-CL
-Experiments 14, 15, and 17 use variations of a dual layer network consisting of a convolutional layer followed by a LSTM layer.
-
-
-no L
-Experiments 25, 26, and 27 do not use LSTM. Experiment 25 uses a convolutional layer followed by a fully connected layer. Experiment 26 uses a convolutional layer followed by a maxpooling layer. Experiment 27 uses 2 convolutional layers and a maxpooling layer.
-
-
-\todo[inline]{Refactor experiments description}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Table \ref{tab:carving12-27} gives a summary of the results of experiments 12 to 27. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
+\todo[inline]{here}
+Three networks were 
+%%%% 25
+Experiment 25 uses a convolutional layer followed by a fully connected layer.
+%%%%
+%%%% 26 e 27
+Experiments 25, 26, and 27 do not use LSTM. Experiment 26 uses a convolutional layer followed by a maxpooling layer. 
+Experiment 27 uses 2 convolutional layers and a maxpooling layer.
+%%%%
+Table \ref{tab:carving12-27} gives a summary of the results of this set of experiments. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
 \input{content/5.3-z-tab-carving12-27.tex}
-
-% Experiment 12 uses the simple single fully connected layer approach used in experiment 10, but the results were not as impressive as before. Two factors are considered to be responsible for such difference. While in the first sector is reasonable to find patterns in specific positions in relation to the beginning of the sector, this correspondence is not normally preserved in the remaining sectors. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
-
-Experiments 14, 15, 17, 21, 22, 24, 25, 26, and 27 did not achieve the minimum desired performance, as they did not achieve 90\% accuracy in less than 150 epochs.
-
-Experiments 14, 15, and 17 use variations of a dual layer network consisting of a convolutional layer followed by a LSTM layer.
-
-Experiment 21 used a TimeDistributed Keras' layer with a fully connected layer inside, followed by two LSTM layers.
-
-Experiment 22 used a convolutional layer followed by two LSTM layers, but the experiment was interrupted because the training performance was too slow, probably because the higher number of parameters when compared to experiment 13.
-
-Experiment 24 uses four convolutional layers followed by a LSTM layer, and a fully connected layer after.
-
-Experiments 25, 26, and 27 do not use LSTM. Experiment 25 uses a convolutional layer followed by a fully connected layer. Experiment 26 uses a convolutional layer followed by a maxpooling layer. Experiment 27 uses 2 convolutional layers and a maxpooling layer.
-
-% 14) Conv1D(3, (32,), strides=16),  LSTM(3)
-% 15) Conv1D(32, (32,), strides=32),  LSTM(3)
-% 17) Conv1D(256, (16,), strides=16), LSTM(3)
-%  21) TimeDistributed(Dense(32)), LSTM(64), LSTM(3)
-%  22) Conv1D(128, (32,), strides=1), LSTM(64), LSTM(3)
-%  24) 4 camadas de convolução, LSTM(32), Dense(3)
-
-% 25) Conv1D(64,(64,),strides=8), Flatten(), Dense(3)
-% 26) Conv1D(3, (32,), strides=1), MaxPooling1D(481)
-% 27) 2 camadas de convolução, maxpooling, sem LSTM
-
-Experiments 16 and 23 also did not achieve \%90 accuracy in 150 epochs, but their accuracy X time curve was similar to the one of experiment 13. This three experiments are one of the two groups which had acceptable performance.
-Experiment 16 uses a convolutional layer with maxpooling followed by a LSTM layer. Experiment 23 uses a convolutional layer followed by a LSTM layer and a fully connected layer.
-Experiment 13 uses a convolutional layer followed by two LSTM layers.
-
-% 13) Conv1D(32, (32,), strides=32), LSTM(64), LSTM(3)
-%  16) Conv1D(32, (32,), strides=32), maxpooling, LSTM(3)
-%  23) Conv1D(256, (16,), strides=16), LSTM(128), Dense(3)
-
-Experiments 18, 19 and 20 are the group that presented best training performance. They start with two convolutional layers, with a maxpooling layer after each one. Experiment 18 and 19 use essentially the same structure and finishes the network with a single LSTM layer, while experiment 20 finishes with two LSTM layers.
-
-% 18) 2 camadas de convolução + maxpooling, LSTM(3)
-% 19) mesma strutura de modelo
-% 20) 2 camadas de convolução + maxpooling, LSTM(64), LSTM(3)
 
