@@ -1,0 +1,21 @@
+
+The input features of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero.
+
+The output of the network for a given instance is a vector with 3 elements, subjected to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to each of the three classes, PDF, JPG or PNG.
+
+Minimize the training time is important when the task of create new models to new filetypes is delegated to the forensic examiners community, since they may not have expensive hardware or time to train a more demanding neural network.
+
+For similar reasons, networks that require too much tuning to perform well are undesirable, since it would require a higher knowledge and work from the forensic examiner.
+
+
+%metricas
+To identify networks with such requirements, each experiment use two stop conditions, a limit of 150 epochs, or ten minutes, or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the first preliminary results.
+%Since the rate of change of accuracy may present oscillations during training, a visual comparison of accuracy versus time curves is important to confirm which network has better training times.
+
+All the experiments use the Adam \cite{kingma_adam:_2014}
+optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without requiring tuning the learning rate.
+
+%modelos
+The networks considered used different combinations of convolutional, maxpooling, LSTM, and fully connected layers.
+
+

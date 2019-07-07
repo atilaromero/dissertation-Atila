@@ -1,0 +1,80 @@
+\documentclass[english,oneside]{article}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[english]{babel}
+\RequirePackage[a4paper]{geometry}
+\RequirePackage{textcomp}
+\RequirePackage{lmodern}
+\RequirePackage{indentfirst}
+\RequirePackage{setspace}
+\RequirePackage{textcase}
+\RequirePackage{float}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{url}
+\RequirePackage[table]{xcolor}
+\RequirePackage{array}
+\RequirePackage{longtable}
+\usepackage{graphicx}
+% Utilize a opção 'pdftex' se você estiver usando o pdflatex (que
+% permite figuras em formatos como .jpg ou .png)
+%\usepackage[pdftex]{graphicx}
+\usepackage{multirow}
+\usepackage{nicefrac}
+% Para inserir figuras lado a lado.
+% \usepackage{subfigure}
+% Para formatar algoritmos.
+% A opção [algo2e] é necessária para evitar conflitos
+% com as definições da classe.
+%\usepackage[algo2e]{algorithm2e}
+\usepackage{algorithmic}
+% Um float do tipo algoritmo. No momento
+% este pacote é incompatível com a classe.
+\usepackage{algorithm}
+\usepackage{bookmark}
+\usepackage{import}
+\usepackage{todonotes}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+% \setcitestyle{square}
+\usepackage{lscape}
+\usepackage{listings}
+
+\usepackage{caption}
+
+\newcommand{\sigla}[2]{}
+
+\author{Atila L. Romero\textsuperscript{$\dagger$}, Avelino F. Zorzo\textsuperscript{$\dagger$}{\let\thefootnote\relax\footnote{{\textsuperscript{$\dagger$}e-mails: \texttt{atila.romero@acad.pucrs.br, avelino.zorzo@pucrs.br}}}}}
+\title{Data carving using neural networks}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% explorations
+% - lstm on data carving
+% - automatization of new data carving parsers
+% - pratical solution
+%from pep 1, paragrafo 7 e pep abstract, paragrafo1
+This work explores the use of Long Short-Term Memory (LSTM) neural networks to perform data carving, investigates how the construction of data carving software can be fully or partially automated using this technology, and apply the findings towards a practical solution in which the forensic examiners community can collaboratively build models for several file types.
+
+\textbf{Keywords:} computer forensics, carving, machine learning, neural networks, long short-term memory
+\end{abstract}
+
+\subimport{content/}{0-sections}
+
+%----------------------------------------------------------------
+% Aqui vai a bibliografia. Existem dois estilos de citação: use
+% 'ppgcc-alpha' para citações do tipo [Abc+] ou [XYZ] (em ordem
+% alfabética na bibliografia), e 'ppgcc-num' para citações
+% numéricas do tipo [1], [20], etc., em ordem de referência.
+%----------------------------------------------------------------
+% \bibliographystyle{ppgcc-alpha}
+%\bibliographystyle{ppgcc-num}
+\bibliographystyle{plain}
+\bibliography{zotero}
+
+\end{document}

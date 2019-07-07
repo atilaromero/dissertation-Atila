@@ -1,0 +1,36 @@
+To test if an increase on the deepness of the network would improve its results, four networks using two convolutional layers were experimented. 
+
+At the ``CCL'' network, the first convolutional layer uses 8 units for the input window, and a stride of the same size, thus dividing the 512 bytes of the input block in 64 matrices of 8x256 that are then converted in 64 vectors of 128 units. The second layer divides the 64x128 input in 8 matrices of 8x128, producing 8 vectors of 64 units. The LSTM layer uses each of these 8 vectors as time steps, producing a single vector of 3 units, one for each class.
+
+The ``CCLL'' network adds a LSTM layer of 64 output units between the convolutional layers and the final LSTM layer.
+
+The ``CMCML'' network is similar to ``CCL'', but uses max pooling of size 2 at each convolutional layer.
+
+The ``CMCMLL'' network combines the two additions, using max pooling and using two LSTM layers.
+
+The results are shown in table \ref{tab:carving2convs}. The ``CL'' network is included for comparison. The ``CCL'' results were worst than ``CL'' ones, while ``CCLL'' were better. But the best results of all experiments described so far were those
+These three networks produced similar results, but they are not as good as the ``CL'' network, as can be seen in figure
+\ref{fig:nolstm}.
+
+\begin{table}[!ht]
+    \centering
+    \caption{Two convolutional layers}
+    \label{tab:carving2convs}
+\begin{tabular}{r|r|r|r|r|r|r}
+\hline
+Name & Parameters & Blocks & Epochs & Time & Training          & Validation          \\       
+     &            &        &        &         &          accuracy &            accuracy \\ \hline\hline
+
+CL & 24663  & all & 150 & 8m38s  & 0.813 & 0.783 \\ \hline
+CCL    & 328688 & all & 113 & 10m04s & 0.762 & 0.766 \\ \hline
+CCLL   & 361712 & all & 98  & 10m02s & 0.853 & 0.823 \\ \hline
+CMCML  & 295536 & all & 84  & 7m42s  & 0.902 & 0.858 \\ \hline
+CMCMLL & 320752 & all & 94  & 10m01s & 0.887 & 0.871 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[htb!]
+\centering\includegraphics[width=0.65\textwidth]{content/twoconvs.png}
+\caption{\label{fig:twoconvs}Two convolutional layers}%
+\end{figure}
+\todo[inline]{legenda}

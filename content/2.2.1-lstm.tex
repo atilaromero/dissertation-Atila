@@ -1,4 +1,3 @@
-\section{\label{sec:lstm}Long Short-Term Memory}
 % Hochreiter schmidhuber, 1997
 % Hochreiter, S., & Schmidhuber, J. (1997). Long ShortTerm Memory. Neural Computation, 9, 1735–1780.
 Long Short-Term Memory\cite{hochreiter_long_1997} (LSTM) is a type of Recurrent Neural Network (RNN) architecture that address the problem of vanishing or exploding gradients through time. This problem occurs in simple RNNs because the signal transmitted from one time-step to another is influenced at each interaction, both on forward and backward propagation phases, limiting the potential interaction between distant time-steps. The solution offered by LSTM introduces the concept of a memory cell, adding gates units to each node. The initial proposal included only input and output gates \cite{hochreiter_long_1997}.
