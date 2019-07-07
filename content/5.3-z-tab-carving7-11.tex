@@ -2,12 +2,13 @@
     \centering
     \caption{Filetype identification experiments with first block}
     \label{tab:carving7-11}
-\begin{tabular}{|r|r|r|r|r|r|r|r|r|r|}
+\begin{tabular}{r|r|r|r|r|r|r}
 \hline
-\multicolumn{3}{|c|}{Layers} & Parameters & Blocks & Epochs & Training   & Validation \\ \cline{1-3}
-C        & L       & D       &            &       &        & time       & accuracy   \\ \hline
-         &         & 1       & 393,219    & first & 1      & 0m9s       & 1.000 \\ \hline
-         & 1       & 1       & 17,523     & first & 17     & 15m12s     & 0.690 \\ \hline
-1        & 1       &         & 24,663     & first & 1      & 0m52s      & 0.987 \\ \hline
+Name & Parameters & Blocks & Epochs & Seconds & Training          & Validation          \\       
+     &            &        &        &         &          accuracy &            accuracy \\ \hline\hline
+
+D    & 393219     & first  & 2      & 0m01s   & 0.98              & 0.99                \\ \hline
+LD   & 37091      & first  & 19     & 1m50s   & 0.91              & 0.72                \\ \hline
+CL   & 24663      & first  & 4      & 0m04s   & 0.93              & 0.72                \\ \hline
 \end{tabular}
 \end{table}

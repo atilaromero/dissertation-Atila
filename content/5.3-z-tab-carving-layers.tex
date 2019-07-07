@@ -1,0 +1,27 @@
+\begin{table}[!ht]
+    \centering
+    \caption{Experiments layers}
+    \label{tab:carvinglayers}
+\begin{tabular}{r|r|r|r|r|r|r}
+
+       & \multicolumn{4}{|c|}{}                         &        & Fully           \\     
+       & \multicolumn{4}{|c|}{Convolutional}            & LSTM   &       connected \\ \hline
+Name   & Input         & Stride & Output & Pooling size & Output & Output          \\ \hline\hline
+
+D      &               &        &        &              &        & 3               \\ \hline
+LD     &               &        &        &              & 32     & 3               \\ \hline
+CL     & 32            & 32     & 3      &              & 3      &                 \\ \hline
+CMCML  & 8             & 8      & 128    & 2            & 3      &                 \\       
+       & 8             & 8      & 64     & 2            &        &                 \\ \hline
+CMCMLL & 8             & 8      & 128    & 2            & 64     &                 \\       
+       & 8             & 8      & 64     & 2            & 3      &                 \\ \hline
+CLL    & 32            & 32     & 32     &              & 64     &                 \\       
+       &               &        &        &              & 3      &                 \\ \hline
+CML    & 32            & 32     & 32     & 2            & 3      &                 \\ \hline
+CLD    & 16            & 16     & 256    &              & 128    & 3               \\ \hline
+CD     & 64            & 8      & 64     &              &        & 3               \\ \hline
+CM     & 32            & 1      & 3      & 481          &        &                 \\ \hline
+CCM    & 32            & 1      & 3      &              &        &                 \\       
+       & 2             & 2      & 3      & 240          &        &                 \\ \hline
+\end{tabular}
+\end{table}

@@ -4,10 +4,9 @@ was to compare the training time of different neural networks, given an target a
 
 \section{Methodology}
 
-The input of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero.
+The input features of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero.
 
-Each epoch was configured to draw 1000 samples from the training dataset. Validation was performed using the development dataset, with another 300 files and and also using only the first 512 bytes.
-
+Each epoch was configured to draw 100 samples from the training dataset. Validation was performed using 100 samples from the development dataset and and also using only 512 bytes.
 
 The output of the network for a given instance is a vector with 3 elements, subjected to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to each of the three classes, PDF, JPG or PNG.
 
@@ -61,25 +60,6 @@ The source code for the experiments is available at \url{http://github.com/atila
 
 \section{Results}
 
-% \subsection{Experiments 1 to 6}
-
-% Experiments 1 to 6 use a limited dataset, with only 3 files as source. Each input to the network is a random sector from one of these files. During these first tests, different strategies to structure the tests were being tried, and that was their main contribution.
-
-% Table \ref{tab:carving1-6} gives a summary of the results of experiments 1 to 6. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
-% \input{content/5.3-z-tab-carving1-6.tex}
-
-% Experiment 1 uses a convolutional layer of 16 units followed by a maxpooling layer, a LSTM layer of 16 units and a dense layer of 3 units.
-
-% Experiment 2 increases the number of convolutional layers, but it was unable to finish the training in less than 150 epochs.
-
-% Experiment 3 introduces the use of the ``fit\_generator'' function, which makes the sampling sectors from the training files easier, avoid manual counting of the epochs, uses callbacks, and uses the development dataset in validation.
-
-% Experiment 4 skips the initialization with ones that was being used in the LSTM layer at the previous experiments as an attempt to increase reproducibility. It also introduces periodic saving of TensorBoard data.
-
-% Experiment 5 skips the convolutional layer, but the resulting network was too slow to train.
-
-% Experiment 6 skips the maxpooling layer.
-
 % \noindent
 % \begin{algorithm}
 % \begin{lstlisting}[language=Python, frame=single, numbers=left]
@@ -102,59 +82,50 @@ In the first set of experiments, for each file selected as input sample from the
 
 
 
-Three network configurations were compared. The simplest one was a feedforward network, with only a single fully connected layer, with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units, one for each output class, PDF, JPG, or PNG.
+Three network configurations were compared. The simplest one was a feedforward network, referred as ``D'', with only a single fully connected layer, with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units, one for each output class, PDF, JPG, or PNG.
 
-Another used a LSTM layer with 16 output units, using a dropout of 0.5, followed by a fully connected layer of 3 output units.
+Another one, referred as ``LD'', used a LSTM layer with 32 output units, followed by a fully connected layer of 3 output units. The LSTM layer process one byte per time step. This is one of the simplest LSTM configurations. While it would be possible to use only a single LSTM layer without a fully connected layer next, then the LSTM layer would have to be limited to 3 output units, and would have too few trainable parameters. 
 
-The last one used a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
+The last one, referred as ``CL'', used a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 32 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed. Using 32 input units and a stride of same size, the convolutional layer breaks the block in 16 parts with 32 bytes each. The convolutional layer already outputs the exact number of classes, thus the LSTM layer here is just summarizing the results.
 
-Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``L'', and ``D'' columns indicate the number of convolutional, LSTM and dense layers in each model structure.
+\todo[inline]{check results again}
+Table \ref{tab:carving7-11} gives a summary of the results of this set of experiments, listing for each model the number of trainable parameters, if the training used all of the blocks of the sample file or just the first one, the number of training epochs, the duration of the training, and the final accuracy on the training and on the validation datasets.
 \input{content/5.3-z-tab-carving7-11.tex}
 
-The simple feedforward network was by far the fastest networking concerning training time, and was able to reach 100\% accuracy in only one epoch. It is interesting to notice that the LSTM without a previous convolutional network had a slow training time.
+The simple feedforward network was by far the fastest networking concerning training time, and had the best validation accuracy. It is interesting to notice that the LSTM without a previous convolutional network had a slow training time.
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%
-
-% All experiments of this set were able to reach the desired accuracy of 90\% in a few epochs. This can be explained by the regularity in the structure which is a characteristic of the beginning of the files.
-
-% Table \ref{tab:carving7-11} gives a summary of the results of experiments 7 to 11. The ``C'', ``R'', ``L'', and ``D'' columns indicate the number of convolutional, recurrent, LSTM and dense layers in each model structure.
-% \input{content/5.3-z-tab-carving7-11.tex}
-
-% Experiment 7 uses almost the same code of experiment 5, it is a single LSTM layer with 0.5 dropout and a output fully connected layer of 3 units, one for each filetype in consideration, PDF, JPG, and PNG.
-
-% Experiment 8 uses four RNN layers followed by a LSTM layer.
-
-% Experiment 9 is similar to the previous one, but uses only 1 RNN instead of 4.
-
-% Experiment 10 is the simplest network, only a fully connected layer with 131072 input units (512 bytes times 256 possible values using one hot encoding) and 3 output units. It was by far the fastest networking concerning training time, and was able to reach the desired accuracy in only one epoch.
-
-% Experiment 11 uses a convolutional layer without maxpooling with 32 input units, 3 output units, and a stride of 16 followed by a LSTM layer with 3 output units. Some other convolution sizes and strides were tried during the test development. A convolutional layer with 512 units of input would be equivalent to a fully connected layer, as no convolution would be performed.
+Since the simplest network was giving the best results, the next experimentation step was to check if this performance would be maintained in a more complex scenario.
 
 \subsection{Random block as input}
 
-The next set of experiments use a random block (512 bytes chunks) from each file, instead of just the first one. This is a harder classification task because, while in the first block is reasonable to find patterns in specific positions in relation to the beginning of the block, this correspondence is not normally preserved in the remaining blocks, the pattern may start anywhere in the block. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
+The next set of experiments uses a random block (512 bytes chunks) from each file, instead of just the first one. This is a harder classification task because, while in the first block is reasonable to find patterns in specific positions in relation to the beginning of the block, this correspondence is not normally preserved in the remaining blocks, as the pattern may start anywhere in the block. The second factor is that in files with low compression rates, as image files, the beginning of the file normally presents more recognizable patterns than the middle.
 
+Eleven network configurations are here compared.
+%18 CMCML, 20 CMCMLL
+The best group of results are composed by two network configurations that use two convolutional layers with a max pooling followed by one or two LSTM layers, referred as ``CMCML'' and  ``CMCMLL''. The results for using one or two LSTM layers were very similar. These networks process 8 bytes
+% , taking 33 and 30 minutes each, with 88.9\% and 88.6\% of accuracy in the validation dataset. 
 
-XXXX network configurations are here compared.
-The best group of results are composed by two network configurations that use two convolutional layers with a maxpooling followed by one or two LSTM layers. The results for using one or two LSTM layers were very similar, taking 33 and 30 minutes each, with 88.9\% and 88.6\% of accuracy in the validation dataset. 
+%12 D
+The simple feedforward network that performed well classifying the first block was unable to achieve similar results when classifying a random block.
+% In 600 epochs, it only reached an accuracy of 77.5\% on the validation dataset, taking 62 minutes.
 
-The simple feedforward network that performed well classifying the first block was unable to achieve similar results when classifying a random block. In 600 epochs, it only reached an accuracy of 77.5\% on the validation dataset, taking 62 minutes.
+%LD
+\todo[inline]{comment LD}
 
-%%%% 13 23 16 15
+%%%% 13-CLL 23-CLD 16-CML 15-CL
 The second best group of results was achieved by four networks with similar characteristics. One of then uses a convolutional layer followed by a LSTM layer, and the other three are variations of it, by adding a second LSTM layer, or by adding a fully connected layer at the end, or by adding maxpooling to the convolutional layer. These four networks presented similar results.
 
+% 25-CD, 26-CM, 27-CCM
+Three networks were constructed using convolutional layers without a LSTM layer. One of them uses a convolutional layer followed by a fully connected layer. Another one uses a convolutional layer followed by a maxpooling layer. And the third uses 2 convolutional layers and a maxpooling layer.
 
-\todo[inline]{here}
-Three networks were 
-%%%% 25
-Experiment 25 uses a convolutional layer followed by a fully connected layer.
+
+\todo[inline]{explain convolutional choices}
+\todo[inline]{detail each experiment}
+
 %%%%
-%%%% 26 e 27
-Experiments 25, 26, and 27 do not use LSTM. Experiment 26 uses a convolutional layer followed by a maxpooling layer. 
-Experiment 27 uses 2 convolutional layers and a maxpooling layer.
-%%%%
-Table \ref{tab:carving12-27} gives a summary of the results of this set of experiments. The ``C'', ``M'', ``L'', and ``D'' columns indicate the number of convolutional, maxpooling, LSTM and dense layers in each model structure.
+Table \ref{tab:carving12-27} gives a summary of the results of this set of experiments, listing for each model the number of trainable parameters, if the training used all of the blocks of the sample file or just the first one, the number of training epochs, the duration of the training, and the final accuracy on the training and on the validation datasets.
 \input{content/5.3-z-tab-carving12-27.tex}
+
+Table \ref{tab:carvinglayers} specify the number of output units in each layer of the networks used in the experiments. For the networks with two convolutional layers, those layers are connected together before the LSTM layer. For the convolutional layers, the input number indicates the size of the receptive field. 
+\input{content/5.3-z-tab-carving-layers.tex}
 
