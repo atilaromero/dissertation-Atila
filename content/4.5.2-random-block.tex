@@ -5,7 +5,7 @@ Each epoch was configured to draw 1000 samples from the training dataset. Valida
 Comparing the three network structures used in the previous set of experiments, the ``CL'' network had the best results.
 %12 D
 The simple feedforward network, ``D'', that performed well classifying the first block was unable to achieve similar results when classifying a random block.
-To check if the accuracy would improve with more training, the network was later trained for 600 epochs, but it only reached an accuracy of 77.5\% on the validation dataset, taking 62 minutes.
+To check if the accuracy would improve with more training, the network was later trained for 62 minutes, but it only reached an accuracy of 77.5\% on the validation dataset.
 
 %LD
 The network using only a LSTM layer followed by a fully connected layer, ``LD'', was the slowest to train, and achieved a low accuracy when compared to the other two networks.
@@ -22,9 +22,9 @@ The network ``CL'', that used a convolutional layer to divide the input block in
 Name & Parameters & Blocks & Epochs & Time    & Training          & Validation          \\       
      &            &        &        &         &          accuracy &            accuracy \\ \hline\hline
 
-D  & 393219 & all & 150 & 7m45s  & 0.758 & 0.684 \\ \hline
-LD & 37091  & all & 13  & 10m10s & 0.462 & 0.468 \\ \hline
-CL & 24663  & all & 150 & 8m38s  & 0.813 & 0.783 \\ \hline
+D	    & 393219	& all	& 150	& 4m56s	    & 0.748	& 0.701 \\hline
+LD	    & 37091 	& all	& 10	& 10m07s	& 0.413	& 0.431 \\hline
+CL	    & 24663	    & all	& 150	& 9m29s	    & 0.798	& 0.756 \\hline
 \end{tabular}
 \end{table}
 
