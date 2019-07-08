@@ -4,13 +4,11 @@ At the ``CCL'' network, the first convolutional layer uses 8 units for the input
 
 The ``CCLL'' network adds a LSTM layer of 64 output units between the convolutional layers and the final LSTM layer.
 
-The ``CMCML'' network is similar to ``CCL'', but uses max pooling of size 2 at each convolutional layer.
+The ``CMCML'' network is similar to ``CCL'', but uses max pooling of size 2 at each convolutional layer. This max pooling act on the second dimension instead of the first, and thus does not change the number of steps that the LSTM layer will process. For example, the first max pooling halves the number of output units of the first convolutional layer from 128 to 64.
 
 The ``CMCMLL'' network combines the two additions, using max pooling and using two LSTM layers.
 
-The results are shown in table \ref{tab:carving2convs}. The ``CL'' network is included for comparison. The ``CCL'' results were worst than ``CL'' ones, while ``CCLL'' were better. But the best results of all experiments described so far were those
-These three networks produced similar results, but they are not as good as the ``CL'' network, as can be seen in figure
-\ref{fig:nolstm}.
+The results are shown in table \ref{tab:carving2convs}. The ``CL'' network is included for comparison. The  ``CL'' network results were only better than the the ``CCL'' network. The other three networks presented better accuracy values, as can be seen in figure \ref{fig:nolstm}.The ``CMCML'' and ``CMCMLL'' results were similar.
 
 \begin{table}[!ht]
     \centering
