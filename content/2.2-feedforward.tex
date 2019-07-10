@@ -2,12 +2,14 @@ Multilayer Perceptron (MLP)\cite{rosenblatt_perceptron:_1958} is an feedforward 
 
 Given enough labeled input samples, these networks can be trained to classify the inputs in a closed group of categories.
 
-The output of each layer is the result of a matrix multiplication of the input and a set of weights plus a bias vector, as shown in equation \ref{eq:mpl}, where $y$ is the output vector of the layer, $x$ is the input vector, $W$ is the set of weights matrix and $b$ is the bias vector.
+The output of each layer is the result of a matrix multiplication of the input and a set of weights plus a bias vector, also subject to an optional activation function, as shown in equation \ref{eq:mpl}, where $y$ is the output vector of the layer, $x$ is the input vector, $W$ is the set of weights matrix, $b$ is the bias vector, and $a$ is the activation function.
 
 \begin{align}
 \label{eq:mpl}     
-y &= x W + b
+y &= a(x W + b)
 \end{align}
 
 
-The training consists in a search for the weights that would \todo{}
+The training consists in a search for the weights that would minimize the error between the predicted output and the correct label of the instance. This error function is also known as loss function or cost function. Some authors prefer to distinguish between the two using the term ``loss'' to refer to a single training example and ``cost'' to refer to the average of losses in the training set. Is important to notice that the framework used to execute the experiments of this work, Keras, does not apply this distinction and uses the term ``loss'' even when the results refer to an entire set of instances.
+
+An essential characteristic of this cost minimization procedure is that it is not random. Given the high number of parameters that can be adjusted, a random search for the lowest cost would be prohibitively expensive. The success of neural networks in several fields and applications would not be possible without the backpropagation algorithm \cite{rumelhart_general_1986}. This algorithm uses the gradient of the network formulas to propagate the error in the network's output back to each node, assessing how much each weight contributes to this error, and adjusting its value accordingly.
