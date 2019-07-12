@@ -1,1 +1,7 @@
-Convolutional networks \cite{lecun_backpropagation_1989}\cite{lecun_convolutional_1995} \todo{...}
+Convolutional networks \cite{lecun_backpropagation_1989}\cite{lecun_convolutional_1995} use a sliding window over the input. The convolutional kernel process a small portion of the input matrix, using the same process described in the multilayer perceptron section, concatenating the results of each portion. Popular choices for the kernel size used in image processing are 2x2 and 3x3. The size of the kernel is the size of the sliding window, while the stride is the step of the slide.
+
+One of the advantages of convolutional layers is that the number of trainable parameters is reduced in comparison with a fully connected layer. And the linear transformation that the kernel does is uniformly applied across the entire input.
+
+When used to process images, the input of the convolution is a matrix with two dimensions. But in other applications it is possible to use a one dimension convolution.
+
+After the convolutional layer, sometimes a pooling layer is added. It is a special type of convolution that applies a predetermined operation instead of a set of trainable weights. The two most common operations used in pooling layers are max and average. Max pooling uses the highest number as result, while average pooling uses the average of the values being processed. Pooling layers offer a fast way to attempt linear transformation invariance, where the detection of patterns is not affected by where in the input they occur. The drawback is that they reduce the size of the input, thus loosing information.
