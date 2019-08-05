@@ -5,7 +5,6 @@ Each epoch was configured to draw 1000 samples from the training dataset. Valida
 Comparing the three network structures used in the previous set of experiments, the ``CL'' network had the best results.
 %12 D
 The simple feedforward network, ``D'', that performed well classifying the first block was unable to achieve similar results when classifying a random block.
-To check if the accuracy would improve with more training, the network was later trained for 62 minutes, but it only reached an accuracy of 77.5\% on the validation dataset.
 
 %LD
 The network using only a LSTM layer followed by a fully connected layer, ``LD'', was the slowest to train, and achieved a low accuracy when compared to the other two networks.
@@ -30,5 +29,5 @@ CL      & 24663     & all   & 159   & 10m00s    & 0.83  & 0.789 \\\hline
 
 \begin{figure}[htb!]
 \centering\includegraphics[width=0.65\textwidth]{content/CL-D-LD.png}
-\caption[Experiments with random blocks]{\label{fig:randomblock}Filetype identification experiments with random block - accuracy vs. time(minutes)}%
+\caption[Experiments with random blocks]{\label{fig:randomblock}Filetype identification experiments with random block - validation accuracy vs. time(minutes)}%
 \end{figure}

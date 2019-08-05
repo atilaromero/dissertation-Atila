@@ -1,5 +1,12 @@
 % establishing the context, background and/or importance of the topic
     
+\todo[inline]{Definir data carving}
+\todo[inline]{passos do data carving}
+\todo[inline]{classes de data carving}
+\todo[inline]{explicar o tipo de experimento}
+\todo[inline]{o foco do trabalho é identificação?}
+\todo[inline]{quais soluções já existem?}
+
 % file recovery: motivation
 % data carving: sometimes the only solution
 %from pep 1, paragrafo 1
@@ -8,7 +15,7 @@ In a forensic context, file recovery is a frequent task that can be motivated by
 
 % the problem of data carving development
 %from pep 1, paragrafo 4
-The patterns searched by data carving software are generally manually coded, taking advantage of fixed byte sequences found on headers and footers. But the amount of different file types combined with the slow process of manually coding each of those patterns makes the development of data carving software a tedious task \cite{mcdaniel_content_2003}.
+The patterns searched by data carving software are generally manually coded\todo{e as abordagens que usam ML?}, taking advantage of fixed byte sequences found on headers and footers. But the amount of different file types combined with the slow process of manually coding each of those patterns makes the development of data carving software a tedious task \cite{mcdaniel_content_2003}.
 
 % ml as a solution
 %from pep 1, paragrafo 5
@@ -22,3 +29,7 @@ The patterns searched by data carving software are generally manually coded, tak
 
 %from pep 4, paragrafo 3
 The amount of work required to support the vast amount of file types in existence is here assumed as the main obstacle to the use of new technologies on data carving software. Most of the attention paid to the results of data carving research is focused on increasing some statistical measurement of success, like accuracy. While these advances are undoubtedly important, they may not be the kind of research needed to transform these findings into practical tools. If this is the case, then the forensic community would benefit from researches that could make the task of supporting the carving of a new file type easier. Machine learning techniques have the potential to achieve that goal because they can replace the step of manually encoding a structure parser by automatically recognizing patterns in large amounts of data.
+
+\todo[inline]{Em quais situações é preciso suportar um novo tipo de arquivo?}
+
+\todo[inline]{o quanto os tipos de arquivos mudam ao longo do tempo? as ferramentas são atualizadas?}
