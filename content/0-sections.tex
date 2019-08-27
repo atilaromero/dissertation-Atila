@@ -6,45 +6,45 @@
 \levelA{\label{chap:introduction}Introduction}
 \input{content/1-introduction.tex}
     %\levelB{Motivation}
-    \input{content/1.1-motivation.tex}
+    \input{content/1.1a-whatisdatacarving.tex}
+    \input{content/1.1b-example.tex}
+    \input{content/1.1c-datacarvingclasses.tex}
+    \input{content/1.1d-theproblem.tex}
     %\levelB{Research questions}
-    \input{content/1.2-researchquestions.tex}
+    \input{content/1.2-proposal.tex}
     %\levelB{Overview}
     \input{content/1.3-overview.tex}
 
-%2
-\levelA{\label{chap:background}Background}
-\input{content/2-background.tex}
-    \levelB{\label{sec:datacarving}Data carving}
-    \input{content/2.1-datacarving.tex}
-    
-    \levelB{\label{sec:feedforward}Multilayer Perceptron}
-    \input{content/2.2-feedforward.tex}
-    
-    \levelB{\label{sec:conv}Convolutional neural network}
-    \input{content/2.3-conv.tex}
-    
-    % \levelB{\label{sec:rnn}Recurrent Neural Network}
-    % \input{content/2.4-rnn.tex}
-    
-    \levelB{\label{sec:lstm}Long Short-Term Memory}
-    \input{content/2.5-lstm.tex}
 
 %3
 \levelA{Related work}
-\input{content/3-relatedwork.tex}
-    \levelB{Data carving evolution}
-    \input{content/3.1-datacarvingevolution.tex}
+\input{content/2-relatedwork.tex}
+    % \levelB{From PEP}
+    \input{content/2.1b-resultados-outros-trabalhos.tex}
     \levelB{Current data carving tools}
-    \input{content/3.2-datacarvingtools.tex}
-    \levelB{Data carving challenges}
-    \input{content/3.3-challenges.tex}
-    \levelB{Neural networks research in data carving}
-    \input{content/3.4-nn.tex}
+    \input{content/2.2-datacarvingtools.tex}
+    % \levelB{Data carving challenges}
+    % \input{content/2.3-challenges.tex}
+    \levelB{Neural networks researches in data carving}
+    \input{content/2.4-nn.tex}
 
+%2
+\levelA{\label{chap:background}Some artificial neural networks}
+\input{content/3-background.tex}
+    \levelB{\label{sec:feedforward}Multilayer Perceptron}
+    \input{content/3.2-feedforward.tex}
+    
+    \levelB{\label{sec:conv}Convolutional neural network}
+    \input{content/3.3-conv.tex}
+    
+    % \levelB{\label{sec:rnn}Recurrent Neural Network}
+    % \input{content/3.4-rnn.tex}
+    
+    \levelB{\label{sec:lstm}Long Short-Term Memory}
+    \input{content/3.5-lstm.tex}
 
 %4
-\levelA{\label{chap:experiments}Experiments}
+\levelA{\label{chap:experiments}Proposed method}
 \input{content/4-experiments.tex}
     \levelB{Objective}
     \input{content/4.1-objective.tex}
@@ -54,18 +54,20 @@
     \input{content/4.3-datasets.tex}
     \levelB{Environment}
     \input{content/4.4-environment.tex}
-    \levelB{Results}
-    \input{content/4.5-results.tex}
-        \levelC{First block as input}
-        \input{content/4.5.1-firstblock.tex}
-        \levelC{Random block as input}
-        \input{content/4.5.2-random-block.tex}
-        \levelC{CL variations}
-        \input{content/4.5.3-cl-variations.tex}
-        \levelC{No LSTM}
-        \input{content/4.5.4-nolstm.tex}
-        \levelC{Two convolutional layers}
-        \input{content/4.5.5-twoconvs.tex}
+
+\levelA{Results}
+\input{content/4.5-results.tex}
+    \levelB{First block as input}
+    \input{content/4.5.1-firstblock.tex}
+    \levelB{Random block as input}
+    \input{content/4.5.2-random-block.tex}
+    \levelB{CL variations}
+    \input{content/4.5.3-cl-variations.tex}
+    \levelB{No LSTM}
+    \input{content/4.5.4-nolstm.tex}
+    \levelB{Two convolutional layers}
+    \input{content/4.5.5-twoconvs.tex}
+
     \levelB{Discussion}
     \input{content/4.6-discussion.tex}
 

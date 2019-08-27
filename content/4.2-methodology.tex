@@ -1,6 +1,9 @@
 
 \todo[inline]{falar da separação de primeiro bloco e todos os blocos, falar qual o tipo de resultado esperado}
 \todo[inline]{qual o tipo de experimento?}
+\todo[inline]{foco na identificação dos tipos de arquivos. Só isto?}
+\todo[inline]{melhor descrição sobre os passos do que vai ser feito antes de descrever os experimentos}
+\todo[inline]{Nos resultados, existe uma nova forma de organização, por exemplo, os primeiros blocos. Continua dizendo o que está sendo feito. Deve re-organizar (colocar na metodologia). Assim quando chegar nos experimentos e resultados o leitor já terá uma ideia geral do que será feito.}
 
 The input features of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero.
 
@@ -14,7 +17,7 @@ For similar reasons, networks that require too much tuning to perform well are u
 %metricas
 To identify networks with such requirements, each experiment use two stop conditions, ten minutes, or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the experiments.
 
-\todo[inline]{justificar critério de parada: estabilização/estagnação}
+\todo[inline]{justificar critério de parada: estabilização/estagnação; quando vai aumentando o tempo, não existia mais modificações, ou seja 10 minutos chegavam para a estabilidade do modelo}
 
 %Since the rate of change of accuracy may present oscillations during training, a visual comparison of accuracy versus time curves is important to confirm which network has better training times.
 

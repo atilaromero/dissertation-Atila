@@ -1,0 +1,15 @@
+\subsection{Research questions}
+This work compares the use of Multilayer Perceptrons (MLP), Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM), and combinations of those types of networks, to perform file fragment classification, which is the first step of the data carving process, identification, answering the following initial questions:
+
+%from pep 4.1
+\begin{enumerate}[itemindent=\parindent,label=\textbf{Q\arabic*.}]
+
+    \item How does different neural network models compare to each other in terms of training performance and quality of results?
+    
+    \item Which neural network models would be more suitable to accept the addition of new file types by the forensic examiners community? 
+
+\end{enumerate}
+
+In this work, only neural networks are implemented, but other machine learning approaches exist, like Support Vector Machines (SVM) and k-Nearest Neighbors (kNN). This choice of restriction was motivated by the success that deep neural networks have shown in other fields, like image classification and speech recognition. The flexibility of neural networks to combine different types of layers is also important, as it is a core characteristic being explored in this research.
+
+Two sets of experiments were conducted. In the first set, the initial 512 bytes of a file is used as input to the tested neural network, whose task is to predict the file type. The second set is similar, but the 512 bytes fragment is extracted from a random position of the file, which is a more difficult task as it cannot depend on header patterns.

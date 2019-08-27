@@ -12,7 +12,7 @@ The network using only a LSTM layer followed by a fully connected layer, ``LD'',
 %CL
 The network ``CL'', that used a convolutional layer to divide the input block in 16 smaller blocks of 32 bytes and used the LSTM layer to process the results gave best results of the three.
 
-\begin{table}[!ht]
+\begin{table*}[!ht]
     \centering
     \caption{Filetype identification experiments with random block}
     \label{tab:carvingrandomblock}
@@ -25,9 +25,10 @@ D       & 393219    & all   & 282   & 10m01s    & 0.764 & 0.719 \\\hline
 LD      & 37091     & all   & 10    & 10m35s    & 0.559 & 0.365 \\\hline
 CL      & 24663     & all   & 159   & 10m00s    & 0.83  & 0.789 \\\hline
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{figure}[htb!]
-\centering\includegraphics[width=0.65\textwidth]{content/CL-D-LD.png}
+\noindent
+\begin{figure*}[htb!]
+\centering\includegraphics[width=0.50\textwidth]{content/CL-D-LD.png}
 \caption[Experiments with random blocks]{\label{fig:randomblock}Filetype identification experiments with random block - validation accuracy vs. time(minutes)}%
-\end{figure}
+\end{figure*}

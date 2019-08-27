@@ -1,0 +1,21 @@
+\subsection{The problem}
+% the problem of data carving development
+%from pep 1, paragrafo 4
+While the research on identification and reassembling continue to provide good alternatives to the old methods, the algorithms used in practice by available data carving software are generally still manually coded, using fixed byte sequences found on headers and footers. The amount of different file types combined with the slow process of manually coding each of those patterns makes the development of data carving software an overwhelming task \cite{mcdaniel_content_2003}. 
+
+% ml as a solution
+%from pep 1, paragrafo 5
+% The application of machine learning solutions to this manual task has the potential to make it easier and faster. An initial strategy could be to train a classifier to, given a chunk of data, provide a label indicating a file type. That could be used to recover unfragmented deleted files.
+% % novo
+% Then, that same classifier can be applied in small chunks of data to produce input to a second algorithm, responsible to reassemble the fragments of a file.
+
+% ml as a solution
+%from pep 1, paragrafo 6
+% The recovery of fragmented files through data carving would require some sort of pattern recognition on the identified chunks, in order to reconstruct the correct sequence.
+
+%from pep 4, paragrafo 3
+The amount of work required to support the vast amount of file types in existence is arguably the main obstacle to implement new technologies on data carving software. The forensic community would benefit from researches that could make the task of supporting the carving of a new file type easier. Machine learning techniques have the potential to achieve that goal because they can replace the step of manually encoding a structure parser by automatically recognizing patterns in large amounts of data.
+
+The range of common file types, those files that are most likely to be relevant in a piece of evidence, like images, videos and documents, do not change frequently. Because of that, the available tools could so far be kept up to date, despite the work required to include a new file type.
+
+But there are situations when this is not enough. This can happen when the relevant file type is proprietary, uncommon, or newly created. As example, some video surveillance solutions use proprietary video formats that are not recognized by data carving software. In this situation, it would be beneficial to use a tool that, using examples of files of that particular kind, could create a customized model able to identify and retrieve this file type.

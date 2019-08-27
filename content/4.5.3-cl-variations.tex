@@ -9,7 +9,7 @@ The ``CLD'' network also tries to increase the influence of the LSTM layer in th
 The results of the experiments with these variations is shown in table \ref{tab:carvingclvariations}.
 Overall, this three variations produced better results than the ``CL'' network, as can be seen in figure \ref{fig:cl-variations}.
 
-\begin{table}[!ht]
+\begin{table*}[!ht]
     \centering
     \caption[CL variations]{Comparison of models that use convolutional layers and LSTM layers}
     \label{tab:carvingclvariations}
@@ -23,9 +23,10 @@ CLL     & 287824    & all   & 108   & 10m04s    & 0.879 & 0.856 \\\hline
 CML     & 262416    & all   & 137   & 10m03s    & 0.863 & 0.836 \\\hline
 CLD     & 1246339   & all   & 73    & 8m48s     & 0.902 & 0.857 \\\hline
 \end{tabular}
-\end{table}
+\end{table*}
 
+\noindent
 \begin{figure}[htb!]
-\centering\includegraphics[width=0.65\textwidth]{content/CL-CLL-CML-CLD.png}
+\centering\includegraphics[width=0.50\textwidth]{content/CL-CLL-CML-CLD.png}
 \caption[CL variations]{\label{fig:cl-variations}Comparison of models that use convolutional layers and LSTM layers - validation accuracy vs. time(minutes)}%
 \end{figure}

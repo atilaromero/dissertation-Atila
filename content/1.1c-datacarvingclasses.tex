@@ -1,8 +1,15 @@
+ \subsection{Data carving categorization}
+ \todo[color=gray,inline]{será que todas essas classificações não confundem mais do que explicam? não tenho certeza}
+ 
+ \todo[inline]{nomenclatura: data carving, file carving, data types, file types, entire files, fragments}
+ 
+ 
 %from pep 2.2, paragrafo 1
 Ali et al. \cite{ali_review_2018} divide the data carving process in three steps:
     identification, which classifies the file type of individual chunks of data; 
     validation, which includes a list of requirements of a file that are needed for its recovery to be considered successful; and
     reassembling, which attempts to reconstruct the original file.
+    
 
 %from pep 2.2, paragrafo 3
 Nadeem \cite{nadeem_ashraf_forensic_2013} groups the carving techniques in three generations, each extending the previous one.
@@ -20,8 +27,6 @@ In extension-based identification, the content of the file is ignored and only i
 %from pep 2.2, paragrafo 8
 Beebe et al. \cite{beebe_sceadan:_2013} identify three content-based approaches to classify file and data types, also referring only to the identification step of the Ali et al. \cite{ali_review_2018} data carving process division: semantic parsing, nonsemantic parsing, and machine learning. Semantic parsing relies on the file structure to identify its type. Nonsemantic parsing searches for strings that are commonly found in specific files. Machine learning uses supervised and unsupervised algorithms, like Support Vector Machine (SVM), k-Nearest Neighbors (kNN), and Neural Networks (NN).
 
-\todo[inline]{qual a relação de ML com a evolucao de data carving?}
-
 \sigla{NN}{Neural Networks}
 \sigla{kNN}{k-Nearest Neighbors}
 \sigla{SVM}{Support Vector Machine}
@@ -29,8 +34,4 @@ Beebe et al. \cite{beebe_sceadan:_2013} identify three content-based approaches 
 %from pep 2.2, paragrafo 9
 A summary of the categorization schemes is depicted on Table \ref{tab:categories}. As Nadeem \cite{nadeem_ashraf_forensic_2013} does not specifically mention machine learning, it is left out of generation classification.
 
-\input{content/tables/3.1-table-categories.tex}
-
-\todo[inline]{diferenças entre este trabalho e outros: dados, metodologia e resultados}
-
-\todo[inline]{qual a acurácia das ferramentas tradicionais? e das técnicas apresentadas em papers?}
+\input{content/tables/2.1-table-categories.tex}

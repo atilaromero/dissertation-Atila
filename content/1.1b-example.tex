@@ -1,0 +1,10 @@
+
+\subsection{Example}
+\todo[color=gray,inline]{deixar ou tirar fora?}
+
+Normally, the average user of a computer does not need to deal with hard disk sectors directly and has contact only with the already mounted filesystem, which presents directories and files for the user. But in order to present such view, the operating system has to interpret the raw media data, which is simply a stream of data blocks.
+
+To explain how a data carving process works, a hard drive with a deleted video file is here used as an example.
+The first blocks of the drive contain a partition table, indicating ranges of blocks belonging to each of the drive partitions. Inside a partition, the operating system expects to find a filesystem. The filesystem stores metadata about each file or directory and keeps an index indicating the position of each file on disk. This way, when a user opens a file, the operating system uses the filesystem to find where in the disk the file is stored, accessing those areas directly and returning its content to the user, who sees the returned data as the file content. 
+ 
+If video file in the example had not been deleted, the filesystem could use the index to find the video location on disk. But after deletion, the corresponding index entry is erased, while the actual content of the file may be left untouched to avoid disk access. In this circumstance, a data carving procedure may successfully retrieve the file, even if the filesystem cannot. One common data carving approach that does not deal with fragmentation consists in searching for headers and footers patterns. To retrieve the hypothetical video file in the example, a software using this approach would sequentially read each drive sector, find a known header of a video file and save the following sectors until a footer is found or a size limit is reached. 
