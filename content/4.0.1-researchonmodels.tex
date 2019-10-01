@@ -1,0 +1,71 @@
+\levelB{Research on accuracy of some models}
+% Objective:
+In this experiment, different neural networks are trained and evaluated
+at the filetype identification task. Their accuracy is then compared,
+to identify which models should be considered or disregarded in the remaining phases.
+
+% Inputs:
+The input features of the network for each instance is a 512x8 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes uses a custom encoding where each of the 8 bits of a byte is represented as -1 or 1, depending whether the bit is 0 or 1. During initial tests, this encoding was compared to three other encodings: one-hot encoding, 8 bits represented as 0 or 1\todo{include citation}, and 8 bits represented as [0,1] and [1,0] \cite{hiester_file_2018}. More research should be done in the future to determine the best of the four, but initial results suggest they have similar impact on the model accuracy. The one-hot encoding has the disadvantage of increasing the input matrix size by a factor of 32.
+
+% outputs:
+The output of the network for a given instance is a vector with a size equal to the number of classes, subjected to a softmax function, which applies the exponential function on the vector and then normalizes\todo{check if this is normalization} it. Each value will represent the predicted probability that the instance belongs to each of the 
+XXXXX
+three classes, PDF, JPG or PNG.
+
+
+% Dataset:
+
+
+%Constraints
+The models where trained with a time constraint of ten minutes, and using only a small training dataset,
+
+Models:
+
+
+Dataset preparation:
+
+%Sampling
+
+
+Setup:
+--- software, hardware, algorithm
+--- vm, os, application, memory, HD
+
+Results:
+
+Limitations and threats to validity:
+
+
+Minimize the training time is important when the task of create new models to new filetypes is delegated to the forensic examiners community, since they may not have expensive hardware or time to train a more demanding neural network.
+
+For similar reasons, networks that require too much tuning to perform well are undesirable, since it would require a higher knowledge and work from the forensic examiner.
+
+
+%metricas
+To identify networks with such requirements, each experiment use two stop conditions, ten minutes, or an accuracy of 90\% in the training set, whichever occurs first. These limits were established during the experiments.
+
+\todo[inline]{justificar critério de parada: estabilização/estagnação; quando vai aumentando o tempo, não existia mais modificações, ou seja 10 minutos chegavam para a estabilidade do modelo}
+
+%Since the rate of change of accuracy may present oscillations during training, a visual comparison of accuracy versus time curves is important to confirm which network has better training times.
+
+All the experiments use the Adam \cite{kingma_adam:_2014}
+optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without requiring tuning the learning rate.
+
+%modelos
+The networks considered used different combinations of convolutional, max pooling, LSTM, and fully connected layers.
+
+The experiment names are based on the types of layers that compose each architecture and their purpose is to differentiate one experiment of another. Thus, they are not intended to be used outside of this work.
+
+
+
+
+
+
+Dissemination:
+-- dataset
+-- authorship
+-- repository
+-- id and citation
+-- data management plan
+-- diary
+-- experimental issues
