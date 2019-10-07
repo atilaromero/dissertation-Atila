@@ -1,3 +1,27 @@
+% \levelC{Dataset}
+This study uses the Govdocs1 dataset \todo{citation}, which was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. From the remaining 30 extensions, listed in table \ref{tab:govdocs1}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
+
+\input{content/tables/4.0.1-govdocs.tex}
+
+% \levelC{Hardware}
+The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
+
+
+% \levelC{Software}
+\todo[inline]{python, keras, tensorflow, linux, jupyter notebook}
+
+% repository
+The source code for the experiments is available at \url{http://github.com/atilaromero/ML}.
+\todo[inline]{create a cleaner repository just for the paper}
+
+Section \ref{sec:evalmodels} evaluates some alternative models in the file fragment classification task. The expectation was to identify the most promising models to continue improvement. Instead, an apparent limit on how far those models could be improved was found. 
+
+Section \ref{sec:numberofclasses} \todo{XXXX}
+
+Section \ref{sec:exprandom} \todo{XXXX}
+
+
+
 \input{content/4.0.1-researchonmodels.tex}
 
 \input{content/4.0.2-researchonnumberofclasses.tex}

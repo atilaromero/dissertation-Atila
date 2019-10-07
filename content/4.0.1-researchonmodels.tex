@@ -1,16 +1,14 @@
-\levelB{Evaluation of models based on accuracy}
+\levelB{Exploratory research of models based on accuracy}
+\label{sec:evalmodels}
+
 \levelC{Objective}
-In this experiment, different neural networks are trained and validated
+In this exploratory research, different neural networks are trained and validated
 at the filetype identification task. Their accuracy is then compared,
 to identify which models should be considered or disregarded in the remaining phases.
 
-\levelC{Dataset}
-The Govdocs1 dataset \todo{citation} was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. From the remaining 30 extensions, listed in table \ref{tab:govdocs1}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
-
-\input{content/tables/4.0.1-govdocs.tex}
 
 \levelC{Sampling}
-To select a sample instance from the dataset, first a random file is selected among those available, without reposition. Then, a block from this file is randomly selected. After all files have participated in the process, the process may be repeated as long as necessary. This way, all files are considered and the classes are easily balanced.
+To select a sample instance from the Govdocs1 dataset, first a random file is selected among those available, without replacement. Then, a block from this file is randomly selected. After all files have participated in the process, the process may be repeated as long as necessary. This way, all files are considered and the classes are easily balanced.
 This contrasts with the sampling technique applied in other works, where all the sectors are grouped together before sampling, which may lead to a imbalance between classes.
 
 \levelC{Inputs}
@@ -34,29 +32,18 @@ Fourteen models participated in this evaluation. One of then is a simple single 
 \input{content/tables/4.0.1-models.tex}
 
 %optimization
-All the experiments use the Adam \cite{kingma_adam:_2014}
+All the trainings use the Adam \cite{kingma_adam:_2014}
 optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without fine tuning of parameters.
 
 % Constraints
 The models where trained with a time constraint of ten minutes, which was sufficient to compare their performance, even before reaching stagnation.
-
-\levelC{Hardware}
-The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
-
-
-\levelC{Software}
-\todo[inline]{python, keras, tensorflow, linux, jupyter notebook}
-
-% repository
-The source code for the experiments is available at \url{http://github.com/atilaromero/ML}.
-\todo[inline]{create a cleaner repository just for the paper}
 
 \levelC{Results}
 %exp18
 The two models that used LSTM layers without convolutional layers presented a slower learning in comparison with the others, as can be seen in table \todo{include learning curve}.
 
 The remaining models after ten minutes already showed signs of being close to their limit.
-Their accuracy results were in the 0.4-0.5 range. \todo{include accuracy bar plot, table and check the mentioned range}.
+Their accuracy results were in the 0.4-0.55 range. \todo{include accuracy bar plot, table and check the mentioned range}.
 
 The best model, identified as ``CLD'', achieved an accuracy of 0.515.
 
@@ -66,19 +53,8 @@ To check if the two slower models could give better result if executed for a lon
 
 %stagnation in learning with such short times, combined with low final accuracy suggests that the dataset present some patterns that are easily recognizable, while the rest of the dataset present a very hard classification task.
 
-\levelC{Limitations and threats to validity}
-In this evaluation, the models were not trained until reach stagnation of accuracy. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters was insufficient to raise accuracy above the 0.4-0.5 range.
+% \levelC{Limitations and threats to validity}
+In this exploratory research, the models were not trained until reach stagnation of accuracy. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters were insufficient to raise accuracy above the 0.4-0.55 range, which suggests that selection or tuning of models may not be best approach to improve results.
 
 
 
-
-
-
-Dissemination:
--- dataset
--- authorship
--- repository
--- id and citation
--- data management plan
--- diary
--- experimental issues

@@ -1,1 +1,27 @@
 \levelB{Experiment on random data detection}
+\label{sec:exprandom}
+
+In the previous sections, it was observed that the higher the number of classes being considered during the creation of a file fragment classification model, the higher is the error rate of this model. In addition, the comparison of pairs of classes indicated that high entropy data structures may be responsible by some part of those errors.
+
+Prior to conducting experiments to find the major cause of error, a list of conceivable error sources was elaborated:
+\begin{enumerate}
+    \item For some data structure, the model cannot distinguish it from random data. This can happen if the pattern in the data is too complex, beyond the capabilities of the model. It may be the case that in practice no model can perform this distinction or, instead, this may be a limitation of this particular model only. This situation may occur in files that use compression or cryptography, or more generally, any filetype with high entropy.
+    \item Same filetype with multiple extensions. If the same filetype appears in the dataset with multiple extensions, ``JPG'' and ``JPEG'' for example, the model will not be able to predict which label is used in the validation dataset for a given instance, since this distinction exists in the labelling but not in the content.
+    \item Different filetypes using the same data structure. This is a problem similar to the previous one, but it is more complex to solve. It is common to a given filetype to employ different types of data structures. If two or more filetypes make use of the same data structures, the existence of that structure will then not be sufficient to differentiate those filetypes, as it may belong to anyone of them.
+    The reverse, a filetype that uses multiple kinds of data structures, does not constitute a problem as it simply results in extra work during the model training.
+    \item Files that contain other files.
+\end{enumerate}
+
+
+\levelC{Objective}
+
+
+\levelC{Dataset}
+\levelC{Sampling}
+\levelC{Inputs}
+\levelC{Outputs}
+\levelC{Models}
+\levelC{Results}
+\levelC{Limitations and threats to validity}
+
+% The extensions ``text'' and ``unk'' were also discarded because they do not correspond to a file type, and the files that use them belong to assorted types. 
