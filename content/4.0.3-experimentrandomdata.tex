@@ -3,14 +3,22 @@
 
 In the previous sections, it was observed that the higher the number of classes being considered during the creation of a file fragment classification model, the higher is the error rate of this model. In addition, the comparison of pairs of classes indicated that high entropy data structures may be responsible by some part of those errors.
 
-Prior to conducting experiments to find the major cause of error, a list of conceivable error sources was elaborated:
-\begin{enumerate}
+Prior to conducting experiments to find the major cause of error, a list of conceivable error sources (E1 to E4) was elaborated:
+\begin{enumerate}[itemindent=\parindent,label=\textbf{E\arabic*.}]
     \item For some data structure, the model cannot distinguish it from random data. This can happen if the pattern in the data is too complex, beyond the capabilities of the model. It may be the case that in practice no model can perform this distinction or, instead, this may be a limitation of this particular model only. This situation may occur in files that use compression or cryptography, or more generally, any filetype with high entropy.
-    \item Same filetype with multiple extensions. If the same filetype appears in the dataset with multiple extensions, ``JPG'' and ``JPEG'' for example, the model will not be able to predict which label is used in the validation dataset for a given instance, since this distinction exists in the labelling but not in the content.
-    \item Different filetypes using the same data structure. This is a problem similar to the previous one, but it is more complex to solve. It is common to a given filetype to employ different types of data structures. If two or more filetypes make use of the same data structures, the existence of that structure will then not be sufficient to differentiate those filetypes, as it may belong to anyone of them.
+
+    \item Different filetypes using the same data structure. It is common to a given filetype to employ different types of data structures. If two or more filetypes make use of the same data structure, the existence of that structure will then not be sufficient to differentiate those filetypes, as it may belong to anyone of them.
     The reverse, a filetype that uses multiple kinds of data structures, does not constitute a problem as it simply results in extra work during the model training.
-    \item Files that contain other files.
+
+    \item Same filetype with multiple extensions. If the same filetype appears in the dataset with multiple extensions, ``JPG'' and ``JPEG'' for example, the model will not be able to predict which label is used in the validation dataset for a given instance, since this distinction exists in the labelling but not in the content.
+
+    \item Files that contain other files. Some filetypes need to embed other files. If the inner file is categorized, even if the model finds an unmistakable pattern, it will not match the label, which will be the extension of the outer file. A ``PDF'' file, for example, can embed a ``JPG'' file. If the model predict ``JPG'' as the class of a portion of this file, it will no match the instance label on the dataset, which would be ``PDF''.
 \end{enumerate}
+
+The three last error sources listed above are similar in nature, as the last two may be viewed as special cases of E2. This error source comes from the practice of using the extension of the file as the class to each of its parts. An analogy with speech recognition would be to label each syllable of a spoken word using the word as its label and then try to predict the whole word using only a syllable.
+
+Unfortunately, for the file fragmentation task the potential labels for smaller parts may be less obvious than it is for speech recognition. The best case scenario would be if the neural network itself could choose the labelling. But evaluate those predicted labels using labels of its own choosing would introduce bias, as it could prefer to create only easy labels. Saying that all filetypes are composed of ``data'' is correct, but it is unhelpful.
+
 
 
 \levelC{Objective}
