@@ -35,7 +35,7 @@ Still, with 55\% of samples being misclassified when the number of classes is 30
 
 \todo[inline]{graph was generated without text and unk classes}
 
-Figure \ref{fig:dual} shows the graph of accuracy of each class when compared individually with each one of the others. Generally, filetypes with higher entropy tends to have lower minima, with the GIF filetype being a notable exception. Most of these files use some form of compression, like image files for example. 
+Figure \ref{fig:dual} shows the graph of accuracy of each class when compared individually with each one of the others. Generally, file types with higher entropy tends to have lower minima, with the GIF file type being a notable exception. Most of these files use some form of compression, like image files for example. 
 
 
 \noindent
@@ -45,7 +45,7 @@ Figure \ref{fig:dual} shows the graph of accuracy of each class when compared in
 \end{figure*}
 
 
-The accuracy obtained after the training of models with pair of classes was used to build a 28x28 matrix \todo{should rebuild with 30?}, using 0.5 in the main diagonal entries. This number was chosen because a pair of indistinguishable classes would have this accuracy in average. Then, a Principal Component Analysis (PCA) \todo{citation} was used to treat this matrix. The result is shown in figures \ref{fig:pca} and \ref{fig:pca2}. Again some filetypes with high entropy emerge as a promising group, ``dwf'',
+The accuracy obtained after the training of models with pair of classes was used to build a 28x28 matrix \todo{should rebuild with 30?}, using 0.5 in the main diagonal entries. This number was chosen because a pair of indistinguishable classes would have this accuracy in average. Then, a Principal Component Analysis (PCA) \todo{citation} was used to treat this matrix. The result is shown in figures \ref{fig:pca} and \ref{fig:pca2}. Again some file types with high entropy emerge as a promising group, ``dwf'',
 ``jpg'',
 ``pps'',
 ``ppt'',
@@ -70,5 +70,5 @@ and ``pdf''.
 \end{figure*}
 
 
-% the problem of unseen filetypes
+% the problem of unseen file types
 % \levelC{Limitations and threats to validity}
