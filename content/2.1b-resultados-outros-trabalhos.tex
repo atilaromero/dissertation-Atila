@@ -1,6 +1,6 @@
-This related work summary focuses on studies on file fragment classification that used the govdocs1 dataset\cite{garfinkel_bringing_2009}.
+This related work summary focuses on studies on file fragment classification that used the Govdocs1 dataset\cite{garfinkel_bringing_2009}.
 
-The early studies on data carving used private datasets, making it difficult to compare the results of different studies. In 2009, Garfinkel et al. \cite{garfinkel_bringing_2009} published the govdocs1 dataset with 1 million files (a small amount of those files were removed later, for legal caution). While some of the later works on the field still use private datasets, the govdocs1 dataset has become the most used choice in studies related to data carving.
+The early studies on data carving used private datasets, making it difficult to compare the results of different studies. In 2009, Garfinkel et al. \cite{garfinkel_bringing_2009} published the Govdocs1 dataset with 1 million files (a small amount of those files were removed later, for legal caution). While some of the later works on the field still use private datasets, the Govdocs1 dataset has become the most used choice in studies related to data carving.
 
 Depending on the objective, the focus of each study may either be whole file classification or file fragment classification. Whole file classification is generally a easier task because most file types, even those with high entropy and low compression rates, have well structured headers, with easily recognizable patterns.
 
@@ -10,7 +10,7 @@ Most of the early work on this field used some form of dimensionality reduction 
 Axelsson \cite{axelsson_normalised_2010}
 used the normalized compression distance as input feature to a kNN algorithm,
 picking pairs of 512 bytes fragments, compressing them with the bzip2 algorithm
-and comparing the length of the results. He used 28 file types from the govdocs1 dataset: pdf, html, jpg, text, doc, xls,
+and comparing the length of the results. He used 28 file types from the Govdocs1 dataset: pdf, html, jpg, text, doc, xls,
 ppt, xml, gif, ps, csv, gz, eps, png, swf, pps, sql, java, pptx, docx, ttf,
 js, pub, bmp, xbm, xlsx, jar, and zip.
 He got an average accuracy around 34\%.
@@ -19,35 +19,35 @@ He got an average accuracy around 34\%.
 
 Fitzgerald et al. \cite{fitzgerald_using_2012}  
 used a SVM classifier with various statistical measures as input features, including unigram and bigram histogram counts, Shannon entropy, and compression length.
-They used 24 file types from the the govdocs1 dataset: pdf, ppt, txt, jpg, doc, xls, ps, html, gz, xml, pps, csv, gif, swf, png, pptx, rtf, sql, docx, bmp, zip, java, xlsx, and tex, omitting first and last fragments of each file.
+They used 24 file types from the the Govdocs1 dataset: pdf, ppt, txt, jpg, doc, xls, ps, html, gz, xml, pps, csv, gif, swf, png, pptx, rtf, sql, docx, bmp, zip, java, xlsx, and tex, omitting first and last fragments of each file.
 They got an average accuracy of 49.1\%.
 
 Beebe et al. \cite{beebe_sceadan:_2013}
 compared various measures of complexity and byte frequency distributions of 512 bytes fragmens as input features to a SVM algorithm.
 They used 8 data types, txt, base64, base85, urlencoded, fat fs data, ntfs fs data, ext fs data, aes256, and
-30 file types, jpg, gif, bmp, png, tif, pdf, ps, zip, bzip2, gzip, doc, docx, xls, xlsx, ppt, pptx, wmv, mp3, mp4, avi, flv, m4a, java, js, html, xml, json, csv, css, and log, from the govdocs1 dataset and some other sources.
+30 file types, jpg, gif, bmp, png, tif, pdf, ps, zip, bzip2, gzip, doc, docx, xls, xlsx, ppt, pptx, wmv, mp3, mp4, avi, flv, m4a, java, js, html, xml, json, csv, css, and log, from the Govdocs1 dataset and some other sources.
 They got an average accuracy of 73.4\% combining unigram and bigrams as input features.
 
 Chen et al. \cite{chen_file_2018}
 used a Convolutional Neural Network (CNN) with 5 concolutional layers and 3 fully connected layers to classify fragments of 4096 bytes, converting each fragment into a 64x64 grayscale picture.
-They used 16 file types from the govdocs1 dataset: csv, doc, docx, gif, gz, html, java, jpg, log, pdf, png, ppt, rtf, text, xls, xml.
+They used 16 file types from the Govdocs1 dataset: csv, doc, docx, gif, gz, html, java, jpg, log, pdf, png, ppt, rtf, text, xls, xml.
 They got an average accuracy of 70.9\%.
 
-Hiester \cite{hiester_file_2018} apparently was the first to utilize a LSTM network to perform file fragment classification. He compared results using three types of neural networks: feedforward, convolutional, and long short-term memory. He used four file types from the govdocs1 dataset: csv, xml, jpg and gif. Each bit of a 512 byte fragment was translated into two features, resulting in 8192 features per block (512 * 8 * 2). First and last sectors of each file in the training set were discarded. In the experiments, the datasets were limited to one gigabyte to fit on memory. He got an average accuracy of 98\% using a LSTM network, 73\% using CNN, and 76\% using MLP.
+Hiester \cite{hiester_file_2018} apparently was the first to utilize a LSTM network to perform file fragment classification. He compared results using three types of neural networks: feedforward, convolutional, and long short-term memory. He used four file types from the Govdocs1 dataset: csv, xml, jpg and gif. Each bit of a 512 byte fragment was translated into two features, resulting in 8192 features per block (512 * 8 * 2). First and last sectors of each file in the training set were discarded. In the experiments, the datasets were limited to one gigabyte to fit on memory. He got an average accuracy of 98\% using a LSTM network, 73\% using CNN, and 76\% using MLP.
 
 Wang et al. \cite{wang_sparse_2018} 
 used sparse dictionaries for n-grams to extract features of 512 bytes fragments, and using this as input to a SVM classifier.
-They used 18 file types from the govdocs1 dataset: csv, doc, docx, gif, gz, html, jpg, pdf, png, ppt, pptx, ps, rtf, swf, txt, xls, xlsx, and xml.
+They used 18 file types from the Govdocs1 dataset: csv, doc, docx, gif, gz, html, jpg, pdf, png, ppt, pptx, ps, rtf, swf, txt, xls, xlsx, and xml.
 They got an average accuracy of 61.3\%.
 
 Wang et al. \cite{wang_file_2018}  
 compared CNN, SVM, kNN, and XGboost, with fragments of different sizes, converting each byte to a 256 length vector (one-hot encoding). The CNN combined 3 parallel convolutional layers of widths 4, 8, and 16.
-They used 20 file types from the govdocs1 dataset: csv, doc, html, pdf, gif, jpg, dbase3, f, txt, swf, ps, java, log, xml, xls, ppt, gz, unk, rtf, and png.
+They used 20 file types from the Govdocs1 dataset: csv, doc, html, pdf, gif, jpg, dbase3, f, txt, swf, ps, java, log, xml, xls, ppt, gz, unk, rtf, and png.
 Using the CNN, they got an average accuracy of around 68\% with 512 bytes fragmens, and around 78\% with 4096 bytes fragments.
 
 Vulinović et al. \cite{vulinovic_neural_2019}
 compared a CNN with MLP, using 512 raw bytes as the CNN input, and byte histograms as input to the MLP.
-They used 18 file types from the govdocs1 dataset: csv, doc, docx, gif, gz, html, jpg, pdf, png, ppt, pptx, ps, rtf, swf, txt, xls, xlsx, and xml.
+They used 18 file types from the Govdocs1 dataset: csv, doc, docx, gif, gz, html, jpg, pdf, png, ppt, pptx, ps, rtf, swf, txt, xls, xlsx, and xml.
 They got a macro average f1 score of 61\% using CNN and 81\% using MLP.
 
 Table \ref{tab:datacarvingstudies} summarizes 
@@ -60,18 +60,18 @@ the results of file fragment classification studies using Govdocs1 dataset.
 \hline
 Study                                          & SVM & kNN & NN   & Dataset       & Raw   & Fragment & Number   & Accuracy   & F1-score  \\
                                                &     &     &      &               & bytes & size     & of types &            &           \\ \hline
-Axelsson \cite{axelsson_normalised_2010}       &     & x   &      & govdocs1      & No    & 512      & 28       & 34\%       &           \\ \hline
-Fitzgerald et al. \cite{fitzgerald_using_2012} & x   &     &      & govdocs1      & No    & 512      & 24       & 49\%       & 48\%      \\ \hline
-Beebe et al. \cite{beebe_sceadan:_2013}        & x   &     &      & govdocs1 +    & No    & 512      & 38       & 73\%       &           \\
+Axelsson \cite{axelsson_normalised_2010}       &     & x   &      & Govdocs1      & No    & 512      & 28       & 34\%       &           \\ \hline
+Fitzgerald et al. \cite{fitzgerald_using_2012} & x   &     &      & Govdocs1      & No    & 512      & 24       & 49\%       & 48\%      \\ \hline
+Beebe et al. \cite{beebe_sceadan:_2013}        & x   &     &      & Govdocs1 +    & No    & 512      & 38       & 73\%       &           \\
                                                &     &     &      & other sources &       &          &          &            &           \\ \hline
-Hiester \cite{hiester_file_2018}               &     &     & MLP  & govdocs1      & Yes   & 512      & 4        & 77\%       &           \\
+Hiester \cite{hiester_file_2018}               &     &     & MLP  & Govdocs1      & Yes   & 512      & 4        & 77\%       &           \\
                                                &     &     & CNN  &               &       &          &          & 73\%       &           \\
                                                &     &     & LSTM &               &       &          &          & 98\%       &           \\ \hline
-Chen \cite{chen_file_2018}                     &     &     & CNN  & govdocs1      & Yes   & 4096     & 16       & 71\%       &           \\ \hline
-Wang \cite{wang_sparse_2018}                   & x   &     &      & govdocs1      & Yes   & 512      & 18       & 61\%       & 61\%      \\ \hline
-Wang \cite{wang_file_2018}                     &     &     & CNN  & govdocs1      & Yes   & 512      & 20       & 68\%       &           \\
+Chen \cite{chen_file_2018}                     &     &     & CNN  & Govdocs1      & Yes   & 4096     & 16       & 71\%       &           \\ \hline
+Wang \cite{wang_sparse_2018}                   & x   &     &      & Govdocs1      & Yes   & 512      & 18       & 61\%       & 61\%      \\ \hline
+Wang \cite{wang_file_2018}                     &     &     & CNN  & Govdocs1      & Yes   & 512      & 20       & 68\%       &           \\
                                                &     &     &      &               &       & 4096     &          & 78\%       &           \\ \hline
-Vulinovic \cite{vulinovic_neural_2019}         &     &     & MLP  & govdocs1      & Yes   & 512      & 18       &            & 81\%      \\
+Vulinovic \cite{vulinovic_neural_2019}         &     &     & MLP  & Govdocs1      & Yes   & 512      & 18       &            & 81\%      \\
                                                &     &     & CNN  &               &       &          &          &            & 61\%      \\ \hline
 \end{tabular}}
 \end{table*}

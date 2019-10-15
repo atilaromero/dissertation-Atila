@@ -1,13 +1,13 @@
 \levelB{Descriptive research on influence of number of classes}
 \label{sec:numberofclasses}
 \levelC{Objective}
-In the previous section, it was observed that achieving 0.6 accuracy on file fragment classification using 30 classes was a difficult task to the considered models. In other studies results \todo{citations} and on initial tests, the achieved accuracy for small number of classes was considerably higher. Hiester \cite{hiester_file_2018}, for instance, achieves 98\% accuracy using four classes.
+In the previous section, it was observed that achieving 0.6 accuracy on file fragment classification using 30 classes was a difficult task to the considered models. In other studies results \cite{hiester_file_2018} \cite{sportiello_context-based_2012} \cite{amirani_feature-based_2013} \cite{maslim_distributed_2014} and on initial tests, the achieved accuracy for small number of classes was considerably higher. Hiester \cite{hiester_file_2018}, for instance, achieves 98\% accuracy using four classes.
 
 This section investigates how the accuracy of the considered models change in relation to the number of classes in the dataset.
 
 
 \levelC{Dataset}
-Several independent models were trained with 2 to 30 extensions from the Govdocs1 dataset. For each number in the range 2 to 30, a random subset of extensions was selected to compose the dataset. Each extension has 200 file samples, half placed in the training dataset and half in the validation dataset. Each dataset was used to train a new model, that should distinguish between the selected subset of extensions in that filtered dataset. This process was repeated five times.
+Several independent models were trained with 2 to 30 \todo{change to 28 classes} extensions from the Govdocs1 dataset. For each number in the range 2 to 30, a random subset of extensions was selected to compose the dataset. Each extension has 200 file samples, half placed in the training dataset and half in the validation dataset. Each dataset was used to train a new model, that should distinguish between the selected subset of extensions in that filtered dataset. This process was repeated five times.
 
 
 
@@ -22,14 +22,13 @@ Figure \ref{fig:nclasses} shows the graph of accuracy versus number of classes f
 
 This pattern is understandable: as the number of classes grows, the harder the classification problem is, leading to a decrease in accuracy, while the individual contributions of each class to overall result diminishes, leading to an increase in precision.
 
-This behavior is an important aspect to consider during the evaluation of file fragments studies. As XXX \todo{citation}
-has mentioned, studies that select fewer classes tends to yield higher results. 
+This behavior is an important aspect to consider during the evaluation of file fragments studies. As Beebe et al. \cite{beebe_sceadan:_2013} have mentioned, studies that select fewer classes tends to yield higher results. 
 
 Still, with 55\% of samples being misclassified when the number of classes is 30, the question of what are the error sources and how they can be addressed requires attention.
 
 \noindent
 \begin{figure*}[htb!]
-\centering\includegraphics[width=0.50\textwidth]{content/nclasses.png}
+\centering\includegraphics[width=1.0\textwidth]{content/nclasses.png}
 \caption{\label{fig:nclasses}Validation accuracy by number of classes}%
 \end{figure*}
 
@@ -40,7 +39,7 @@ Figure \ref{fig:dual} shows the graph of accuracy of each class when compared in
 
 \noindent
 \begin{figure*}[htb!]
-\centering\includegraphics[width=0.50\textwidth]{content/dual.png}
+\centering\includegraphics[width=1.0\textwidth]{content/dual.png}
 \caption{\label{fig:dual}Validation accuracy of models trained with pair of classes}%
 \end{figure*}
 
@@ -58,14 +57,14 @@ and ``pdf''.
 
 \noindent
 \begin{figure*}[htb!]
-\centering\includegraphics[width=0.50\textwidth]{content/pca.png}
+\centering\includegraphics[width=1.0\textwidth]{content/pca.png}
 \caption{\label{fig:pca}PCA of accuracy of models trained with pair of classes}%
 \end{figure*}
 
 
 \noindent
 \begin{figure*}[htb!]
-\centering\includegraphics[width=0.50\textwidth]{content/pca2.png}
+\centering\includegraphics[width=1.0\textwidth]{content/pca2.png}
 \caption{\label{fig:pca2}PCA of accuracy of models trained with pair of classes - detail}%
 \end{figure*}
 
