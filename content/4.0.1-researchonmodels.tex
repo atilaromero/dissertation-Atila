@@ -13,7 +13,7 @@ This contrasts with the sampling technique applied in other works, where all the
 
 \levelC{Inputs}
 %one-hot
-The input features of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero. A batch size of 100 was used, with 30 steps per epoch. \todo{remake with 28 after excluding text and unk?}
+The input features of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero. A batch size of 100 was used, with 28 steps per epoch.
 
 %8bits
 % The input features of the network for each instance is a 512x8 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes uses a custom encoding where each of the 8 bits of a byte is represented as -1 or 1, depending whether the bit is 0 or 1. During initial tests, this encoding was compared to three other encodings: one-hot encoding, 8 bits represented as 0 or 1\todo{include citation}, and 8 bits represented as [0,1] and [1,0] \cite{hiester_file_2018}. More research should be done in the future to determine the best of the four, but initial results suggest they have similar impact on the model accuracy. The one-hot encoding has the disadvantage of increasing the input matrix size by a factor of 32.
@@ -25,9 +25,9 @@ The output of the network for a given instance is a vector with a size equal to 
 \levelC{Models}
 The networks under consideration used different combinations of convolutional, max pooling, LSTM, and fully connected layers,
 %loss
-applying categorical crossentropy as the loss function. Binary crossentropy and mean squared error were considered during initial tests, but categorical crossentropy gave faster training times.
+applying categorical cross-entropy as the loss function. Binary cross-entropy and mean squared error were considered during initial tests, but categorical cross-entropy gave faster training times.
 
-Fourteen models participated in this evaluation. One of then is a simple single layer perceptron. Two of them use LSTM layers without convolutional layers, while 3 of them use convolutional layers without LSTM layers. Eight models combine convolutional layers and LSTM layers. Table \ref{tab:models} outline the parameters of the models, which can be analysed in more details in the code repository \todo{repository}. The convolutional layers do not use padding. 
+Fourteen models participated in this evaluation. One of then is a simple single layer perceptron. Two of them use LSTM layers without convolutional layers, while 3 of them use convolutional layers without LSTM layers. Eight models combine convolutional layers and LSTM layers. Table \ref{tab:models} outline the parameters of the models, which can be analysed in more details in the code repository \sloppy\url{http://github.com/atilaromero/randomness-experiments}. The convolutional layers do not use padding. 
 
 \input{content/tables/4.0.1-models.tex}
 
@@ -36,7 +36,7 @@ All the trainings use the Adam \cite{kingma_adam:_2014}
 optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without fine tuning of parameters.
 
 % Constraints
-The models where trained until no further improvement was observed in the last 60 epochs. \todo{60 is much higher than 10, which was used in sections 4.2 and 4.3, leading to difference in accuracy results}
+The models where trained until no further improvement was observed in the last 10 epochs.
 
 \levelC{Results}
 %exp18
@@ -51,24 +51,17 @@ The two models that used LSTM layers without convolutional layers presented a sl
 \noindent
 \begin{figure*}[htb!]
 \centering\includegraphics[width=1.0\textwidth]{content/models.png}
-\caption{\label{fig:models}The bar plot shows the validation accuracy of the considered models. Their training time, in minutes, and the total epochs processed is also indicated. The training was halted when no further improvement was observed for 60 consecutive epochs.)}%
+\caption{\label{fig:models}The bar plot shows the validation accuracy of the considered models. Their training time, in minutes, and the total epochs processed is also indicated. The training was halted when no further improvement was observed for 10 consecutive epochs.}%
 \end{figure*}
 
 
+The validation accuracy values of the remaining models were in the 0.35-0.54 range.
 
-The remaining models after ten minutes already showed signs of being close to their limit.
-Their accuracy results were in the 0.44-0.56 range.
-
-The selected model for further research, identified as ``CLD'', achieved an accuracy of 0.56, almost the same value of the model ``CM'', but in about half the time.
+The selected model for further research, identified as ``CLD'', achieved an accuracy of 0.54, almost the same value of the models ``CM'' and ``CCM'', but in less time.
 
 To check if the two slower models could give better result if executed for a longer period, they were trained for 10 hours. The model identified as ``LD'', which uses a LSTM layer followed by a fully connected layer, was able to achieve 0.494 accuracy, while the other, ``LL'', achieved only 0.153.
-
-
 
 %stagnation in learning with such short times, combined with low final accuracy suggests that the dataset present some patterns that are easily recognizable, while the rest of the dataset present a very hard classification task.
 
 % \levelC{Limitations and threats to validity}
-In this exploratory research, the models were not trained until exhaustion. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters were insufficient to raise accuracy above the 0.44-0.56 range, which suggests that selection or tuning of models may not be best approach to improve results.
-
-
-
+In this exploratory research, the models were not trained until exhaustion. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters resulted in accuracy values still very close to 0.54, which suggests that selection or tuning of models may not be best approach to improve results.

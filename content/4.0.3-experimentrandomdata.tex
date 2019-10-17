@@ -3,7 +3,7 @@
 
 In the previous sections, it was observed that the higher the number of classes being considered during the creation of a file fragment classification model, the higher is the error rate of this model. In addition, the comparison of pairs of classes indicated that high entropy data structures may be responsible by some part of those errors.
 
-Prior to conducting experiments to find the major cause of error, a list of conceivable error sources (E1 to E4) was elaborated:
+Prior to conducting experiments related to the cause of error, a list of conceivable error sources (E1 to E4) was elaborated:
 \begin{enumerate}[itemindent=\parindent,label=\textbf{E\arabic*.}]
     \item For some data structure, the model cannot distinguish it from random data. This can happen if the pattern in the data is too complex, beyond the capabilities of the model. It may be the case that in practice no model can perform this distinction or, instead, this may be a limitation of this particular model only. This situation may occur in files that use compression or cryptography, or more generally, any file type with high entropy.
 
@@ -33,13 +33,15 @@ The model training was divided in two passes, depicted in figure \ref{fig:random
 
 \noindent
 \begin{figure*}[htb!]
-\centering\includegraphics[width=1.0\textwidth]{content/random_measure.png}
+\centering\includegraphics[width=0.5\textwidth]{content/random_measure.png}
 \caption{\label{fig:randommeasure}Example of the random measure for the JPG file type. In pass 1, a model is trained to classify the data as ``random'' or ``not random'', achieving 87\% accuracy. In pass 2, another model is trained to do the same task, but the JPG blocks used are those classified as ``not random'' by model 1. As model 2 achieves an accuracy of 99\%, it validates that almost all the blocks classified as ``not random'' by model 1 are indeed not random. Then model 1 can be used to make an upper boundary estimate of the randomness of the dataset.}%
 \end{figure*}
 
-When the model training finishes, if the validation accuracy is above 98\% for a given file type, no further passes are required by that file type, as the model already can distinguish between ``random'' and ``not random'' classes for that particular file type. This will only happen on file types that have almost no random like structures.
+When the model training finishes, if the validation accuracy is above 98\% for a given file type, no further passes are required by that file type, as the model already can distinguish between ``random'' and ``not random'' classes for that particular file type. This will only happen on file types that have almost no random-like structures.
 
-In the second pass, the file type dataset is filtered and only those fragments classified as ``not random'' in the first pass are used in the second pass. The random generator needs no filtering. If in the second pass the accuracy is above 98\%, it means that the pass 1 was successfully selected samples that have almost no random like structures. In that case, the pass 1 model can then used in the original dataset, giving a count of how many fragments are correctly identified as not random.
+In the second pass, the file type dataset is filtered and only those fragments classified as ``not random'' in the first pass are used in the second pass. The random generator does not require similar filtering. If in the second pass the accuracy is above 98\%, it means that the pass 1 was successfully selected samples that have almost no random like structures. In that case, the pass 1 model can then used in the original dataset, giving a count of how many fragments are correctly identified as not random.
+
+The complexity of using two passes to measure the false positive rate of the model of the first pass is necessary because a direct comparison using the sample labels is insufficient for validation. From the labels, it is possible to know if the sample came from the Govdocs1 dataset or from the random generator. But, to perform validation, it would be necessary to have previous knowledge of which of the samples from the Govdocs1 dataset should be classified as ``random'' and which should be classified as ``not random''. This piece of information is unknown until the model of the first pass is trained.
 
 \levelC{Results}
 For some file types, training achieved an accuracy higher than 98\% on the first pass. These are the file types where a model should have no difficulty finding patterns. For the remaining file types, all achieved an accuracy higher than 98\% on the second pass, which is fortunate, as this avoids the need to use further passes and  simplifies calculations.

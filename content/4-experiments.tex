@@ -1,5 +1,5 @@
 % \levelC{Dataset}
-This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. From the remaining 30 extensions, listed in table \ref{tab:govdocs1}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
+This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. The  ``text'' and ``unk'' extensions were discarded because files with these extensions use multiple formats and they do not correspond to a single file type. From the remaining 28 extensions, listed in table \ref{tab:govdocs1}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
 
 \input{content/tables/4.0.1-govdocs.tex}
 
@@ -8,18 +8,16 @@ The experiments did not take advantage of GPU acceleration and were  conducted o
 
 
 % \levelC{Software}
-The main softwares and frameworks used to build the experiments were Python 3.6, Jupyter notebook, Tensorflow 1.14.0, Keras 2.2.4-tf, and Fedora Linux 27.
+The main software and frameworks used to build the experiments were Python 3.6, Jupyter notebook, Tensorflow 1.14.0, Keras 2.2.4-tf, and Fedora Linux 27.
 
 % repository
-The source code for the experiments is available at \url{http://github.com/atilaromero/ML}.
-\todo[inline]{create a cleaner repository just for the paper}
+The source code for the experiments is available at \sloppy\url{http://github.com/atilaromero/randomness-experiments}.
 
 Section \ref{sec:evalmodels} evaluates some alternative models in the file fragment classification task. The expectation was to identify the most promising models for improvement. Instead, an apparent limit was found on how far these models could be improved. 
 
 Section \ref{sec:numberofclasses} describes how does the accuracy of neural network models change relative to the number of classes. It was observed that a high accuracy in the file fragment classification task could be achieved only when the number of classes was small. Also, when compared with each other, file types with high entropy data showed the lowest accuracy values.
 
-Section \ref{sec:exprandom} investigates the hypothesis that some part of these errors may be explained by the inability of the models to distinguish high entropy data from random data. The portion of data that could be identified as not random was higher than expected. While some of errors could have the explanation mentioned in the hypothesis, it could only explain about 1/3 of the observed errors (16.5\% out of 55
-\%) \todo{revise numbers}.
+Section \ref{sec:exprandom} investigates the hypothesis that some part of these errors may be explained by the inability of the models to distinguish high entropy data from random data. The portion of data that could be identified as not random was higher than expected. While some of errors could have the explanation mentioned in the hypothesis, it could only explain about 1/3 of the observed errors (16.5\% out of 46\%) \todo{revise numbers}.
 
 \input{content/4.0.1-researchonmodels.tex}
 
