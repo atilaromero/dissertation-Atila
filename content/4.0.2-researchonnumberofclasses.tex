@@ -1,9 +1,9 @@
 \levelB{Descriptive research on influence of number of classes}
 \label{sec:numberofclasses}
 \levelC{Objective}
-In the previous section, it was observed that achieving 0.6 accuracy on file fragment classification using 28 classes was a difficult task to the considered models. In other studies results \cite{hiester_file_2018} \cite{sportiello_context-based_2012} \cite{amirani_feature-based_2013} \cite{maslim_distributed_2014} and on initial tests, the achieved accuracy for small number of classes was considerably higher. Hiester \cite{hiester_file_2018}, for instance, achieves 98\% accuracy using four classes.
+In the previous section, it was observed that achieving 0.6 accuracy on file fragment classification using 28 classes was a difficult task to the considered models. In other studies results \cite{hiester_file_2018} \cite{sportiello_context-based_2012} \cite{amirani_feature-based_2013} \cite{maslim_distributed_2014} and on initial tests, the achieved accuracy for small number of classes was considerably higher. Hiester \cite{hiester_file_2018}, for instance, achieves an accuracy of 98\% using four classes.
 
-This section investigates how the accuracy of the considered models change in relation to the number of classes in the dataset.
+This section investigates how does the accuracy of the considered models change in relation to the number of classes in the dataset.
 
 
 \levelC{Dataset}
@@ -11,18 +11,18 @@ Several independent models were trained with 2 to 28 extensions from the Govdocs
 
 
 
-In addition to this sampling of extensions using different quantity of classes, all 378 combinations of pairs of extensions were compared. Each pair was used to compose a dataset and to train a new model for each one, using the same process described above.
+In addition to this sampling of extensions using different quantities of classes, all 378 combinations of pairs of extensions were compared. Each pair was used to compose a dataset and to train a new model for each one, using the same process described above.
 
 \levelC{Models}
-The same sampling, input, and output details described in section \ref{sec:evalmodels} were used here. The model that gave best results in that section, identified as ``CLD'', was selected to be used.
+The same sampling, input, and output details described in section \ref{sec:evalmodels} were used here. The model that gave the best results in that section, identified as ``CLD'', was selected to be used.
 
 \levelC{Results}
 % decrease in accuracy
-Figure \ref{fig:nclasses} shows the graph of accuracy versus number of classes for the ``CLD'' model. The bottom line indicates, for comparison, what the accuracy would be for a random change classifier. An increase in number of classes appears to be  correlated with a decrease in accuracy. Another relevant aspect of the graph, is that the range of the results seems to be smaller when more classes are used.  
+Figure \ref{fig:nclasses} shows the graph of accuracy versus number of classes for the ``CLD'' model. The bottom line indicates, for comparison, what the accuracy would be for a random change classifier. An increase in the number of classes appears to be  correlated with a decrease in accuracy. Another relevant aspect of the graph is that the range of the results seems to be smaller when more classes are used.  
 
 This pattern is understandable: as the number of classes grows, the harder the classification problem is, leading to a decrease in accuracy, while the individual contributions of each class to overall result diminishes, leading to an increase in precision.
 
-This behavior is an important aspect to consider during the evaluation of file fragments studies. As Beebe et al. \cite{beebe_sceadan:_2013} have mentioned, studies that select fewer classes tends to yield higher results. 
+This behavior is an important aspect to consider during the evaluation of file fragments studies. As Beebe et al. \cite{beebe_sceadan:_2013} have mentioned, studies that select fewer classes tend to yield higher results. 
 
 Still, with 46\% of samples being misclassified when the number of classes is 28, the question of what are the error sources and how they can be addressed requires attention.
 
@@ -32,7 +32,7 @@ Still, with 46\% of samples being misclassified when the number of classes is 28
 \caption{\label{fig:nclasses}Validation accuracy by number of classes}%
 \end{figure*}
 
-Figure \ref{fig:dual} shows the graph of accuracy of each class when compared individually with each one of the others. Generally, file types with higher entropy tends to have lower minima, with the GIF file type being a notable exception. Most of these files use some form of compression, like image files for example. 
+Figure \ref{fig:dual} shows the graph of the accuracy of each class when compared individually with each one of the others. Generally, file types with higher entropy tend to have lower minima, with the GIF file type being a notable exception. Most of these files use some form of compression, like image files for example. 
 
 
 \noindent
@@ -42,7 +42,7 @@ Figure \ref{fig:dual} shows the graph of accuracy of each class when compared in
 \end{figure*}
 
 
-The accuracy obtained after the training of models with pair of classes was used to build a 28x28 matrix, using 0.5 in the main diagonal entries. This number was chosen because a pair of indistinguishable classes would have this accuracy in average. Then, a Principal Component Analysis (PCA) \todo{citation} was used to treat this matrix. The result is shown in figures \ref{fig:pca} and \ref{fig:pca2}. Again some file types with high entropy emerge as a promising group, ``dwf'',
+The accuracy obtained after the training of models with pairs of classes was used to build a 28x28 matrix, using 0.5 in the main diagonal entries. This number was chosen because a pair of indistinguishable classes would have this accuracy on average. Then, a Principal Component Analysis (PCA) \todo{citation} was used to treat this matrix. The result is shown in figures \ref{fig:pca} and \ref{fig:pca2}. Again some file types with high entropy emerge as a promising group, ``dwf'',
 ``jpg'',
 ``pps'',
 ``ppt'',
