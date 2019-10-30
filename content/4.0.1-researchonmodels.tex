@@ -32,7 +32,7 @@ Fourteen models participated in this evaluation. One of then is a simple single-
 \input{content/tables/4.0.1-models.tex}
 
 %optimization
-All the trainings use the Adam \cite{kingma_adam:_2014}
+All the trainings used the Adam \cite{kingma_adam:_2014}
 optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary results without fine-tuning of parameters.
 
 % Constraints
@@ -51,17 +51,17 @@ The two models that used LSTM layers without convolutional layers presented slow
 \noindent
 \begin{figure*}[htb!]
 \centering\includegraphics[width=1.0\textwidth]{content/models.png}
-\caption{\label{fig:models}The bar plot shows the validation accuracy of the considered models. Their training time, in minutes, and the total epochs processed is also indicated. The training was halted when no further improvement was observed for 10 consecutive epochs.}%
+\caption{\label{fig:models}The bar plot shows the validation accuracy of the considered models. Their training time, in minutes, and the total epochs processed is also indicated. The training was interrupted when no further improvement was observed for 10 consecutive epochs.}%
 \end{figure*}
 
 
 The validation accuracy values of the remaining models were in the 0.35-0.54 range.
 
-The selected model for further research, identified as ``CLD'', achieved an accuracy of 0.54, almost the same value of the models ``CM'' and ``CCM'', but in less time.
+The selected model for further research, identified as ``CM'', achieved an accuracy of 0.54. The models, ``CLD'' and ``CCM'' achieved similar values, but model ``CM'' performed better in the experiment described in section \ref{sec:exprandom}.
 
 To check if the two slower models could give better results if executed for a longer period, they were trained for 10 hours. The model identified as ``LD'', which uses an LSTM layer followed by a fully connected layer, was able to achieve an accuracy of 0.494, while the other, ``LL'', achieved only 0.153.
 
 %stagnation in learning with such short times, combined with low final accuracy suggests that the dataset present some patterns that are easily recognizable, while the rest of the dataset present a very hard classification task.
 
 % \levelC{Limitations and threats to validity}
-In this exploratory research, the models were not trained until exhaustion. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters resulted in accuracy values still very close to 0.54, which suggests that selection or tuning of models may not be the best approach to improve results.
+In this exploratory research, the models were not trained until exhaustion. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters resulted in accuracy values still close to 0.54, which suggests that selection or tuning of models may not be the best approach to improve results.
