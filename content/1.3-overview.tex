@@ -4,12 +4,9 @@
 The remainder of this document is organized as follows.
 % \todo{check later}
     Chapter 2 describes some key neural network concepts relevant to this work. 
-    Chapter 3 analyses current research on file fragment classification. 
-    Chapter 4 address the first research question, comparing the accuracy of fourteen neural network models, mixing convolutional, Long Short-Term Memory (LSTM) and fully-connected layers in the file fragment classification task. The initial goal was to identify the most promising models, but an apparent limit was found on how far these models could be improved.
-    Chapter 5 address the second research question, exploring the influence of number of classes on the accuracy of the models, in a attempt to understand the limitations found on the chapter 4. While the number of classes seems to influence the accuracy of the trained model, the choice of which file types are included in the dataset have a bigger impact because file types that contain images or use compression were found to have a expressive negative effect on accuracy.
-    Motivated by these results, chapter 6 address the third research question, testing the hypothesis that part of the observed errors are caused by high entropy data misinterpreted as random data. 
+    Chapter 3 analyses current research on file fragment classification.
+    Chapter 4 address the first research question, comparing the accuracy of fourteen neural network models.
+    Chapter 5 address the second research question, exploring the influence of number of classes on the accuracy of the models
+    Chapter 6 address the third research question, testing the hypothesis that part of the observed errors are caused by high entropy data misinterpreted as random data.    
     Finally, chapter 7 concludes the research and includes suggestions for future work.
-
-
-    In the first, the accuracy of some types of neural networks is compared, classifying file fragments taken from the Govdocs1 dataset\cite{garfinkel_bringing_2009}, using their file extensions as class labels.
-    Then, the influence of the number of classes on the accuracy of the resulting models is explored. Finally, an experiment is devised to measure, for a given neural network architecture, the number of fragments that have recognizable structures for each file type.
+    

@@ -15,6 +15,9 @@ This work explores some of the challenges of applying neural networks in file fr
     \item Can high entropy data misinterpreted as random data explain part of the file fragment classification errors? If so, to what extent?
 \end{enumerate}
 
+The initial goal of the the first research question was to identify the most promising models on file fragment classification, but an apparent limit was found on how far these models could be improved. This led to the second research question, that explores the influence of number of classes on the accuracy of the models. While the number of classes seems to influence the accuracy of the trained model, the choice of which file types are included in the dataset have a bigger impact because file types that contain images or use compression were found to have a expressive negative effect on accuracy. Motivated by these results, the third question was formulated to test the hypothesis that part of the observed errors are caused by high entropy data misinterpreted as random data.
+
+
 In this work, only neural networks are taken into account, but other machine learning approaches could also be applied, like Support Vector Machines (SVM) and k-Nearest Neighbors (kNN). This restriction was motivated by the success that neural networks have shown in other fields, like image classification and speech recognition.
 % The flexibility of neural networks to combine different types of layers is also important, as it is a core characteristic being explored in this research.
 
