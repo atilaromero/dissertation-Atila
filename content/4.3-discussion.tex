@@ -1,0 +1,13 @@
+The results may be grouped in three groups. The models that used LSTM without a convolutional layer performed poorly. The models with convolutional layers that used LSTM as the final layer had intermediary results. The remaining models were the single layer perceptron (single fully-connected layer model, identified as ``D'') and the models that used convolutional models and used a fully-connected layer or maxpooling as the last layer.
+
+The best accuracy results were from the three models identified as ``CCM'', ``CM'', and ``CLD'', but the latter had faster training time and also showed good resilience to changes: during preliminary tests and later when test conditions where altered to try to improve results, this model and its variations always were among the best models while the others were not.
+
+In this research, the models were not trained until exhaustion. This was initially done to identify which models would be most promising for future testing, but further attempts to tune layer types, quantity and parameters resulted in accuracy values still close to 0.54, which suggests that selection or tuning of models may not be the best approach to improve results.
+
+
+% Among the examined networks, while some of them satisfy the requirements imposed and could potentially be used by a forensic examiner to create a model to a new file type, the networks that showed the best results are those that use convolutional layers to split and process the input and then use LSTM layers to analyse the series of outputs produced by the convolutional layers. This gives a direct answer to the first research question, ``How does different neural network models compare to each other in terms of training performance and quality of results?''.
+
+% To answer the second question, ``Which neural network models would be more suitable to accept the addition of new filetypes by the forensic examiners community?'', a set of constraints were imposed to the analyzed models. The achieved results can be replicated with little computational power, in a short time period and with limited datasets.
+
+% To create models that recognize new filetypes, a forensic examiner would have to gather a small dataset for each filetype that needs to be recognized. Datasets of 100 files were sufficient to run the experiments in this work, but it is possible that even smaller datasets could be used. Then, a network with two convolutional layers with max pooling followed by a LSTM layer could be used to quickly train a new model, without the requirement of special hardware. In the chosen framework, Keras, the export and import of models can be easily done, so the forensic examiner could export and publish the new model in a public repository.
+
