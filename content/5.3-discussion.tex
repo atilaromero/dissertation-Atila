@@ -6,7 +6,7 @@ In figure \ref{fig:nclasses}, a decreasing trend was observed. An increase in th
 
 This pattern is understandable: as the number of classes grows, the harder the classification problem is, leading to a decrease in accuracy. Meanwhile, the individual contributions of each class to the overall result diminishes, leading to an increase in precision.
 
-This behavior is an important aspect to consider during the evaluation of file fragments studies. This observation is in agreement with Beebe et al. \cite{beebe_sceadan:_2013} assumption, that studies that select fewer classes tend to yield higher results. 
+This behavior is an important aspect to consider during the evaluation of file fragments studies. This observation is in agreement with Beebe et al. \cite{beebe_sceadan:_2013} observation, that studies that select fewer classes tend to yield higher results. 
 
 Still, with 42\% of samples being misclassified when the number of classes is 28, the question of what are the error sources and how they can be addressed requires attention.
 
@@ -20,10 +20,20 @@ It was demonstrated that the accuracy of a new model may be manipulated by the s
 
 \levelB{PCA}
 
-The usage of PCA on the 28x28 distance matrix produced a 2D projection where the file types that use compression or contains images are grouped near each other, as shown in figures \ref{fig:pca} and \ref{fig:pca2}.
+The usage of PCA on the 28x28 distance matrix produced a 2D projection where, as shown in figures \ref{fig:pca} and \ref{fig:pca2}, a group of file types that use compression or contains images are grouped near each other: 
+``gif'',
+``jpg'',
+``pdf'',
+``gz'',
+``kmz'',
+``dwf'',
+``ppt'',
+``swf'',
+``png'',
+``pptx'',
+and ``pps''.
 
-
-\section{Conclusion}
+\levelB{Conclusion}
 It was observed that an increase in the number of extensions selected to compose the training had the tendency to decrease accuracy and increase precision. But the number of classes alone is not as important as the type of extension selected: some file types when included in the experiment have a much higher negative impact than others. This observation was demonstrated in the ``hard file types first'' and ``easy file types first'' of figure \ref{fig:nclasses}, where the file types selected to compose  where intentionally chosen, once to degrade results and once to improve them.
 
 File types that contains images or that use compression were identified as those that have the higher negative effect on results, which suggests that their entropy may contribute to the error.
