@@ -1,0 +1,43 @@
+% \levelB{Objective}
+In preliminary tests, it was observed that achieving accuracy values above 0.6 on file fragment classification using 28 classes was a difficult task to the considered models. In other studies results \cite{hiester_file_2018} \cite{sportiello_context-based_2012} \cite{amirani_feature-based_2013} \cite{maslim_distributed_2014} and on initial tests, the achieved accuracy for small number of classes was considerably higher. Hiester \cite{hiester_file_2018}, for instance, achieves an accuracy of 98\% using four classes.
+
+% \levelB{Dataset}
+This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. The  ``text'' and ``unk'' extensions were discarded because files with these extensions use multiple formats and they do not correspond to a single file type. From the remaining 28 extensions, listed in table \ref{tab:studiesfiletypes}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
+
+% \input{content/tables/4.0.1-govdocs.tex}
+
+% \levelB{Sampling}
+To select a sample instance from the Govdocs1 dataset, first a random file is selected among those available, without replacement. Then, a block from this file is randomly selected. After all files have participated in the process, the process may be repeated as long as necessary. This way, all files are considered and the classes are easily balanced.
+This contrasts with the sampling technique applied in other works, where all the sectors are grouped before sampling, which may lead to an imbalance between classes.
+
+% \levelB{Inputs}
+%one-hot
+The input features of the network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero. A batch size of 100 was used, with 28 steps per epoch.
+
+% \levelB{Outputs}
+The output of the network for a given instance is a vector with a size equal to the number of classes, subjected to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to a specific class. The class for a block sample is the file extension of the original file.
+
+% \levelB{Model}
+Before doing the procedures described here, 14 combinations of types of layers were compared, using convolutional, LSTM, and fully-connected layers. For each combination, some variations in parameters were also experimented with. This led to the three-layer model used in this research. The first is a convolutional layer with 256 output units, a window of size 16, and a stride of 16. The second is a LSTM layer of 128 units. The last is a fully-connected layer where the number of output units match the number of classes of the input dataset.
+
+%optimization
+All the trainings used the Adam \cite{kingma_adam:_2014}
+optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary tests without requiring fine-tuning of parameters.
+
+% Constraints
+The models were trained until no further improvement was observed in the last 10 epochs, using categorical cross entropy loss.
+
+\levelC{Accuracy vs. number of classes}
+Several independent models with the same general architecture but different weights were trained with 2 to 28 extensions from the Govdocs1 dataset. For each number in the range 2 to 28, a random subset of extensions was selected to compose the dataset. Each extension has 200 file samples, half placed in the training dataset and half in the validation dataset. Each dataset was used to train a new model, that should distinguish between the selected subset of extensions in that filtered dataset. This process was repeated five times.
+
+In addition to this sampling of extensions using different quantities of classes, all 378 combinations of pairs of extensions were compared. Each pair was used to compose a dataset and to train a new model for each one, using the same process described in the previous paragraph.
+
+Given the number of different models trained (135 for the N classes phase and 378 for the pairs), it was important to use a model architecture that had a fast training time. Models trained with the chosen architecture took about 10 minutes to train. Without this short training period, this study would not be feasible.
+
+\levelC{PCA}
+The accuracy obtained after the training of models with pairs of classes was used to build a 28x28 matrix. Here the accuracy of the model trained for that particular pair of extensions was used as a distance measure of how similar those file types are. If a model was able to achieve 100\% accuracy, the file types would be considered different, if the accuracy is 50\%, they would be considered indistinguishable, as 50\% is the average accuracy of a random guess classifier for two classes.
+
+Following this concept, the diagonal entries of the matrix were filled with the value 0.5, as each class should be indistinguishable from itself. Then, a Principal Component Analysis (PCA) \cite{amirani_new_2008} was used to treat this matrix. The 28x28 matrix can be interpreted as 28 vectors of 28 dimensions. For each class, the vector indicates how similar that class is to each of the others. This could be plotted in a space of 28 dimensions, if such representation could be built. What PCA does is to reduce the dimensionality of this space. Here the dimensions were reduced to 2, to be shown in a 2D graph. To do that, it chooses as first axis the one that maximizes the variance in data and then does the same for the second dimension. That produces a projection in which the points are as farther away as possible.
+
+While it may not be obvious how to attribute meaning to the resulting coordinate system, this technique is useful to visually group classes with similar characteristics.
+

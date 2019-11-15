@@ -1,0 +1,35 @@
+
+%fig 1
+\levelB{Accuracy vs. number of classes}
+
+In figure \ref{fig:nclasses}, a decreasing trend was observed. An increase in the number of classes appears to be  correlated with a decrease in accuracy. Another relevant aspect of the graph is that the range of the results seems to be smaller when more classes are used.  
+
+This pattern is understandable: as the number of classes grows, the harder the classification problem is, leading to a decrease in accuracy. Meanwhile, the individual contributions of each class to the overall result diminishes, leading to an increase in precision.
+
+This behavior is an important aspect to consider during the evaluation of file fragments studies. This observation is in agreement with Beebe et al. \cite{beebe_sceadan:_2013} assumption, that studies that select fewer classes tend to yield higher results. 
+
+Still, with 42\% of samples being misclassified when the number of classes is 28, the question of what are the error sources and how they can be addressed requires attention.
+
+The number of possible combinations of file types to compose the datasets depends on the number of classes being considered. For 28 classes there is only one possible combination, while for two classes there are 378. For intermediary values, the numbers are much higher, which is the number of possible combinations disregarding the order of the elements: $ \frac{28!}{(28-n)!n!}$. For 14 file types there are 40116600 combinations. For this reason, the significance of the 5 samples diminishes for intermediary values.
+
+\levelB{Accuracy of pairs of classes}
+
+The accuracy of models trained with pairs of classes, shown in figure \ref{fig:dual}, suggests a reverse correlation between entropy and accuracy.  Generally, file types with higher entropy tend to have lower minima, with the GIF file type being a notable exception. Most of these files use some form of compression, like image files for example.
+
+It was demonstrated that the accuracy of a new model may be manipulated by the selection of file types that will compose the dataset. The lines ``hard file types first'' and ``easy file types first'' of figure \ref{fig:nclasses} were created using the order shown on figure \ref{fig:dual}, resulting in lines that seem to be close to the minimum and maximum of the possible accuracy values. 
+
+\levelB{PCA}
+
+The usage of PCA on the 28x28 distance matrix produced a 2D projection where the file types that use compression or contains images are grouped near each other, as shown in figures \ref{fig:pca} and \ref{fig:pca2}.
+
+
+\section{Conclusion}
+It was observed that an increase in the number of extensions selected to compose the training had the tendency to decrease accuracy and increase precision. But the number of classes alone is not as important as the type of extension selected: some file types when included in the experiment have a much higher negative impact than others. This observation was demonstrated in the ``hard file types first'' and ``easy file types first'' of figure \ref{fig:nclasses}, where the file types selected to compose  where intentionally chosen, once to degrade results and once to improve them.
+
+File types that contains images or that use compression were identified as those that have the higher negative effect on results, which suggests that their entropy may contribute to the error.
+
+\levelB{Limitations, threats to validity and future work}
+
+The number of samples taken was small when compared with the number of all possible file types combinations. This imposes a limit on the conclusions that can be reached and this limitation is hard to overcome.
+
+The group that emerged as file types that most degrade results are files that use compression or contain images. While they are known for their high entropy, no measure of entropy was used to reinforce this claim. A study is in progress to measure the impact of entropy on file fragment classification errors.
