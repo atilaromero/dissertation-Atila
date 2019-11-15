@@ -1,0 +1,9 @@
+Having a minimum number of recognizable structures for each file type, it is now possible to calculate the maximum number of the classification errors that can be attributed to error cause E1, which happens when the complexity of the data is beyond the model’s capability to recognize patterns.
+
+The mean accuracy for all file types, using data listed in figure 6, is 83.5\% \todo{check}.  Assuming a dataset with balanced classes, if all the blocks considered random data were misclassified, then the maximum amount of error due to data complexity would be 16.5\%. If all blocks considered random were classified as DWG, which is the class with less recognizable patterns, then the maximum amount of error would be 14.3\%.
+
+
+\levelC{Limitations and threats to validity}
+The procedure applied in this experiment avoids false positives over false negatives. In other words, it avoids random data classified as structured at the cost of missing potentially recognizable structures at valid fragments. Thus, it is expected that the exact valid fragments count, which is unknown in practice, will be higher than the number obtained. Taking the JPG file type as an example, in which 90\% of the blocks were identified as ``structured'', this means that the true randomness value is some unknown value between 0 and 10\%.
+
+Also, it is important to notice that the use of different network architectures will result in different randomness values, as their ability to recognize patterns in the data will be different.
