@@ -1,26 +1,3 @@
-% \levelC{Objective}
-In the previous sections, it was observed a tendency that the higher the number of classes being considered during the creation of a file fragment classification model, the higher is the error rate of this model. In addition, the comparison of pairs of classes indicated that high entropy data structures may be responsible for some part of those errors.
-
-Before conducting experiments related to the cause of errors, a list of conceivable error sources (E1 to E4) was elaborated:
-\begin{enumerate}[itemindent=\parindent,label=\textbf{E\arabic*.}]
-    \item For some data structure, the model cannot distinguish it from random data. This can happen if the pattern in the data is too complex, beyond the capabilities of the model. It may be the case that in practice no model can perform this distinction or, instead, this may be a limitation of this particular model only. This situation may occur in files that use compression or cryptography, or more generally, any file type with high entropy.
-
-    \item Different file types using the same data structure. It is common for a given file type to employ different types of data structures. If two or more file types make use of the same data structure, the existence of that structure will then not be sufficient to differentiate those file types, as it may belong to any one of them.
-    The reverse, a file type that uses multiple kinds of data structures, does not constitute a problem as it simply results in extra work during the model training.
-
-    \item Same file type with multiple extensions. If the same file type appears in the dataset with multiple extensions, ``JPG'' and ``JPEG'' for example, the model will not be able to predict which label is used in the validation dataset for a given instance, since this distinction exists in the labeling but not in the content.
-
-    \item Files that contain other files. Some file types need to embed other files. If the inner file is categorized, even if the model finds an unmistakable pattern, it will not match the label, which will be the extension of the outer file. A ``PDF'' file, for example, can embed a ``JPG'' file. If the model predicts ``JPG'' as the class of a portion of this file, it will not match the instance label on the dataset, which would be ``PDF''.
-\end{enumerate}
-
-The first error source, E1, is the focus of this section. In the file fragment classification task, it is expected that some portion of the classifications errors of a given model be caused by its inability to recognize patterns in the data if the data has high entropy. In these situations, even humans may be unable to tell if a sample is valid or if it is random data.
-
-The three last error sources listed above, E2 to E4, are not explored in this study. They are similar in nature, as the last two may be viewed as special cases of E2. 
-
-% \levelC{Hypothesis}
-The goal of this experiment is to test the \underline{hypothesis that part of the errors of file fragment classification can be explained by the existence of data that has no structure detectable by the model}. Not all file types possess this kind of data, and on those that do, they should compose only a portion of the file.
-
-
 % \levelC{Models}
 For each file type, a new model is trained to classify a fragment into two classes, random or structured. The stopping condition used is 10 epochs without improvement at validation accuracy.
 The same sampling, input, and output details described in section \ref{sec:evalmodels} were used here. The model identified as ``CM'' was selected to be used.
