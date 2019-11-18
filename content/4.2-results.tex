@@ -32,7 +32,7 @@ The input features of the network for each instance is a 512x256 matrix represen
 The output of the network for a given instance is a vector with a size equal to the number of classes, subjected to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to a specific class.
 
 %exp18
-The two models that used LSTM layers without convolutional layers presented slower learning in comparison with the others, as can be seen in figure \ref{fig:learning}. The validation accuracy values can be consulted in figure \ref{fig:models}.
+The two models that used LSTM layers without convolutional layers presented slower learning in comparison with the others, as can be seen in figure \ref{fig:learning}. The final validation accuracy values can be consulted in figure \ref{fig:models}.
 
 
 \noindent
@@ -54,13 +54,13 @@ To check if the two slower models could give better results if executed for a lo
 
 The model CLD was chosen to be compared with other works because it was among the 3 models with highest accuracy, but achieved its results in less time and showed high resilience to changes in parameters during the tests, while the others did not.
  
-In this second stage, using longer training sessions, the accuracy for the 28 file types used in the first stage increased from 0.54 to 0.62. Using the same file types of other works, the CLD model achieved an accuracy of 
-0.66 for the file types from Chen \textit{et al.} \cite{chen_file_2018},
+In this second stage, using longer training sessions, the accuracy for the 28 file types used in the first stage increased from 0.54 to 0.63. Using the same file types of other works, the CLD model achieved an accuracy of 
+0.67 for the file types from Chen \textit{et al.} \cite{chen_file_2018},
 0.91 for Hiester \cite{hiester_file_2018}, 
 0.59 for Wang \textit{et al.} \cite{wang_sparse_2018},
-0.64 for Wang \textit{et al.} \cite{wang_file_2018},
+0.65 for Wang \textit{et al.} \cite{wang_file_2018},
 and
-0.60 for Vulinović \textit{et al.} \cite{vulinovic_neural_2019}.
+0.61 for Vulinović \textit{et al.} \cite{vulinovic_neural_2019}.
 The results can be seen in figure \ref{fig:cldothers}.
 
 \noindent
