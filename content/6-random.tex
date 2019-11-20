@@ -15,12 +15,13 @@ Before conducting experiments related to the cause of errors, a list of conceiva
     \item Files that contain other files. Some file types need to embed other files. If the inner file is categorized, even if the model finds an unmistakable pattern, it will not match the label, which will be the extension of the outer file. A ``PDF'' file, for example, can embed a ``JPG'' file. If the model predicts ``JPG'' as the class of a portion of this file, it will not match the instance label on the dataset, which would be ``PDF''.
 \end{enumerate}
 
-The first error source, E1, is the focus of this section. In the file fragment classification task, it is expected that some portion of the classifications errors of a given model be caused by its inability to recognize patterns in the data if the data has high entropy. In these situations, even humans may be unable to tell if a sample is valid or if it is random data.
+The first error source, E1, is the focus of this chapter. In the file fragment classification task, it is expected that some portion of the classifications errors of a given model be caused by its inability to recognize patterns in the data if the data has high entropy. In these situations, even humans may be unable to tell if a sample is valid or if it is random data. It may happen that a search for an alternative model lead to better results, but the chances are low, as this type of error is hard to mitigate. 
 
-The second error source, E2, is a situation that could be improved by a better model or more training. Since the model has successfully detected structures, it is conceivable that avoiding misinterpretation of one structure as another is possible. This error source is not explored in this study.
+In the second error source, E2, it is conceivable that avoiding misinterpretation of one structure as another is possible, since the model has successfully detected structures. This error source is not explored in this study. Mitigation of this type of error probably would be achieved through more training or by a search for a better model.
 
-The three last error sources listed above, E3 to E5, are not explored in this study. They are similar in nature, as the last two may be viewed as special cases of E3. 
+The three last error sources listed above, E3 to E5, are not explored in this study. They are similar in nature, as the last two may be viewed as special cases of E3. This type of error is better mitigated through a revision of the labeling system.
 
 % \levelC{Hypothesis}
-The goal of this experiment is to test the \textbf{hypothesis that part of the errors of file fragment classification can be explained by the existence of data that has no structure detectable by the model}. Not all file types possess this kind of data, and on those that do, they should compose only a portion of the file.
+The goal of the experiment of this chapter is to test the \textbf{hypothesis that part of the errors of file fragment classification can be explained by the existence of data that has no structure detectable by the model}. Not all file types have this kind of data, and on those that do, they should compose only a portion of the file.
 
+% Two methods are described next. The measuring method results in a number that can be used as a measure of entropy. The filtering method can be used to filter the original dataset, leaving only samples that have recognizable structures.

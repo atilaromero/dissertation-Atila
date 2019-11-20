@@ -1,13 +1,18 @@
-The portion of data that could be identified as not random was higher than expected. While some of the errors could be explained by the misinterpretation of high entropy data as random data, this could only explain about 1/3 of the observed errors (16.5\% out of 46\%).
+The research described in this study was divided in three parts.
+In chapter \ref{sec:evalmodels}, during the search for the best model to classify file fragments, an apparent limit on how far this models could be improved was found. This limitation can be also observed in other works, since training the model ``CLD'' with the same file types used in those works resulted in accuracy values similar to theirs.
+
+In chapter \ref{sec:numberofclasses}, the influence
+In chapter \ref{sec:exprandom}
+
+\todo[inline]{contibutions from chap4}
+\todo[inline]{contibutions from chap5}
+\todo[inline]{contibutions from chap6}
+
+The portion of data that could be identified as containing structures was higher than expected. While some of the errors could be explained by the inability of the models to distinguish  high entropy data from random data, this could only explain about 1/3 of the observed errors (12.7\% out of 37\%).
 
 This raises the question of whether the remaning 2/3 of errors could be explained by different file types using the same data structures. This error source comes from the practice of using the extension of the file as the class to each of its parts. An analogy with speech recognition would be to label each syllable of a spoken word using the word as its label and then try to predict the whole word using only a syllable.
 
-Unfortunately, for the file fragmentation task, the potential labels for smaller parts may be less obvious than it is for speech recognition. The best-case scenario would be if the neural network itself could choose the labeling. But evaluating those predicted labels using labels of its own choosing would introduce bias, as it could prefer to create only easy labels. The statement that all file types are composed of ``data'' is correct, but it is unhelpful.
+Unfortunately, for the file fragmentation task, the potential labels for smaller parts may be less obvious than it is for speech recognition. The best-case scenario would be if the neural network itself could choose the labeling. But evaluating those predicted labels using labels of its own choosing would introduce bias, as it could prefer to create only easy labels.
+% The statement that all file types are composed of ``data'' is correct, but it is unhelpful.
 
-
-% Among the examined networks, while many of them satisfy the requirements imposed and could potentially be used by a forensic examiner to create a model to a new file type, the networks that showed the best results are those that use convolutional layers to split and process the input and then use LSTM layers to analyse the series of outputs produced by the convolutional layers. This gives a direct answer to the first research question, ``How does different neural network models compare to each other in terms of training performance and quality of results?''.
-
-% To answer the second question, ``Which neural network models would be more suitable to accept the addition of new filetypes by the forensic examiners community?'', a set of constraints were imposed to the analyzed models. The achieved results can be replicated with little computational power, in a short time period and with limited datasets.
-
-% To create models that recognize new filetypes, a forensic examiner would have to gather a small dataset for each filetype that needs to be recognized. Datasets of 100 files were sufficient to run the experiments in this work, but it is possible that even smaller datasets could be used. Then, a network with two convolutional layers with max pooling followed by a LSTM layer could be used to quickly train a new model, without the requirement of special hardware. In the chosen framework, Keras, the export and import of models can be easily done, so the forensic examiner could export and publish the new model in a public repository.
-
+An additional contribution of this work is the availability of the source code used to generate the results, which is a feature that not all studies provide. It can be used as a basis of comparison in future researches, generating models with the same architecture of those presented here.

@@ -1,0 +1,42 @@
+% \levelC{Models}
+For this experiment, a new model is created for each considered file type. The input of the model is a one-hot encoded block than may come from a random generator or from the Govdocs1 dataset. Samples from the Govdocs1 dataset are labeled ``structured'', while samples from the random generator are labeled ``random''. The model should predict from which source the sample came.
+
+The 28 file types from the Govdocs1 dataset \cite{garfinkel_bringing_2009} used in chapters \ref{sec:evalmodels} and \ref{sec:numberofclasses} were used in this experiment, placing 100 files in the training dataset and 100 in the validation dataset.
+
+
+The model architecture used in this research, ``CLD'', is described in chapter \ref{sec:evalmodels} and has three layers. The first is a convolutional layer with 256 output units, a window of size 16, and a stride of 16. The second is a LSTM layer of 128 units. The last is a fully-connected layer where the number of output units match the number of classes of the input dataset.
+
+All the trainings used the Adam \cite{kingma_adam:_2014}
+optimization algorithm to guide backpropagation.
+The stopping condition used is 10 epochs without improvement at validation accuracy, using categorical cross entropy loss.
+
+
+\levelC{From data source to measure of entropy}
+There is a difference in the nature of the predetermined labels and the predicted ones. The predetermined labels reflect the data source from which the samples were extracted, while the predicted labels are based on the content of the data. For the random generator, this is not a problem, as this data source only has one kind of data. But the samples from the Govdocs1 dataset may have two kinds of data. For some of the samples, it is expected that the true classification should be ``random'' instead of ``structured''. These are the samples that are too complex to this kind of model, the ones where the model cannot find any pattern. Unfortunately, there is no direct way to know the perfect labels in advance, hence all samples of the Govdocs1 dataset are labeled ``structured''. Thus, it is known that the samples from Govdocs1 dataset have an unknown portion of conditions positives and negatives.
+
+Here, the ``structured'' samples are considered positive and the ``random'' samples are considered negative. Thus the samples that are classified as ``random'' by the model are the sum of the true negatives and the false negatives. Similarly, the samples classified as ``structured'' are the sum of the true positives and the false positives.
+
+The random generator can be used to predict the proportion between false positives and true negatives of the chosen file type from the Govdocs1 dataset. Since the condition negative (which is the sum of false positives and true negatives) are those samples that ideally should be marked ``random'', the classifier should treat them the same way it treats the random generator samples.
+
+In other words, the Govdocs1 dataset for a particular file type is assumed to have a subset of samples that should be labeled ``random'' because the model cannot find patterns in them. Some of those samples may be incorrectly labeled ``structured'' by the model. These are the false positives. But this should happen in the same proportion that the model classify samples from the random generator as ``structured''.
+
+Using this method, the quantity that would best represent the entropy of the dataset would be the $(1-Prevalence)$, where  $Prevalence=\frac{\sum ConditionPositive}{\sum TotalPopulation}$. Unfortunately, without knowing the false negative rate, the best that can be achieved is a range where the maximum entropy value occurs when the false negative rate is zero. Assuming the false negative rate to be zero, the prevalence will be equal to the true positives over the entire population. Thus the entropy range can be calculated using only the accuracy values of the trained model obtained separately on the Govdocs1 dataset and on the random dataset, as shown on equations \ref{eq:TPstart} to \ref{eq:TPend}.
+
+\begin{align}
+\label{eq:TPstart}
+    1-\begin{matrix}
+    Entropy\\
+    measure
+    \end{matrix}
+      &= Govdocs\,True\,Positive \\
+      &= Govdocs\,Predicted\,Positive - Govdocs\,False\,Positive\\
+      &= GovdocsPredPOS - \left(GovdocsPredNEG*\frac{randomPredPOS}{randomPredNEG}\right)\label{eq:TPPred}\\
+      &= GovdocsKerasACC - \frac{(1-GovdocsKerasACC)*(1-randomKerasACC)}{randomKerasACC}
+      \label{eq:TPend}
+\end{align}
+
+In equation \ref{eq:TPPred}, the $(GovdocsPredNEG)$ quantity is the portion of samples marked as ``random'' by the model when classifying samples from the Govdocs1 dataset. The $GovdocsKerasACC$ is the accuracy calculated by Keras during validation of the Govdocs1 dataset. It is not the real accuracy, since this validation consider all samples marked ``random'' as errors. Thus $GovdocsKerasACC = GovdocsPredPOS$. The accuracy calculated by Keras during validation of the random generator consider as correct the samples marked as ``random'', thus $randomKerasACC = randomPredNEG$.
+
+Multiplying $(1-GovdocsKerasACC)$ value by $\frac{(1-randomKerasACC)}{randomKerasACC}$ should give the portion of samples that are erroneous marked as ``structured'' by the model, the false positives. Here it is assumed that $\frac{False\, positive}{True\,negative}$ on the Govdocs dataset is equal to $\frac{randomPredPOS}{randomPredNEG}$ on the random generator.
+
+After this entropy measure is calculated for all the file types, it can be used to estimate the amount of error that can be attributed to the model's inability to recognize structures, testing the proposed hypothesis. For a dataset with balanced file types distribution, this will be the mean of the entropy measures.

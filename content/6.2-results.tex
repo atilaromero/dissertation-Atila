@@ -1,6 +1,3 @@
-% \levelC{Dataset}
-This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. The  ``text'' and ``unk'' extensions were discarded because files with these extensions use multiple formats and they do not correspond to a single file type. From the remaining 28 extensions, listed in table \ref{tab:govdocs1}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
-
 % \levelC{Hardware}
 The experiments did not take advantage of GPU acceleration and were  conducted on a single computer with 256GB of RAM and with 2 Intel\textregistered Xeon\textregistered E5-2630 v2 processors, with 6 cores each, with 2 hyper-threads per core, or 24 hyper-threads in total. 
 
@@ -9,17 +6,17 @@ The experiments did not take advantage of GPU acceleration and were  conducted o
 The main software and frameworks used to build the experiments were Python 3.6, Jupyter notebook, Tensorflow 1.14.0, Keras 2.2.4-tf, and Fedora Linux 27.
 
 % repository
-The source code for the experiments is available at \sloppy\url{http://github.com/atilaromero/randomness-experiments}.
+The source code for the experiments is available at \sloppy\url{http://github.com/atilaromero/carving-experiments}.
 
 
-% \levelC{Results}
-For some file types, training achieved an accuracy higher than 98\% on the first pass. These are the file types where a model should have no difficulty finding patterns. For the remaining file types, all achieved an accuracy higher than 98\% on the second pass, which is fortunate, as this avoids the need to use further passes and  simplifies calculations.
+\input{content/tables/6.2-pass1.tex}
+
+The results obtained are shown in table \ref{tab:pass1}. The entropy measure is the complement of the GovdocsTP column.
 
 Figure \ref{fig:not_random} shows, for each file type, the percent of 512-byte fragments identified as ``structured'', from a sample of 1000 fragments for each file type.
 
 \noindent
 \begin{figure*}[htb!]
 \centering\includegraphics[width=1.0\textwidth]{content/random.png}
-\caption{\label{fig:not_random}Validation accuracy of models trained to distinguish each file type from random data. The 90\% accuracy of JPG, for example, means that recognizable patterns were found on 90\% of the blocks of the JPG dataset.}%
+\caption[]{\label{fig:not_random}Estimate of percentage of samples with recognizable structures, using models trained to distinguish each file type from random data. The 87\% value for JPG, for example, means that up to 87\% of the blocks of the JPG dataset have recognizable patterns. Since the assumption of no false negatives was used, the real value, which is unknown, can be lower. The entropy measure proposed is the complement of this value, for example, 13\% for JPG.}%
 \end{figure*}
-

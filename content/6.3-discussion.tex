@@ -1,9 +1,13 @@
 Having a minimum number of recognizable structures for each file type, it is now possible to calculate the maximum number of the classification errors that can be attributed to error cause E1, which happens when the complexity of the data is beyond the model’s capability to recognize patterns.
 
-The mean accuracy for all file types, using data listed in figure 6, is 83.5\% \todo{check}.  Assuming a dataset with balanced classes, if all the blocks considered random data were misclassified, then the maximum amount of error due to data complexity would be 16.5\%. If all blocks considered random were classified as DWG, which is the class with less recognizable patterns, then the maximum amount of error would be 14.3\%.
+The mean true positive estimate for all file types, using data listed in figure \ref{fig:not_random}, is 87.3\%.  Assuming a dataset with balanced classes, if all the blocks considered random data were misclassified, then the maximum amount of error due to data complexity would be 12.7\%. If all blocks considered random were classified as DWG, which is the class with less recognizable patterns, then the maximum amount of error would be 10.9\%.
+
+Since the higher validation accuracy obtained in chapter \ref{sec:evalmodels} for these 28 file types using the ``CLD'' models was 0.63, that model has an error rate of 37\%. But only 12.7\% of those error can be attributed to the error cause E1, which happens when the model is unable to detect structures in the data.
+
+The hypothesis proposed in this chapter is only partially confirmed: some of the errors can be attributed to error cause E1, but only to some extent. About 2/3 of the errors cannot be explained by error cause E1. Since the false negative assumption was used, 2/3 may be an underestimation.
 
 
-\levelC{Limitations and threats to validity}
-The procedure applied in this experiment avoids false positives over false negatives. In other words, it avoids random data classified as structured at the cost of missing potentially recognizable structures at valid fragments. Thus, it is expected that the exact valid fragments count, which is unknown in practice, will be higher than the number obtained. Taking the JPG file type as an example, in which 90\% of the blocks were identified as ``structured'', this means that the true randomness value is some unknown value between 0 and 10\%.
+% \levelC{Limitations and threats to validity}
+The procedure applied in this experiment uses the no false negative assumption, which considers that no sample with recognizable structures are erroneous classified as ``random''. Thus, it is expected that the exact valid fragments count, which is unknown in practice, will be higher than the number obtained. Taking the JPG file type as an example, in which 87\% of the blocks were identified as ``structured'', this means that the true entropy value would be some unknown value between 0 and 13\%.
 
 Also, it is important to notice that the use of different network architectures will result in different randomness values, as their ability to recognize patterns in the data will be different.
