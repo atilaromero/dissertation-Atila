@@ -1,6 +1,12 @@
 \begin{abstract}{computer forensics, data carving, machine learning, neural networks, long short-term memory, convolutional layers, file fragment classification, high entropy data}
 
-High entropy data, frequently found on images, video, and compressed files, may be misinterpreted as random data. \todo{focus is on last part, rephrase to focus on all three parts}
-This research explores how far the presence of high entropy data can explain file fragment classification errors. The research is divided into three parts. In the first, the accuracy of some types of neural networks is compared, classifying file fragments taken from the Govdocs1 dataset\cite{garfinkel_bringing_2009}, using their file extensions as class labels\todo{insert conclusion}. Then, the influence of the number of classes on the accuracy of the resulting models is explored\todo{insert why and conclusion}. Finally, an experiment is devised to measure, for a given neural network architecture, the number of fragments that have recognizable structures for each file type. The conclusion is that, for the model used, which classifies fragments of 28 file types, inability to distinguish high entropy data from random data can only account for an error in accuracy of 16.5\%\todo{check}. Since the total error in accuracy is 37\% for 28 classes, this leaves 29.5\%\todo{check} of samples misclassified by other reasons. This suggests that, for future researches on file fragment classification, the seek for a procedure to automatically label inner data structures of files may be a promising approach.
+This work is divided in three parts. 
+In the first, the accuracy values of some types of neural networks are compared, classifying file fragments taken from the Govdocs1 dataset\cite{garfinkel_bringing_2009}, using their file extensions as class labels.
+The results suggest that the dataset composition has a more relevant role in the results than the architectural details of the neural network models.
+In the second part, the influence of number of classes on accuracy is explored. 
+The conclusion is that the number of classes in the dataset is relevant but less important than the types of extensions selected to compose the dataset.
+Finally, a procedure is devised to test the hypothesis that part of the errors of file fragment classification can be explained by the inability of the models to distinguish high entropy data from random data.
+The conclusion is that, for the model used, the inability to distinguish high entropy data from random data can only account for about 1/3 of the errors.
+This suggests that, for future researches on file fragment classification, the seek for a procedure to automatically label inner data structures of files may be a promising approach.
 
 \end{abstract}
