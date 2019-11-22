@@ -1,55 +1,39 @@
-The early studies on data carving used private datasets, making it difficult to compare the results of different studies. In 2009, Garfinkel \textit{et al.} \cite{garfinkel_bringing_2009} published the Govdocs1 dataset with 1 million files (a small amount of those files were removed later, for legal reasons). While some of the later works on the field still use private datasets, the Govdocs1 dataset has become the most used choice in studies related to data carving.
+The early studies on data carving used private datasets, making it difficult to compare the results of different studies. In 2009, Garfinkel \textit{et al.} \cite{garfinkel_bringing_2009} published the Govdocs1 dataset with 1 million files (a small amount of those files was removed later, for legal reasons). While some of the later works on the field still use private datasets, the Govdocs1 dataset has become the most used choice in studies related to data carving.
 Therefore, this related work summary focuses on studies on file fragment classification that used the Govdocs1 dataset.
 
-Depending on the objective, the focus of each study may either be whole file classification or file fragment classification. Whole file classification is generally an easier task because most file types, even those with high entropy and low compression rates, have well-structured headers, with easily recognizable patterns.
+Depending on the objective, the focus of each study may either be whole file classification or file fragment classification. The whole file classification is generally an easier task because most file types, even those with high entropy and low compression rates, have well-structured headers, with easily recognizable patterns.
 
-Most of the early work on this field used some form of dimensionality reduction on the input data before performing classification, as byte frequency distribution, compression rate, and various statistical techniques. The usage of raw bytes as input is recently becoming more popular, especially in studies applying machine learning techniques, which seems to be a rising trend in the last ten years.
+Most of the early work in this field used some form of dimensionality reduction in the input data before performing classification, as byte frequency distribution, compression rate, and various statistical techniques. The usage of raw bytes as input is recently becoming more popular, especially in studies applying machine learning techniques, which seems to be a rising trend in the last ten years.
 
-
-Axelsson \cite{axelsson_normalised_2010} used the normalized compression distance as an input feature to a kNN algorithm, picking pairs of 512 bytes fragments, compressing them with the bzip2 algorithm and comparing the length of the results.
-% He used 28 file types from the Govdocs1 dataset
-% : pdf, html, jpg, text, doc, xls, ppt, xml, gif, ps, csv, gz, eps, png, swf, pps, sql, java, pptx, docx, ttf, js, pub, bmp, xbm, xlsx, jar, and zip.
+Axelsson \cite{axelsson_normalised_2010} used the normalized compression distance as an input feature to a kNN algorithm, picking pairs of 512-byte fragments, compressing them with the bzip2 algorithm and comparing the length of the results.
 He got an average accuracy of around 34\% using 28 file types.
 
-% Gopal et al. \cite{gopal_statistical_2011}  \todo{describe approach}. They used RDC
-
 Fitzgerald \textit{et al.} \cite{fitzgerald_using_2012}  used an SVM classifier with various statistical measures as input features, including unigram and bigram histogram counts, Shannon entropy, and compression length.
-% They used 24 file types from the the Govdocs1 dataset, 
-% : pdf, ppt, txt, jpg, doc, xls, ps, html, gz, xml, pps, csv, gif, swf, png, pptx, rtf, sql, docx, bmp, zip, java, xlsx, and tex, 
-Omitting first and last fragments of each file, they got an average accuracy of 49.1\% using 24 file types.
+Omitting the first and the last fragments of each file, they got an average accuracy of 49.1\% using 24 file types.
 
 Beebe \textit{et al.} \cite{beebe_sceadan:_2013}
-compared various measures of complexity and byte frequency distributions of 512 bytes fragments as input features to an SVM algorithm. They used 8 data types, txt, base64, base85, urlencoded, fat fs data, ntfs fs data, ext fs data, aes256, and
+compared various measures of complexity and byte frequency distributions of 512-byte fragments as input features to an SVM algorithm. They used 8 data types, txt, base64, base85, urlencoded, fat fs data, ntfs fs data, ext fs data, aes256, and
 30 file types
-% , jpg, gif, bmp, png, tif, pdf, ps, zip, bzip2, gzip, doc, docx, xls, xlsx, ppt, pptx, wmv, mp3, mp4, avi, flv, m4a, java, js, html, xml, json, csv, css, and log, 
 from the Govdocs1 dataset and some other sources (19 are at least partially from the Govdocs1 dataset). They got an average accuracy of 73.4\% combining unigram and bigrams as input features.
 
 Chen \textit{et al.} \cite{chen_file_2018}
-used a Convolutional Neural Network (CNN) with 5 convolutional layers and 3 fully connected layers to classify fragments of 4096 bytes, converting each fragment into a 64x64 grayscale picture.
-% They used 16 file types from the Govdocs1 dataset
-% : csv, doc, docx, gif, gz, html, java, jpg, log, pdf, png, ppt, rtf, text, xls, xml.
+used a Convolutional Neural Network (CNN) with five convolutional layers and 3 fully connected layers to classify fragments of 4096 bytes, converting each fragment into a 64x64 grayscale picture.
 They got an average accuracy of 70.9\% using 16 file types.
 
-Hiester \cite{hiester_file_2018} apparently was the first to utilize an LSTM network to perform file fragment classification. He compared results using three types of neural networks: feedforward, convolutional, and LSTM. He used four file types from the Govdocs1 dataset.
-% : csv, xml, jpg and gif. 
-Each bit of a 512-byte fragment was translated into two features, resulting in 8192 features per block (512*8*2). The first and last sectors of each file in the training set were discarded. In the experiments, the datasets were limited to one gigabyte to fit on memory. He got an average accuracy of 98\% using an LSTM network, 73\% using CNN, and 76\% using MLP.
+Hiester \cite{hiester_file_2018} apparently was the first to use an LSTM network to perform file fragment classification. He compared the results of three types of neural networks: feedforward, convolutional, and LSTM. He used four file types from the Govdocs1 dataset.
+Each bit of a 512-byte fragment was translated into two features, resulting in 8192 features per block (512*8*2). The first and last sectors of each file in the training set were discarded. In the experiments, the datasets were limited to one gigabyte to fit in memory. He got an average accuracy of 98\% using an LSTM network, 73\% using CNN, and 76\% using MLP.
 
 Wang \textit{et al.} \cite{wang_sparse_2018} 
-used sparse dictionaries for n-grams to extract features of 512 bytes fragments, using this as input to an SVM classifier.
-% They used 18 file types from the Govdocs1 dataset
-% : csv, doc, docx, gif, gz, html, jpg, pdf, png, ppt, pptx, ps, rtf, swf, txt, xls, xlsx, and xml.
+used sparse dictionaries for n-grams to extract features of 512-byte fragments, using this as input to an SVM classifier.
 They got an average accuracy of 61.3\% using 18 file types.
 
 Wang \textit{et al.} \cite{wang_file_2018}  
-compared CNN, SVM, kNN, and XGboost, with fragments of different sizes, converting each byte to a 256 length vector (one-hot encoding). The CNN combined 3 parallel convolutional layers of widths 4, 8, and 16.
+compared CNN, SVM, kNN, and XGboost, with fragments of different sizes, converting each byte to a 256-length vector (one-hot encoding). The CNN combined three parallel convolutional layers of widths 4, 8 and 16.
 They used 20 file types from the Govdocs1 dataset.
-% : csv, doc, html, pdf, gif, jpg, dbase3, f, txt, swf, ps, java, log, xml, xls, ppt, gz, unk, rtf, and png.
-Using CNN, they got an average accuracy of around 68\% with 512 bytes fragments, and around 78\% with 4096 bytes fragments.
+Using CNN, they got an average accuracy of around 68\% with 512-byte fragments, and around 78\% with 4096-byte fragments.
 
 Vulinović \textit{et al.} \cite{vulinovic_neural_2019}
 compared a CNN with MLP, using 512 raw bytes as the CNN input, and byte histograms as input to the MLP.
-% They used 18 file types from the Govdocs1 dataset
-% : csv, doc, docx, gif, gz, html, jpg, pdf, png, ppt, pptx, ps, rtf, swf, txt, xls, xlsx, and xml.
 Using 18 file types, they got a macro average f1 score of 61\% using CNN and 81\% using MLP.
 
 Table \ref{tab:datacarvingstudies} summarizes 
@@ -58,41 +42,4 @@ lists the file types used in each study.
 
 \input{content/tables/2.1b-others.tex}
 
-
 \input{content/tables/4.0.1-studies-filetypes.tex}
-
-% % In 2014, 
-% Alamri and Allen \cite{alamri_taxonomy_2014} created a taxonomy of file type identification techniques, grouped by the following broad categories: statistical learning, frequency distribution, statistical analysis, and detection of file fragments. The statistical learning category is subdivided in supervised and unsupervised leaning. The supervised learning techniques are Support Vector Machine (SVM), k-Nearest Neighbor (kNN), and Neural Network (NN). According to this taxonomy study, SVM is used in \cite{ahmed_fast_2011}, \cite{amirani_feature-based_2013}, \cite{beebe_sceadan:_2013}, \cite{fitzgerald_using_2012}, \cite{gopal_statistical_2011}, and \cite{sportiello_context-based_2012}, kNN is used in \cite{ahmed_fast_2011} and \cite{gopal_statistical_2011}, while neural networks are used in \cite{ahmed_fast_2011}, \cite{ahmed_content-based_2010}, \cite{amirani_new_2008}, \cite{amirani_feature-based_2013}, and \cite{penrose_approaches_2013}.
-
-% % In 2018, 
-% Ali et al. \cite{ali_review_2018} reviewed digital forensics methods for JPEG file carving. JPEG is mentioned in that paper as a common focus among data carving studies. Only some of the analyzed studies utilize some machine learning technique:
-% neural networks are used in \cite{xu_reassembling_2009} and \cite{amirani_feature-based_2013},
-% SVM is used in \cite{qiu_new_2014}, \cite{zhang_svm_2016}, and \cite{sportiello_file_2011},
-% kNN is used in \cite{axelsson_normalised_2010},
-% and Extreme Learning Machine (ELM) is used in \cite{zhang_svm_2016} and \cite{ali_classification_2018}.
-
-
-% Other works studying machine learning techniques applied to data carving include: \cite{luigi_file_2011} using SVM,
-% and Conti et al. \cite{conti_automated_2010} using kNN to classify low-level primitive types, like ASCII text, compressed data, bitmap, and encoded schemes.
-
-% According to Ali et al. \cite{ali_review_2018}, artificial intelligence techniques are found to be not fully utilized in this field.
-
-% In 2005, 
-% Dunhan et al. \cite{dunham_classifying_2005} have successfully identified file type of encrypted files. First, they used a two-level neural network to identify files encrypted with the same key. Then, within each group of files, they used a three-level neural network to identify file types, using file deltas created with exclusive-or as input to the neural network. The samples included the beginning of the files.
-
-% In 2007, 
-% Harris \cite{harris_using_2007} described the attempt to use a neural network in data carving. He compared the use of bytes frequency distribution against the use of the raw bytes. Even using the begging of files, the achieved accuracy was lower than 60\%. The use of floats to represent bytes must have contributed to those low results.
-
-% In 2008, 
-% Amirami et al.  \cite{amirani_new_2008} used Principal Component Analysis (PCA) as input for a 5 layer feed-forward auto-associative unsupervised neural network to do feature extraction and a 3 layer Multi Layer Perceptron (MLP) to perform classification.  They used byte frequency distribution of the entire file as initial features. 
-% In 2009, 
-% Xu and Dong \cite{xu_reassembling_2009}, used a neural network as a cluster reassembling technique for JPEG image fragments.
-% network structure not detailed
-
-% In 2010, 
-% Ahmed et al. \cite{ahmed_content-based_2010}, used byte frequency distribution of entire files as input to a neural network that performed file type classification. They used a similar approach in their later work \cite{ahmed_fast_2011}, but compared with features taken from fragments of files. These fragments included the beginning of the files.
-
-% In 2013, 
-% Penrose et al. \cite{penrose_approaches_2013}, using compression rate as the input to a neural network to distinguish between compressed and encrypted files;
-% In 2014, 
-% Maslim et al. \cite{maslim_distributed_2014}, using Principal Component Analysis (PCA) of byte frequency distribution as input to a Gene Regulatory Engine (GRE) and a Distributed Adaptative Neural Network (DANN).

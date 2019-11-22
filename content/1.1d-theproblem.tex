@@ -1,7 +1,7 @@
 %\subsection{The problem}
 % the problem of data carving development
 %from pep 1, paragrafo 4
-Although there are researches providing good alternatives in data carving, the algorithms used in practice by available data carving software are generally still manually coded, using fixed byte sequences found on headers and footers of the files. The amount of different file types combined with the slow process of manually coding each of those patterns makes the development of data carving software an overwhelming task \cite{mcdaniel_content_2003}. 
+Although researches are providing good alternatives in data carving, the algorithms used in practice by available data carving software are generally still manually coded, using fixed byte sequences found on headers and footers of the files. The amount of different file types combined with the slow process of manually coding each of those patterns makes the development of data carving software an overwhelming task \cite{mcdaniel_content_2003}. 
 
 % ml as a solution
 %from pep 1, paragrafo 5
@@ -20,4 +20,4 @@ The range of common file types, files that are most likely to be relevant in a p
 
 But there are situations when this is not enough. This can happen when the relevant file type is proprietary, uncommon, or newly created. As an example, some video surveillance solutions use proprietary video formats that are not recognized by data carving software. In this situation, it would be beneficial to use a tool that, using examples of files of that particular kind, could create a customized model able to identify and retrieve this file type.
 
-One strategy to solve this problem could be the use of neural networks to provide automatic classification of file fragments. As detailed in chapter \ref{sec:relatedwork}, some works already explored this approach. But the practice of using the file extension as labels for each of the file fragments may introduce errors when multiple file types use the same data structures. Thus, the plain search for better models without tackling the problem of inner data labeling may not be enough to achieve higher accuracy results.
+One strategy to solve this problem could be the use of neural networks to provide an automatic classification of file fragments. As detailed in chapter \ref{sec:relatedwork}, some works already explored this approach. But the practice of using the file extension as labels for each of the file fragments may introduce errors when multiple file types use the same data structures. Thus, the plain search for better models without tackling the problem of inner data labeling may not be enough to achieve higher accuracy results.
