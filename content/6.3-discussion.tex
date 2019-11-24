@@ -2,12 +2,12 @@ Having a minimum number of recognizable structures for each file type, it is now
 
 The mean true positive estimate for all file types, using data listed in figure \ref{fig:not_random}, is 87.3\%.  Assuming a dataset with balanced classes, if all the blocks considered random data were misclassified, then the maximum amount of error due to data complexity would be 12.7\%. If all blocks considered random were classified as DWG, which is the class with less recognizable patterns, then the maximum amount of error would be 10.9\%.
 
-Since the higher validation accuracy obtained in chapter \ref{sec:evalmodels} for these 28 file types using the ``CLD'' models was 0.63, that model has an error rate of 37\%. But only 12.7\% of those error can be attributed to the error cause E1, which happens when the model is unable to detect structures in the data.
+Since the higher validation accuracy obtained in chapter \ref{sec:evalmodels} for these 28 file types using the ``CLD'' models was 0.63, that model has an error rate of 37\%. But only 12.7\% of those errors can be attributed to the error cause E1, which happens when the model is unable to detect structures in the data.
 
 The hypothesis proposed in this chapter is only partially confirmed: some of the errors can be attributed to error cause E1, but only to some extent. About 2/3 of the errors cannot be explained by error cause E1. Since the false negative assumption was used, 2/3 may be an underestimation.
 
 
 % \levelC{Limitations and threats to validity}
-The procedure applied in this experiment uses the no false negative assumption, which considers that no sample with recognizable structures are erroneous classified as ``random''. Thus, it is expected that the exact valid fragments count, which is unknown in practice, will be higher than the number obtained. Taking the JPG file type as an example, in which 87\% of the blocks were identified as ``structured'', this means that the true entropy value would be some unknown value between 0 and 13\%.
+The procedure applied in this experiment uses the no false negative assumption, which considers that no sample with recognizable structures is erroneously classified as ``random''. Thus, it is expected that the exact valid fragment count, which is unknown in practice, will be higher than the number obtained. Taking the JPG file type as an example, in which 87\% of the blocks were identified as ``structured'', this means that the true entropy value would be some unknown value between zero and 13\%.
 
 Also, it is important to notice that the use of different network architectures may result in different measures, as their ability to recognize patterns in the data may be different.
