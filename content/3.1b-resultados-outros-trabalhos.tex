@@ -1,9 +1,12 @@
-The early studies on data carving used private datasets, making it difficult to compare the results of different studies. In 2009, Garfinkel \textit{et al.} \cite{garfinkel_bringing_2009} published the Govdocs1 dataset with 1 million files (a small amount of those files was removed later, for legal reasons). While some of the later works on the field still use private datasets, the Govdocs1 dataset has become the most used choice in studies related to data carving.
+The early studies on data carving \todo{insert refs here} used private datasets, making it difficult to compare the results of different studies. In 2009, Garfinkel \textit{et al.} \cite{garfinkel_bringing_2009} published the Govdocs1 dataset with 1 million files (a small amount of those files was removed later, for legal reasons). While some of the later works on the field still use private datasets, the Govdocs1 dataset has become the most used choice in studies related to data carving.
 Therefore, this related work summary focuses on studies on file fragment classification that used the Govdocs1 dataset.
 
 Depending on the objective, the focus of each study may either be whole file classification or file fragment classification. The whole file classification is generally an easier task because most file types, even those with high entropy and low compression rates, have well-structured headers, with easily recognizable patterns.
 
-Most of the early work in this field used some form of dimensionality reduction in the input data before performing classification, as byte frequency distribution, compression rate, and various statistical techniques. The usage of raw bytes as input is recently becoming more popular, especially in studies applying machine learning techniques, which seems to be a rising trend in the last ten years.
+Most of the early work in this field used some form of dimensionality reduction in the input data before performing classification, as byte frequency distribution\todo{ref}, compression rate\todo{ref}, and various statistical techniques\todo{ref}. The usage of raw bytes as input is recently becoming more popular, especially in studies applying machine learning techniques, which seems to be a rising trend in the last ten years.
+
+\todo[inline]{introduction to list of studies, what is their goal? accuracy of what?}
+\todo[inline]{figure explaining the splitting and usage of govdocs1}
 
 Axelsson \cite{axelsson_normalised_2010} used the normalized compression distance as an input feature to a kNN algorithm, picking pairs of 512-byte fragments, compressing them with the bzip2 algorithm and comparing the length of the results.
 He got an average accuracy of around 34\% using 28 file types.
@@ -34,7 +37,9 @@ Using CNN, they got an average accuracy of around 68\% with 512-byte fragments, 
 
 Vulinović \textit{et al.} \cite{vulinovic_neural_2019}
 compared a CNN with MLP, using 512 raw bytes as the CNN input, and byte histograms as input to the MLP.
-Using 18 file types, they got a macro average f1 score of 61\% using CNN and 81\% using MLP.
+Using 18 file types, they got a macro average f1 score \todo{ref} of 61\% using CNN and 81\% using MLP.
+
+\todo[inline]{check spellings of f1 score, F1 score, F1-score}
 
 Table \ref{tab:datacarvingstudies} summarizes 
 the results of file fragment classification studies using Govdocs1 dataset and table \ref{tab:studiesfiletypes}

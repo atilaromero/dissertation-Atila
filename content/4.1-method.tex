@@ -1,18 +1,40 @@
-%\levelB{Models}
-The networks under consideration used different combinations of convolutional, max pooling, LSTM, and fully connected layers, applying categorical cross-entropy as the loss function. Binary cross-entropy and mean squared error were considered during initial tests, but categorical cross-entropy gave faster training times.
+\todo[inline]{include method figure}
 
-Fourteen models participated in this evaluation. One of then is a simple single-layer perceptron. Two of them use LSTM layers without convolutional layers, while 3 of them use convolutional layers without LSTM layers. Eight models combine convolutional layers and LSTM layers. Table \ref{tab:models} outline the parameters of the models, which can be analyzed in more detail in the code repository \sloppy\url{http://github.com/atilaromero/carving-experiments}. The convolutional layers do not use padding. 
+%\levelB{Dataset sampling}
+This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and then organized by file extension.
+This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded\todo{why?}. The  ``text'' and ``unk'' extensions were discarded because examination showed that files with these extensions use multiple formats and they do not correspond to a single file type.
+The remaining 28 extensions are listed in table \ref{tab:studiesfiletypes}.
+
+To select a sample instance from the Govdocs1 dataset, first, a random file is selected among those available, without replacement. Then, a block from this file is randomly selected. After all files have participated in the process, the process may be repeated as long as necessary. This way, all files are considered and the classes are easily balanced.
+This contrasts with the sampling technique applied in other works, where all the sectors are grouped before sampling, which may lead to an imbalance between classes.
+
+%\levelB{Inputs}
+The input features of the neural network for each instance are a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero.
+
+\todo[inline]{search for 'the network' and replace by 'the neural network'}
+
+%\levelB{Outputs}
+The output of the neural network for a given instance is a vector with a size equal to the number of classes, subject to a softmax\todo{ref} function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to a specific class.
+
+%\levelB{Models}
+The neural networks under consideration used different combinations of convolutional, max pooling, LSTM, and fully connected layers, applying categorical cross-entropy as the loss function. Binary cross-entropy \todo{ref} and mean squared error \todo{ref} were considered during initial tests, but categorical cross-entropy gave faster training times.
+
+Fourteen neural network models participated in this evaluation. One of then is a simple single-layer perceptron. Two of them use LSTM layers without convolutional layers, while 3 of them use convolutional layers without LSTM layers. Eight models combine convolutional layers and LSTM layers. Table \ref{tab:models} outlines the parameters of the models, which can be analyzed in more detail in the code repository \sloppy\url{http://github.com/atilaromero/carving-experiments}. The convolutional layers do not use padding. 
+
+\todo[inline]{describe the 14 models}
+\todo[inline]{describe the names}
+\todo[inline]{pass all github references to footnotes}
 
 \input{content/tables/4.0.1-models.tex}
 
 %optimization
 All the training sessions used the Adam \cite{kingma_adam:_2014}
-optimization algorithm to guide backpropagation, which was selected because it performed well in the preliminary tests without requiring fine-tuning of parameters.
+optimization algorithm to guide backpropagation, which was selected because it showed good learning speed in the preliminary tests without requiring fine-tuning of parameters.
 
 % Constraints
 The models were trained until no further improvement was observed in the last 10 epochs, using categorical cross-entropy loss.
 
-After the 14 models were compared, one of the models, ``CLD'', was chosen to have its results compared with other works. A longer training session was performed in this stage, using a batch size of 300 samples instead of 100, and increasing the improvement threshold of the early stopping condition (maximum number of epochs to wait for improvements) from 10 to 20.
+After the 14 models were compared, one of the models, ``CLD'', was chosen to have its results compared with other works\todo{why?}. A longer training session was performed in this stage, using a batch size of 300 samples instead of 100\todo{why these numbers?}, and increasing the improvement threshold of the early stopping condition (maximum number of epochs to wait for improvements) from 10 to 20\todo{why these numbers?}.
 
 Using this extended training parameters, the ``CLD'' model was trained with the 28 file types used in the first stage. Then, a different model was built from scratch using the same file types of each of the most recent works listed in table \ref{tab:datacarvingstudies}: 
 Hiester \cite{hiester_file_2018}, 
