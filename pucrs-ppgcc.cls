@@ -623,7 +623,7 @@ e-mail <rfbpiccoli at gmail dot com>^^J
        \interlinepenalty\@M
        \large\bfseries\MakeTextUppercase{#3}\par\nointerlineskip\nobreak
        \normalfont\normalsize
-       \vskip 19.5ex
+       \vskip 15ex
       }%
       {%
        \parindent\z@
@@ -632,11 +632,11 @@ e-mail <rfbpiccoli at gmail dot com>^^J
        \interlinepenalty\@M
        \bfseries\MakeTextUppercase{#1}\par\nointerlineskip\nobreak
        \normalfont\normalsize
-       \vskip 19.5ex
+       \vskip 15ex
       }%
       \@afterheading
    }%
-   {\null\vskip 2cm
+  {%\null\vskip 0cm
    \begin{description}%
      \item[\PP@kwname{}:] \PP@kwtext{}.%
    \end{description}%
