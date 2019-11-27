@@ -14,7 +14,7 @@ The input features of the neural network for each instance are a 512x256 matrix 
 \todo[inline]{search for 'the network' and replace by 'the neural network'}
 
 %\levelB{Outputs}
-The output of the neural network for a given instance is a vector with a size equal to the number of classes, subject to a softmax\todo{ref} function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to a specific class.
+The output of the neural network for a given instance is a vector with a size equal to the number of classes, subject to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to a specific class.
 
 %\levelB{Models}
 The neural networks under consideration used different combinations of convolutional, max pooling, LSTM, and fully connected layers, applying categorical cross-entropy as the loss function. Binary cross-entropy \todo{ref} and mean squared error \todo{ref} were considered during initial tests, but categorical cross-entropy gave faster training times.

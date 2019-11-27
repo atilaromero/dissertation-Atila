@@ -1,4 +1,5 @@
-Long Short-Term Memory \cite{hochreiter_long_1997} (LSTM) is a type of Recurrent Neural Network (RNN) architecture that addresses the problem of vanishing or exploding gradients through time. This problem occurs in simple \todo{are ther others?} RNNs because the signal transmitted from one time-step to another is influenced at each interaction, both on forward and backward propagation phases, limiting the potential interaction between distant time-steps. The solution offered by LSTM introduces the concept of a memory cell, adding gates units to each node. The initial proposal included only input and output gates \cite{hochreiter_long_1997}.
+Recurrent Neural Network (RNN) are neural networks where part of the input of a layer uses its previous output.
+Long Short-Term Memory \cite{hochreiter_long_1997} (LSTM) is a type of Recurrent Neural Network architecture that addresses the problem of vanishing or exploding gradients through time. This problem occurs in regular RNNs because the signal transmitted from one time-step to another is influenced at each interaction, both on forward and backward propagation phases, limiting the potential interaction between distant time-steps. The solution offered by LSTM introduces the concept of a memory cell, adding gates units to each node. The initial proposal included only input and output gates \cite{hochreiter_long_1997}.
 The input gate is responsible for regulating if the cell internal state will be affected by the layer input. Similarly, the output gate regulates if the internal state will influence the output of the layer. The concept of a forget gate was introduced later \cite{gers_learning_1999}, to control whether the internal state of the cell should be reset.
 
 Equations \ref{eq:lstmequationsstart} to \ref{eq:lstmequationsend} describe a typical LSTM network. At each time step $t$, $x_t$ is the input vector, $c_t$ is the cell's internal state and $h_t$ is the output state. Both $c_t$ and $h_t$ influence the next time step as variables $c_{t-1}$ and $h_{t-1}$. The symbol $\circ$ denotes an element wise multiplication.
@@ -24,4 +25,4 @@ c_t &= f_t \circ c_{t-1} + i_t \circ \sigma_c(x_t W_{c} + h_{t-1} U_{c} + b_c) \
 h_t &= o_t \circ \sigma_h(c_t)
     \end{align}
 
-\todo[inline]{conclusion of nn section, conclusion of data carving section, and conclusion of chapter}
+% \todo[inline]{conclusion of nn section, conclusion of data carving section, and conclusion of chapter. What could possibly be concluded?!?! In this chapter we will describe y. Y=x. In this chapter we described y.}

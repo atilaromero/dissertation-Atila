@@ -1,4 +1,4 @@
-In a forensic context, file recovery is a frequent task that can be motivated by several situations, like a physical media malfunction, an intentional attempt to hide data, and the need to access deleted or older versions of files\todo{ref}. When a filesystem no longer provides the physical location of a file on the media, data carving is often the only procedure capable of retrieving this content.
+In a forensic context, file recovery is a frequent task that can be motivated by several situations, like a physical media malfunction, an intentional attempt to hide data, and the need to access deleted or older versions of files. When a filesystem no longer provides the physical location of a file on the media, data carving is often the only procedure capable of retrieving this content.
 
 Data carving is a forensic process that attempts to recover files without previous information of where the file starts or ends \cite{garfinkel_carving_2007}.
 To accomplish this task, a program has to analyze a source of raw data, searching for patterns indicating a known file type and making attempts to locate and reconstruct each of its constituent parts.
@@ -6,3 +6,7 @@ That process commonly disregards the filesystem \cite{veenman_statistical_2007},
 
 Data carving is frequently used in forensic environments, but it may also be beneficial in other areas, such as reverse engineering, network traffic analysis, and data mining.
 This observation is related to the fact that many types of data sources contain embedded files. Therefore, they may be used as input to a data carving process. This includes network traffic, memory dumps, hard drive images, and files containing other files.
+
+Data carving may resort to many techniques as file fragment classification, whole file classification, and fragment reassembling.
+File fragment classification aims to identify the original type of file from which a given block of
+data was extracted. It is a more difficult task than whole file classification, because it cannot rely on structures of the beginning and end of the files, that generally are easier to recognize. Reassembling is the attempt to reconstruct a file from pieces that may be out of order and mixed with pieces from other files, and is a procedure that depends on the correct output of the file fragment classification task.

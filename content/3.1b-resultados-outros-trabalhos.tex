@@ -5,7 +5,8 @@ Depending on the objective, the focus of each study may either be whole file cla
 
 Most of the early work in this field used some form of dimensionality reduction in the input data before performing classification, as byte frequency distribution\todo{ref}, compression rate\todo{ref}, and various statistical techniques\todo{ref}. The usage of raw bytes as input is recently becoming more popular, especially in studies applying machine learning techniques, which seems to be a rising trend in the last ten years.
 
-\todo[inline]{introduction to list of studies, what is their goal? accuracy of what?}
+Each of the following studies chose a subset of file types from the Govdocs1 dataset, splitting the subset further in training and validation parts. The training dataset was used to train the machine learning solution to classify file fragments, while the validation dataset was used to verify how accuratly the model could predict the type of the file from which the fragment was extracted. 
+
 \todo[inline]{figure explaining the splitting and usage of govdocs1}
 
 Axelsson \cite{axelsson_normalised_2010} used the normalized compression distance as an input feature to a kNN algorithm, picking pairs of 512-byte fragments, compressing them with the bzip2 algorithm and comparing the length of the results.

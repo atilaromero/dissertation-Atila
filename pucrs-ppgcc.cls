@@ -623,7 +623,7 @@ e-mail <rfbpiccoli at gmail dot com>^^J
        \interlinepenalty\@M
        \large\bfseries\MakeTextUppercase{#3}\par\nointerlineskip\nobreak
        \normalfont\normalsize
-       \vskip 15ex
+       \vskip 12ex
       }%
       {%
        \parindent\z@
@@ -632,7 +632,7 @@ e-mail <rfbpiccoli at gmail dot com>^^J
        \interlinepenalty\@M
        \bfseries\MakeTextUppercase{#1}\par\nointerlineskip\nobreak
        \normalfont\normalsize
-       \vskip 15ex
+       \vskip 12ex
       }%
       \@afterheading
    }%
