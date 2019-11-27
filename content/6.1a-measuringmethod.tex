@@ -6,7 +6,7 @@ For this experiment, a new model is created for each considered file type. The i
 The 28 file types from the Govdocs1 dataset \cite{garfinkel_bringing_2009} used in chapters \ref{sec:evalmodels} and \ref{sec:numberofclasses} were used in this experiment, placing 100 files in the training dataset and 100 in the validation dataset.
 
 
-The model architecture used in this research, ``CLD'', is described in chapter \ref{sec:evalmodels} and has three layers. The first is a convolutional layer with 256 output units, a window of size 16, and a stride of 16. The second is an LSTM layer of 128 units. The last is a fully-connected layer where the number of output units matches the number of classes of the input dataset.
+The model architecture used in this research, ``CLD'', is described in Chapter \ref{sec:evalmodels} and has three layers. The first is a convolutional layer with 256 output units, a window of size 16, and a stride of 16. The second is an LSTM layer of 128 units. The last is a fully-connected layer where the number of output units matches the number of classes of the input dataset.
 
 All the training sessions used the Adam \cite{kingma_adam:_2014}
 optimization algorithm to guide backpropagation.
