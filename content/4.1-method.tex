@@ -18,11 +18,9 @@ The output of the neural network for a given instance is a vector with a size eq
 %\levelB{Models}
 The neural networks under consideration used different combinations of convolutional, max pooling, LSTM, and fully connected layers, applying categorical cross-entropy as the loss function. Binary cross-entropy and mean squared error were considered during initial tests, but categorical cross-entropy gave faster training times.
 
-Fourteen neural network models participated in this evaluation. One of then is a simple single-layer perceptron. Two of them use LSTM layers without convolutional layers, while 3 of them use convolutional layers without LSTM layers. Eight models combine convolutional layers and LSTM layers. Table \ref{tab:models} outlines the parameters of the models, which can be analyzed in more detail in the code repository \footnote{http://github.com/atilaromero/carving-experiments}. The convolutional layers do not use padding. 
-
-\todo[inline]{describe the 14 models}
-\todo[inline]{describe the names}
-\todo[inline]{pass all github references to footnotes}
+Fourteen neural network models participated in this evaluation.
+Their names indicate the types of layers that compose their architecture, using the letter ``C'' to indicate a convolutional layer, ``D'' to indicate a dense layer, also called fully-connected, ``L'' to indicate an LSTM layer, and ``M'' to indicate a max pooling layer. The convolutional layers do not use padding.
+Table \ref{tab:models} lists the parameters of the models, which can be analyzed in more detail in the code repository \footnote{http://github.com/atilaromero/carving-experiments}. One of then, ``D'' is a simple single-layer perceptron. Two of them, ``LD'' and ``LL'', use LSTM layers without convolutional layers, while three of them, ``CD'', ``CM'', and ``CCM'', use convolutional layers without LSTM layers. Eight models, ``CL'', ``CML'', ``CLL'', ``CLD'', ``CCL'', ``CCLL'', ``CMCML'', and ``CMCMLL'', combine convolutional layers and LSTM layers. 
 
 \input{content/tables/4.0.1-models.tex}
 
@@ -33,7 +31,7 @@ optimization algorithm to guide backpropagation, which was selected because it s
 % Constraints
 The models were trained until no further improvement was observed in the last 10 epochs, using categorical cross-entropy loss.
 
-After the 14 models were compared, one of the models, ``CLD'', was chosen to have its results compared with other works\todo{why?}. A longer training session was performed in this stage, using a batch size of 300 samples instead of 100\todo{why these numbers?}, and increasing the improvement threshold of the early stopping condition (maximum number of epochs to wait for improvements) from 10 to 20\todo{why these numbers?}.
+After the 14 models were compared, one of the models with best accuracy results and faster training time, ``CLD'', was chosen to have its results compared with other works, using a longer training session than those used to assess the 14 models.
 
 Using this extended training parameters, the ``CLD'' model was trained with the 28 file types used in the first stage. Then, a different model was built from scratch using the same file types of each of the most recent works listed in Table \ref{tab:datacarvingstudies}: 
 Hiester \cite{hiester_file_2018}, 
