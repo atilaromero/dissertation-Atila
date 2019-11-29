@@ -10,7 +10,7 @@ The source code for the experiments is available at \sloppy\url{http://github.co
 \levelC{Accuracy vs. number of classes}
 
 % decrease in accuracy
-Figure \ref{fig:nclasses} shows the graph of accuracy versus number of classes.  Each of those points is a model trained with the indicated number of classes. The class for a block sample is the file extension of the original file. The classes/extensions used to train each model were taken at random. The bottom line indicates for comparison how accurate a random guess classifier would be. The points for two classes use transparency to improve visualization, as many of them are too close. For 2 classes, the accuracy values are between 0.5 and 1.0, with a greater concentration near 1.0. For 28 classes, the accuracy values are between 0.55 and 0.58.
+Figure \ref{fig:nclasses} shows the graph of accuracy versus number of classes.  Each of those points is a model trained with the indicated number of classes. The class for a block sample is the file extension of the original file. The classes/extensions used to train each model were taken at random. The bottom line indicates for comparison how accurate a random guess classifier would be. The points for two classes use transparency to improve visualization, as many of them are too close. For 2 classes, the accuracy values are between 50\% and 100\%, with a greater concentration near 100\%. For 28 classes, the accuracy values are between 55\% and 58\%.
 
 The lines ``hard file types first'' and ``easy file types first'' were created by selecting the file types that would compose the dataset. The selection was based on the results described in the next subsection, ``Accuracy of pairs of classes'', ordering the file types by their minimum accuracy values and following this order to choose file types. For example, the ``hard file types first'' point for three classes was obtained by training a model with the file types ``pps'', ``ppt'', and ``gz'', the three classes with lower minima in Figure \ref{fig:dual}.
 
@@ -22,7 +22,7 @@ The lines ``hard file types first'' and ``easy file types first'' were created b
 
 \levelC{Accuracy of pairs of classes}
 
-Figure \ref{fig:dual} shows the graph of the accuracy of each class when compared individually with each one of the others, resulting in 378 models, one for each possible pair of classes. File types where all the points are close to 1.0 are hardly mistaken for other types, while file types presenting accuracy values close to 0.5 can be mistaken for other file types by the model.
+Figure \ref{fig:dual} shows the graph of the accuracy of each class when compared individually with each one of the others, resulting in 378 models, one for each possible pair of classes. File types where all the points are close to 100\% are hardly mistaken for other types, while file types presenting accuracy values close to 50\% can be mistaken for other file types by the model.
 
 \noindent
 \begin{figure*}[htb!]
