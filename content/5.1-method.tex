@@ -1,24 +1,8 @@
 \todo[inline]{include method figure}
 
-\todo[inline]{refer to chapter 4}
-% \levelB{Dataset}
-This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and its files were grouped by extension. This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded. The  ``text'' and ``unk'' extensions were discarded because files with these extensions use multiple formats and they do not correspond to a single file type. From the remaining 28 extensions, listed in Table \ref{tab:studiesfiletypes}, 200 files of each were randomly selected, 100 to use in the training dataset and 100 to use in the validation dataset.
-
-% \input{content/tables/4.0.1-govdocs.tex}
-
-% \levelB{Sampling}
-To select a sample instance from the Govdocs1 dataset, first, a random file is selected among those available, without replacement. Then, a block from this file is randomly selected. After all files have participated in the process, it may be repeated as many times as necessary. This way, all files are considered, and the classes are easily balanced.
-This contrasts with the sampling technique applied in other works, where all the sectors are grouped before sampling, which may lead to an imbalance between classes.
-
-% \levelB{Inputs}
-%one-hot
-The input features of the neural network for each instance is a 512x256 matrix representing only one block of 512 bytes of a random file of the dataset. Each of the 512 bytes is one-hot encoded, meaning that its value is converted into a vector with 256 elements, with only one of them set to 1, corresponding to the value of the byte, while the others are set to zero. A batch size of 100 was used, with 28 steps per epoch.
-
-% \levelB{Outputs}
-The output of the neural network for a given instance is a vector with a size equal to the number of classes, subject to a softmax function, which applies the exponential function on the vector and then normalizes it. Each value will represent the predicted probability that the instance belongs to a specific class. The class for a block sample is the file extension of the original file.
-
 % \levelB{Model}
 The model architecture used in this research stage, ``CLD'', is described in the previous chapter and has three layers. The first is a convolutional layer with 256 output units, a window of size 16, and a stride of 16. The second is an LSTM layer of 128 units. The last is a fully-connected layer where the number of output units matches the number of classes of the input dataset.
+The same dataset handling, sampling, output, and input encoding described in Chapter 4 were used in this research stage.
 
 %optimization
 All the training sessions used the Adam \cite{kingma_adam:_2014}
@@ -30,7 +14,9 @@ The models were trained until no further improvement was observed in the last 10
 \levelC{Accuracy vs. number of classes}
 Several independent models with the same general architecture, but different weights, were trained with 2 to 28 extensions from the Govdocs1 dataset. For each number in the range 2 to 28, a random subset of extensions was selected to compose the dataset. Each extension has 200 file samples, half placed in the training dataset and half in the validation dataset. Each dataset was used to train a new model, that should distinguish between the selected subsets of extensions in that filtered dataset. This process was repeated five times.
 
-In addition to this sampling of extensions using different quantities of classes, all 378 combinations of pairs of extensions were compared. Each pair was used to compose a dataset and to train a new model for each one, using the same process described in the previous paragraph.
+\levelC{Accuracy of pairs of classes}
+
+In addition to this sampling of extensions using different quantities of classes, all 378 combinations of pairs of extensions were compared. Each pair was used to compose a dataset and to train a new model for each one, using the same process described in the previous section.
 
 Given the number of different models trained (135 for the N classes phase and 378 for the pairs), it was important to use a model architecture that had a fast training time. Models trained with the chosen architecture took about 10 minutes to train. Without this short training period, this research part would not be feasible.
 

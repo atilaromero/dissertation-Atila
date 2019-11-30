@@ -33,7 +33,7 @@ To check if the two slower models could give better results if executed for a lo
 % \levelC{Limitations and threats to validity}
 The model ``CLD'' was chosen to be compared with other works because it was among the three models with the highest accuracy, but achieved its results in less time and showed high resilience to changes in parameters during the tests, while the others did not.
 
-In this second stage, a longer training session was performed, using a batch size of 300 samples instead of 100, and increasing the improvement threshold of the early stopping condition (maximum number of epochs to wait for improvements) from 10 to 20. These parameters were chosen by trial and error. For the initial 28 file types, the ``CLD'' model training time increased from eigth minutes to three hours using these parameters.
+In this second stage, a longer training session was performed, using a batch size of 300 samples instead of 100, and increasing the improvement threshold of the early stopping condition (maximum number of epochs to wait for improvements) from 10 to 20. These parameters were chosen by trial and error. For the initial 28 file types, the ``CLD'' model training time increased from eight minutes to three hours using these parameters.
  
 using longer training sessions, the accuracy for the 28 file types used in the first stage increased from 54\% to 63\%. Using the same file types of other works, the ``CLD'' model achieved an accuracy of 
 67\% for the file types from Chen \textit{et al.} \cite{chen_file_2018},
