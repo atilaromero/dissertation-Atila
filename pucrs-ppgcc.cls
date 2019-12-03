@@ -296,7 +296,7 @@ e-mail <rfbpiccoli at gmail dot com>^^J
     \gdef\bbltechrep{Technical Report}
     \gdef\bblmthesis{Master's Thesis}
     \gdef\bblphdthesis{Ph.D. Thesis}
-    \gdef\bblcaptured{Source: }
+    \gdef\bblcaptured{Retrieved from: }
     \gdef\bbljan{Jan}
     \gdef\bblfeb{Feb}
     \gdef\bblmar{Mar}
