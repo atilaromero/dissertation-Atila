@@ -1,5 +1,7 @@
 Multilayer Perceptron (MLP) \cite{rosenblatt_perceptron:_1958} is a feedforward artificial neural network with at least three layers where all layers are fully-connected, meaning that all nodes of a layer are connected to all nodes of the next.
+{\color{red}
 The term feedforward implies that the connections between the nodes of the networks do not form cycles, thus the layers are processed sequentially in order.
+}
 
 One of the applications of these networks is classification, where given enough labeled input samples they can be trained to classify the inputs in a closed group of categories.
 
@@ -21,6 +23,7 @@ The success of neural networks in several fields and applications would not be p
 % \todo[inline]{define: backpropagation}
 This algorithm uses the gradient of the network formulas to propagate the error in the network's output back to each node, assessing how much each weight contributes to this error, and adjusting its value to minimize the error.
 
+{\color{red}
 When the neural network output results for multiple classes, it is usual to use one-hot encoding in the input and to apply the softmax function in the last layer of the neural network.
 Softmax applies the exponential function on the vector and then normalizes it.
 In one-hot encoding, a value is converted into a vector where the number of elements equals the number of desired classes. Only one of the elements is set to one, corresponding to the class of the instance, while the others are set to zero.
@@ -31,3 +34,4 @@ Assuming the input of the neural network uses one-hot encoding, categorical cros
 To train the neural network, the dataset may be processed multiple times. Each of those cycles is usually called an epoch. Epochs can be further divided in batches, where the adjustments derived from the backpropagation are applied more frequently.
 
 The training stopping condition is arbitrary. Some choices are to use a fixed number of epochs, to train for a fixed period of time, or to stop after a fixed number of epochs without improvement above certain threshold.
+}

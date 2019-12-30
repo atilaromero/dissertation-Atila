@@ -12,7 +12,10 @@ Therefore, this work explores some of the challenges of applying neural networks
 
 The initial goal of the first research question was to identify the most promising models on file fragment classification, but an apparent limit was found on how far these models could be improved.
 This led to the second research question, that explores the influence of the number of classes on the accuracy of the models. While the number of classes seems to influence the accuracy of the trained models, the choice of which file types are included in the dataset has a bigger impact because file types that contain images or use compression were found to have an expressive negative effect on accuracy.
-Motivated by these results, the third research question was formulated to test the hypothesis that part of the observed errors is caused by the inability of the models to distinguish high entropy data from random data. These steps are depicted in Figure \ref{fig:steps}.
+Motivated by these results, the third research question was formulated to test the hypothesis that part of the observed errors is caused by the inability of the models to distinguish high entropy data from random data.
+{\color{red}
+These steps are depicted in Figure \ref{fig:steps}.
+}
 
 \noindent
 \begin{figure*}[htb!]
@@ -20,5 +23,4 @@ Motivated by these results, the third research question was formulated to test t
 \caption[Research parts]{\label{fig:steps}Overview of the three parts of the research.}%
 \end{figure*}
 
-
-In this work, only neural networks are taken into account, but other machine learning approaches could also be applied, like Support Vector Machines (SVM) \cite{fitzgerald_using_2012} and k-Nearest Neighbors (kNN) \cite{axelsson_normalised_2010}. This restriction was motivated by the success that neural networks have shown in other fields, like image classification\cite{matan_reading_1992} and speech recognition\cite{graves_speech_2013}.
+In this work, only neural networks are taken into account, but other machine learning approaches could also be applied, like Support Vector Machines (SVM) {\color{red}\cite{fitzgerald_using_2012}} and k-Nearest Neighbors (kNN) {\color{red}\cite{axelsson_normalised_2010}}. This restriction was motivated by the success that neural networks have shown in other fields, like image classification {\color{red}\cite{matan_reading_1992}} and speech recognition {\color{red}\cite{graves_speech_2013}}.

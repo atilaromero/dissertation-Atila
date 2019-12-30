@@ -1,4 +1,6 @@
-Recurrent Neural Network (RNN) are neural networks where part of the input of a layer uses its previous output.
+{\color{red}
+Recurrent Neural Network (RNN) are neural networks where part of the input of a layer uses its previous output \cite{hochreiter_long_1997}.
+}
 Long Short-Term Memory \cite{hochreiter_long_1997} (LSTM) is a type of Recurrent Neural Network architecture that addresses the problem of vanishing or exploding gradients through time. This problem occurs in regular RNNs because the signal transmitted from one time-step to another is influenced at each interaction, both on forward and backward propagation phases, limiting the potential interaction between distant time-steps. The solution offered by LSTM introduces the concept of a memory cell, adding gates units to each node. The initial proposal included only input and output gates \cite{hochreiter_long_1997}.
 The input gate is responsible for regulating if the cell internal state will be affected by the layer input. Similarly, the output gate regulates if the internal state will influence the output of the layer. The concept of a forget gate was introduced later \cite{gers_learning_2000}, to control whether the internal state of the cell should be reset.
 

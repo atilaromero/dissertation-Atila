@@ -1,8 +1,15 @@
+{\color{red}
 Convolutional networks \cite{lecun_backpropagation_1989} \cite{lecun_convolutional_1995} use a sliding window over the input. The convolutional kernel is a matrix with the size of that window. It process the input matrix dividing it in small parts, processing each part using the same procedure described in the multilayer perceptron section, and concatenating the results of each part. The size of the step used to move the window while processing parts of the input matrix is the stride. If it is equal to the kernel size, the input matrix is divided and processed without overlap. To enforce that the final output has the same size of the input, padding may be used, which is a technique that increases the input matrix size, adding elements to its borders.
+}
 
 One of the advantages of convolutional layers is that the number of trainable parameters is reduced in comparison with a fully connected layer. And the linear transformation that the kernel does is uniformly applied across the entire input.
 
-When used to process images, the input of the convolution is a matrix with two dimensions. But, in other applications, as file fragment classification, it is possible to use a one dimension convolution, since the core concept of the convolutional processing can be understood as a simple division of the input in parts, that are then processed separately, concatenating results at the end, a concept that can be applied on any number of dimensions.
+When used to process images, the input of the convolution is a matrix with two dimensions.
+{\color{red}
+But, in other applications, as file fragment classification, it is possible to use a one dimension convolution, since the core concept of the convolutional processing can be understood as a simple division of the input in parts, that are then processed separately, concatenating results at the end, a concept that can be applied on any number of dimensions.
+}
 % \todo{why? why not?!?}
 
+{\color{red}
 After the convolutional layer, sometimes a pooling layer is added. It is a special type of convolution that applies a predetermined operation instead of a matrix multiplication with trainable weights. The two most common operations used in pooling layers are max and average. Max pooling returns the highest number of the values being processed, while average pooling uses the average of these values. Pooling layers offer a fast way to achieve translation invariance \cite{hinton_learning_1987}, which means that the detection of patterns is not affected by where in the input they occur. The drawback is that it introduces information loss, since the output is smaller than the input.
+}

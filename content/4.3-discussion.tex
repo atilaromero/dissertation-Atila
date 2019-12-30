@@ -1,7 +1,9 @@
 This chapter evaluated some alternative models in the file fragment classification task. The expectation was to identify the most promising models for improvement. But an apparent limit was found on how far these models could be improved.
 
+{\color{red}
 Answering the first research question ``\textbf{How do different neural network models compare to each other in terms of training performance and quality of results?}'', 
 the results may be grouped into three groups: i) The models that used LSTM without a convolutional layer performed poorly; ii) The models with convolutional layers that used LSTM as the last layer had intermediary results; iii) The remaining models, which achieved better results, were the single-layer perceptron (single fully-connected layer model, identified as ``D'') and the models that used convolutional models and used a fully-connected layer or max pooling as the last layer.
+}
 
 The three models with best accuracy results are identified as ``CCM'', ``CM'', and ``CLD'', but the latter had faster training time and also showed good resilience to changes: during preliminary tests and later when test conditions were altered to try to improve results, this model and its variations were always among the best models while the others were not.
 
@@ -14,6 +16,8 @@ This raises the question of whether there are harder patterns that could be foun
 
 However, the 14 models used in this study represent a very small sample of all possible model architectures using the chosen layer types. Moreover, there is no certainty that in different circumstances the best performing models will continue to outperform the others. For those reasons, the search for an alternative model could also be a valid research direction. Since the proposed models use a small number of layers and considering that deep networks have shown good results in other applications, a study that increases the number of layers of the models presented here may improve results.
 
-A comparison was made between a chosen model, ``CLD'', and recent works in the field. While ``CLD'' achieved slight lower accuracy values than the other studies, it can be noticed that the values are similar: while the result values of these other works range from 61\% to 98\%, a difference of 37\%, the differences between the results from this study and theirs do not exceed 7\%. This is an indication that the high  variability that these studies show between each other is caused by the difference in the file types they choose. This supports the claim that advances in this area should come from error analysis.
+A comparison was made between a chosen model, ``CLD'', and recent works in the field. While ``CLD'' achieved slight lower accuracy values than the other studies, it can be noticed that the values are similar: {\color{red}
+while the result values of these other works range from 61\% to 98\%, a difference of 37\%, the differences between the results from this study and theirs do not exceed 7\%.} This is an indication that the high  variability that these studies show between each other is caused by the difference in the file types they choose. This supports the claim that advances in this area should come from error analysis.
+
 
 The Govdocs1 dataset brought an important basis for comparison to be used between carving solutions. But to achieve easily reproducible results, the models must also be publicly available, a condition not all revised studies fulfill. Being available as Jupyter notebooks at https://github.com/atilaromero/carving-experiments, the results described here should require little effort to be reproduced. Thus the source code can be used as a basis of comparison in future researches, generating models with the same architecture of those presented here.
