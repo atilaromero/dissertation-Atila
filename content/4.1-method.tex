@@ -22,7 +22,7 @@ The neural networks under consideration used different combinations of convoluti
 Fourteen neural network models participated in this evaluation.
 Their names indicate the types of layers that compose their architecture, using the letter ``C'' to indicate a convolutional layer, ``D'' to indicate a dense layer, also called fully-connected, ``L'' to indicate an LSTM layer, and ``M'' to indicate a max pooling layer. The convolutional layers do not use padding.
 Table \ref{tab:models} lists the parameters of the models, which can be analyzed in more detail in the code repository \footnote{http://github.com/atilaromero/carving-experiments}. One of then, ``D'' is a simple single-layer perceptron. Two of them, ``LD'' and ``LL'', use LSTM layers without convolutional layers, while three of them, ``CD'', ``CM'', and ``CCM'', use convolutional layers without LSTM layers. Eight models, ``CL'', ``CML'', ``CLL'', ``CLD'', ``CCL'', ``CCLL'', ``CMCML'', and ``CMCMLL'', combine convolutional layers and LSTM layers. 
-}
+
 \input{content/tables/4.0.1-models.tex}
 
 %optimization

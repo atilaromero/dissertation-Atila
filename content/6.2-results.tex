@@ -3,18 +3,22 @@ The experiments did not take advantage of GPU acceleration and were  conducted o
 
 
 % \levelC{Software}
-The main software and frameworks used to build the experiments were Python 3.6 {\color{red}
-\cite{rossum_python_2019}, Jupyter notebook \cite{perez_jupyter_2019}, Tensorflow 1.14.0 \cite{google_brain_tensorflow_2019}, Keras 2.2.4-tf \cite{chollet_keras_2019}}, and Fedora Linux 27.
+The main software and frameworks used to build the experiments were Python 3.6 
+\cite{rossum_python_2019}, Jupyter notebook \cite{perez_jupyter_2019}, Tensorflow 1.14.0 \cite{google_brain_tensorflow_2019}, Keras 2.2.4-tf \cite{chollet_keras_2019}, and Fedora Linux 27.
 % repository
 The source code for the experiments is available at \sloppy\url{http://github.com/atilaromero/carving-experiments}.
 
 
 \input{content/tables/6.2-pass1.tex}
 
-\textcolor{blue}{The results obtained are shown in Table \ref{tab:pass1}. The entropy measure is the complement of the GovdocsTP column.}
+The results obtained are shown in Table \ref{tab:pass1}. The entropy measure is the complement of the GovdocsTP column.
+
+\todo[inline]{Colocar a descrição da tabela no paragrafo acima}
 
 Figure \ref{fig:not_random} shows, for each file type, the percent of 512-byte fragments identified as ``structured'', from a sample of 1000 fragments for each file type.
 In the figure, the 87\% value for JPG, for example, means that up to 87\% of the blocks of the JPG dataset have recognizable patterns. Since the assumption of no false negatives was used, the real value, which is unknown, can be lower. The entropy measure proposed is the complement of this value, for example, 13\% for JPG.
+
+\todo[inline]{Colocar a descrição da figura no paragrafo acima}
 
 \noindent
 \begin{figure*}[htb!]
