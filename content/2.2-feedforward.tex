@@ -1,15 +1,12 @@
-Multilayer Perceptron (MLP) \cite{rosenblatt_perceptron:_1958} is a feedforward artificial neural network with at least three layers where all layers are fully-connected, meaning that all nodes of a layer are connected to all nodes of the next.
-{\color{red}
-The term feedforward implies that the connections between the nodes of the networks do not form cycles, thus the layers are processed sequentially in order.
-}
+Multilayer Perceptron (MLP) \cite{rosenblatt_perceptron:_1958} is a feedforward artificial neural network with at least three layers, in which all layers are fully-connected, meaning that all nodes of a layer are connected to all nodes of the next. The term feedforward implies that the connections between the nodes of the networks do not form cycles, thus the layers are processed sequentially in order.
 
 One of the applications of these networks is classification, where given enough labeled input samples they can be trained to classify the inputs in a closed group of categories.
 
-The output of each layer is the result of a matrix multiplication of the input and a set of weights plus a bias vector, also subject to an optional activation function, as shown in equation \ref{eq:mpl}, where $y$ is the output vector of the layer, $x$ is the input vector, $W$ is the set of weights matrix, $b$ is the bias vector, and $a$ is the activation function.
+The output of each layer is the result of a matrix multiplication of the input and a set of weights plus a bias vector, also subject to an optional activation function, as shown in Equation \ref{eq:mpl}, where $y$ is the output vector of the layer, $x$ is the input vector, $W$ is the set of weights matrix, $b$ is the bias vector, and $a$ is the activation function.
 
 \begin{align}
 \label{eq:mpl}     
-y &= a(x W + b)
+y &= a.(x.W + b)
 \end{align}
 
 The training consists of a search for the weights that would minimize the error between the predicted output and the correct label of the instance. This error function is also known as loss function or cost function. Some authors prefer to distinguish between the two using the term ``loss'' to refer to a single training example and ``cost'' to refer to the average of losses in the training set.
@@ -23,15 +20,11 @@ The success of neural networks in several fields and applications would not be p
 % \todo[inline]{define: backpropagation}
 This algorithm uses the gradient of the network formulas to propagate the error in the network's output back to each node, assessing how much each weight contributes to this error, and adjusting its value to minimize the error.
 
-{\color{red}
-When the neural network output results for multiple classes, it is usual to use one-hot encoding in the input and to apply the softmax function in the last layer of the neural network.
-Softmax applies the exponential function on the vector and then normalizes it.
-In one-hot encoding, a value is converted into a vector where the number of elements equals the number of desired classes. Only one of the elements is set to one, corresponding to the class of the instance, while the others are set to zero.
+When the neural network output results for multiple classes, it is usual to use one-hot encoding in the input and to apply the softmax function in the last layer of the neural network. Softmax applies the exponential function on the vector and then normalizes it. In one-hot encoding, a value is converted into a vector where the number of elements equals the number of desired classes. Only one of the elements is set to one, corresponding to the class of the instance, while the others are set to zero.
 
 Some relevant loss functions for multi-class neural networks are categorical cross-entropy, binary cross-entropy, and mean squared error. 
 Assuming the input of the neural network uses one-hot encoding, categorical cross entropy is $-log(\hat{y}_i)$, where $\hat{y}_i$ is the neural network output for the correct class $i$. Binary cross entropy is similar, but penalizes errors in all classes instead of only the correct one. Mean squared error, like binary cross-entropy, also consider all classes simultaneously, but with a different formula. It is the mean of the results of $(\hat{y}_i - y_i)^2$, where $y$ is the correct vector, $\hat{y}$ is the predicted vector, and $i$ is a vector component, corresponding to a class.
 
-To train the neural network, the dataset may be processed multiple times. Each of those cycles is usually called an epoch. Epochs can be further divided in batches, where the adjustments derived from the backpropagation are applied more frequently.
+To train the neural network, the dataset may be processed multiple times. Each of those cycles is usually called an epoch. Epochs can be further divided into batches, where the adjustments derived from the backpropagation are applied more frequently.
 
 The training stopping condition is arbitrary. Some choices are to use a fixed number of epochs, to train for a fixed period of time, or to stop after a fixed number of epochs without improvement above certain threshold.
-}

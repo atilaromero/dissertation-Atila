@@ -1,7 +1,7 @@
 % \todo[inline]{include method figure}
 
 %\levelB{Dataset sampling}
-{\color{red}
+
 This study uses the Govdocs1 dataset \cite{garfinkel_bringing_2009}, which was fully downloaded and then organized by file extension.
 This dataset has files with 63 different extensions. The 33 extensions with less than 200 files were discarded, to ensure the training and validation dataset would have at least 100 files of each file type.
 The  ``text'' and ``unk'' extensions were discarded because examination showed that files with these extensions use multiple formats and they do not correspond to a single file type.
@@ -32,9 +32,9 @@ optimization algorithm to guide backpropagation, which was selected because it s
 % Constraints
 The models were trained until no further improvement was observed in the last 10 epochs, using categorical cross-entropy loss.
 
-{\color{red}
+
 After the 14 models were compared, one of the models with best accuracy results and faster training time, ``CLD'', was chosen to have its results compared with other works, using a longer training session than those used to assess the 14 models.
-}
+
 
 Using this extended training parameters, the ``CLD'' model was trained with the 28 file types used in the first stage. Then, a different model was built from scratch using the same file types of each of the most recent works listed in Table \ref{tab:datacarvingstudies}: 
 Hiester \cite{hiester_file_2018}, 

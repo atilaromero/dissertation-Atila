@@ -1,3 +1,5 @@
+\todo[inline]{introduction}
+
 \levelC{Accuracy vs. number of classes}
 
 In Figure \ref{fig:nclasses}, a decreasing trend was observed. An increase in the number of classes appears to be correlated with a decrease in accuracy. Another relevant aspect of the graph is that the range of the results seems to be smaller when more classes are used.  
@@ -8,7 +10,7 @@ This behavior is an important aspect to consider during the evaluation of file f
 
 Still, with 42\% \footnote{In the extended training session described in Chapter 4, a higher accuracy was obtained and 38\% of samples were misclassified, instead of 42\%.} of samples being misclassified when the number of classes is 28, the question of what are the error sources and how they can be addressed requires attention.
 
-The number of possible combinations of file types to compose the datasets depends on the number of classes being considered. For 28 classes, there is only one possible combination, while for two classes there are 378. For intermediary values, the numbers are much higher, which is the number of possible combinations disregarding the order of the elements: $ \frac{28!}{(28-n)!n!}$. For 14 file types, there are 40116600 combinations. For this reason, the significance of the 5 samples diminishes for intermediary values.
+The number of possible combinations of file types to compose the datasets depends on the number of classes being considered. For 28 classes, there is only one possible combination, while for two classes there are 378. For intermediary values, the numbers are much higher, which is the number of possible combinations disregarding the order of the elements: $ \frac{28!}{(28-n)!n!}$. For 14 file types, there are 40,116,600 combinations. For this reason, the significance of the 5 samples diminishes for intermediary values.
 
 \levelC{Accuracy of pairs of classes}
 
@@ -16,7 +18,7 @@ The accuracy of models trained with pairs of classes, shown in Figure \ref{fig:d
 
 It was demonstrated that the accuracy of a new model may be manipulated by the selection of file types that will compose the dataset. The lines ``hard file types first'' and ``easy file types first'' of Figure \ref{fig:nclasses} were created using the order shown in Figure \ref{fig:dual}, resulting in lines that seem to be close to the minimum and maximum of the possible accuracy values. 
 
-\levelC{PCA}
+\levelC{Principal Component Analysis}
 
 The usage of PCA on the 28x28 distance matrix produced a 2D projection where, as shown in figures \ref{fig:pca} and \ref{fig:pca2}, a group of file types that use compression or contains images are grouped near each other: 
 ``gif'',
@@ -31,12 +33,12 @@ The usage of PCA on the 28x28 distance matrix produced a 2D projection where, as
 ``pptx'',
 and ``pps''.
 
-\levelC{Conclusion}
+\levelC{Final considerations}
 
-{\color{red}
-Answering the second research question ``\textbf{How does the accuracy of neural network models changes relative to the number of classes?}'', 
+
+Answering the second research question ``\textbf{How does the accuracy of neural network models changes relative to the number of classes in file fragment classification?}'', 
 it was observed that an increase in the number of extensions selected to compose the training tends to decrease accuracy and increase precision. But the number of classes alone is not as important as the type of extension selected: some file types when included in the experiment have a much higher negative impact than others. This observation was demonstrated in the ``hard file types first'' and ``easy file types first'' of Figure \ref{fig:nclasses}, where the file types selected to compose were intentionally chosen, once to degrade results and once to improve them.
-}
+
 
 File types that contain images or that use compression were identified as those that have the highest negative effect on results, which suggests that their entropy may contribute to the error.
 

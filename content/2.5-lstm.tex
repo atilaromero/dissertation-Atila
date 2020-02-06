@@ -1,6 +1,5 @@
-{\color{red}
+
 Recurrent Neural Network (RNN) are neural networks where part of the input of a layer uses its previous output \cite{hochreiter_long_1997}.
-}
 Long Short-Term Memory \cite{hochreiter_long_1997} (LSTM) is a type of Recurrent Neural Network architecture that addresses the problem of vanishing or exploding gradients through time. This problem occurs in regular RNNs because the signal transmitted from one time-step to another is influenced at each interaction, both on forward and backward propagation phases, limiting the potential interaction between distant time-steps. The solution offered by LSTM introduces the concept of a memory cell, adding gates units to each node. The initial proposal included only input and output gates \cite{hochreiter_long_1997}.
 The input gate is responsible for regulating if the cell internal state will be affected by the layer input. Similarly, the output gate regulates if the internal state will influence the output of the layer. The concept of a forget gate was introduced later \cite{gers_learning_2000}, to control whether the internal state of the cell should be reset.
 
@@ -13,16 +12,14 @@ The dimensions of $x$ and $h_{t-1}$ are respectively the chosen dimensions for i
 The activation function usually chosen for the gates is the sigmoid, which gives values in the $[0,1]$ range. If the forget gate $f_t$ results zero for a given component, the corresponding component in the $c_{t-1}$ vector will have no influence on $c_t$ or $h_t$. If all the resulting components of the forget gate are zero, which corresponds to the zero vector, then the previous cell's state $c_{t-1}$ is completely ignored.
 Similarly, if the input gate $i_t$ results in a zero component, the corresponding component in the $c_t$ vector will not be influenced by $x$ and $h_{t-1}$.
 
-If all components of $f_t$ and $i_t$ are equal to $1$, then $c_t = c_{t-1} + \sigma_c(x_t W_{c} + h_{t-1} U_{c} + b_c)$, which is the case where $c_t$ is fully influenced by $c_{t-1}$, $x$ and $h_{t-1}$.
-
-The output gate $o_t$ follows a similar pattern, but it regulates how $h_t$ will be influenced by $c_t$.
+If all components of $f_t$ and $i_t$ are equal to $1$, then $c_t = c_{t-1} + \sigma_c(x_t W_{c} + h_{t-1} U_{c} + b_c)$, which is the case where $c_t$ is fully influenced by $c_{t-1}$, $x$ and $h_{t-1}$. The output gate $o_t$ follows a similar pattern, but it regulates how $h_t$ will be influenced by $c_t$.
 
 \begin{align}
 \label{eq:lstmequationsstart}     
-f_t &= \sigma_g(x_t W_{f} + h_{t-1} U_{f} + b_f) \\
-i_t &= \sigma_g(x_t W_{i} + h_{t-1} U_{i} + b_i) \\
-o_t &= \sigma_g(x_t W_{o} + h_{t-1} U_{o} + b_o) \\
-c_t &= f_t \circ c_{t-1} + i_t \circ \sigma_c(x_t W_{c} + h_{t-1} U_{c} + b_c) \\
+f_t &= \sigma_g.(x_t.W_{f} + h_{t-1}.U_{f} + b_f) \\
+i_t &= \sigma_g.(x_t.W_{i} + h_{t-1}.U_{i} + b_i) \\
+o_t &= \sigma_g.(x_t.W_{o} + h_{t-1}.U_{o} + b_o) \\
+c_t &= f_t \circ c_{t-1} + i_t \circ \sigma_c.(x_t.W_{c} + h_{t-1}.U_{c} + b_c) \\
 \label{eq:lstmequationsend}
 h_t &= o_t \circ \sigma_h(c_t)
     \end{align}
