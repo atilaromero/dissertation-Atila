@@ -11,17 +11,13 @@ The source code for the experiments is available at \sloppy\url{http://github.co
 
 \input{content/tables/6.2-pass1.tex}
 
-The results obtained are shown in Table \ref{tab:pass1}. The entropy measure is the complement of the GovdocsTP column.
-
-\todo[inline]{Colocar a descrição da tabela no paragrafo acima}
+The results obtained are shown in Table \ref{tab:pass1}. The entropy measure is the complement of the GovdocsTP column.  The GovdocsACC columns contains the accuracy validations values as calculated by Keras on the Govdocs1 dataset, thus considering all samples labeled as ``random'' as errors. The RandomACC column lists the portion of samples from the random generator classified as ``random'' by the model for that file type. The Time and Epoch columns refer to the training session of each model. The GovdocsTP column uses the equation \ref{eq:TPend}, giving the complement of the entropy. GovdocsPrec is simply $GovdocsTP/GovdocsACC$.
 
 Figure \ref{fig:not_random} shows, for each file type, the percent of 512-byte fragments identified as ``structured'', from a sample of 1000 fragments for each file type.
 In the figure, the 87\% value for JPG, for example, means that up to 87\% of the blocks of the JPG dataset have recognizable patterns. Since the assumption of no false negatives was used, the real value, which is unknown, can be lower. The entropy measure proposed is the complement of this value, for example, 13\% for JPG.
 
-\todo[inline]{Colocar a descrição da figura no paragrafo acima}
-
 \noindent
 \begin{figure*}[htb!]
 \centering\includegraphics[width=1.0\textwidth]{content/random.png}
-\caption[Complement of entropy measure for 28 file types]{\label{fig:not_random}Estimate of the percentage of samples with recognizable structures, using models trained to distinguish each file type from random data. The 87\% value for JPG, for example, means that up to 87\% of the blocks of the JPG dataset have recognizable patterns. Since the assumption of no false negatives was used, the real value, which is unknown, can be lower. The entropy measure proposed is the complement of this value, for example, 13\% for JPG.}%
+\caption[Complement of entropy measure for 28 file types]{\label{fig:not_random}Estimate of the percentage of samples with recognizable structures, using models trained to distinguish each file type from random data. }%
 \end{figure*}
