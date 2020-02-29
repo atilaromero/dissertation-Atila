@@ -1,4 +1,4 @@
-# Applied neural networks for file fragment classification
+# Neural networks applied to file fragment classification
 
 File fragment classification aims to identify the original type of file from which a given block of data was extracted. Machine learning techniques, and neural networks in particular, have the potential to improve this field, because the support of a new file type using traditional methods is laborious and not automatic. While studies on neural networks applied for file fragment classification have shown good results, to apply those contributions on real scenarios a better understanding is required on how those methods respond to an increase in number of supported file types and what the are the main sources of errors of this approach.
 
