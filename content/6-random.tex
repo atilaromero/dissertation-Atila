@@ -1,6 +1,8 @@
 % \levelC{Objective}
 In the previous chapter, it was observed that file types that use compression or contain images have a higher negative impact on accuracy than other file types do. This raises the question of whether high entropy may be related to the observed errors.
 
+In this work, the entropy of a data block can be defined as the amount of information required to describe that data. This is closely related to how compressible the data is: it can be said that a block of data that can be compressed into a small size has low entropy, as it is being described with fewer data. The presence of structures in the data makes it easier to describe and to compress, thus reducing its entropy. Conversely, a block of random data is not easy to describe and hardly compressible, so it is considered to have high entropy. 
+
 Before conducting experiments related to the cause of errors, a list of conceivable error sources (E1 to E5) was elaborated:
 \begin{enumerate}[itemindent=\parindent,label=\textbf{E\arabic*.}]
     \item For some data structure, the model cannot distinguish it from random data. This can happen if the pattern in the data is too complex, beyond the capabilities of the model. It may be the case that in practice no model can perform this distinction or, instead, this may be a limitation of this particular model only. This situation may occur in files that use compression or cryptography, or more generally, any file type with high entropy.
