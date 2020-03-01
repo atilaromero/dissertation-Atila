@@ -1,0 +1,114 @@
+% Comentarios Renata:
+% - Aleatório foi organizado por ti? - podes compartilhar para futuros experimentos
+% é um gerador de dados aleatórios, acho que o mais fácil é usar o código do github
+
+% - Texto coerente, talvez uma revisão final do inglês ainda possa ser recomendado, a exemplo do título
+
+% - Explorar mais as comparações com trabalhos relacionados (tempo, processos, etc) - trabalho futuro
+% Pode ser, mas para alguns trabalhos é dificil reproduzir os modelos deles. Seria mais fácil se eles compartilhassem o código-fonte
+
+% - Qual principal vantagem da tua abordagem em relação as anteriores?
+% O modelo em si nem tem tanto de especial, talvez a velocidade. O mais interessantes é o questionamento feito no final, que o labeling system comumente usado provavelmente é o problema
+
+% - Aumento do data set seria uma solução?
+% Provavelmente não, porque mexer no sampling não resolveu
+
+% - Na prática ….
+
+% Comentários Fabian
+% - Cambridge Analytics para coletar dados de uma população ???
+% Não sei.
+
+% - Usado por hackers para criar malwers e trojans criando arquivos disfarçados importados ou sites web visitados por usuários inadivertidos ???
+% Quem sabe no futuro, não sei.
+
+% - Pergunta: que outras técnicas tradicionais poderiam similarmente enfrentar este problema ref. à adição de novos tipos e arquivos? 
+% content/1.2-researchquestions.tex:In this work, only neural networks are taken into account, but other machine learning approaches could also be applied, like Support Vector Machines (SVM) \cite{fitzgerald_using_2012} and k-Nearest Neighbors (kNN) \cite{axelsson_normalised_2010}. This restriction was motivated by the success that neural networks have shown in other fields, like image classification \cite{matan_reading_1992} and speech recognition \cite{graves_speech_2013}.
+
+% Pergunta: Ao redor de 2/3 ? Isto vale para técnicas RNA e outras técnicas de Machine Learning? Quais por exemplo? 
+% Cada técnica provavelmente geraria um valor um pouco diferente, pq dependeria da capacidade do modelo em reconhecer estruturas, e um modelo pode ser melhor que outro nisso. Acho que os números não seriam muito diferentes, mas seria algo a se testar, mas que seria um outro trabalho. Até daria para colocar em trabalhos futuros, mas acho que investir em labeling systems seria mais produtivo que retestar estrutura vs aleatorio.
+
+% Comentário: foi difícil ler o document em função da falta de definição formal e prévia de termos como: 
+% \todo[inline]{Accuracy} coloquei na secao 4.1
+% \todo[inline]{Precision, } troquei por variation in results, pq existem duas definicoes de precision, o que pode gerar confusão
+% \todo[inline]{Classes, } coloquei em 2.2
+% (Max) Pooling layer (pág 18), 
+%% está na pag 18
+% \todo[inline]{Raw bytes as input data (págs. 21 e 23), } coloquei em 3.1
+% \todo[inline]{ Unigram e Bigrams  (pág, 22),} coloquei na 3.1
+% One-hot encoding (pág, 22),
+%% Explicado na pag 17
+% \todo[inline]{F1-score (pág, 22),} coloquei em 4.1
+% \todo[inline]{ High-entropy,}
+% Binary cross-entropy, mean squared error, categorical cross-entropy (pág, 25),
+%% está na pag 17
+% Padding (pág. 26).
+%% está na pag 17
+% Vários outros termos: LD, LL, CD, CM, CCM, etc… (pág. 26),
+% \todo[inline]{nomes de modelos na lista de siglas}
+%% pag 26: Their names indicate the types of layers that compose their architecture, using the letter “C” to indicate a convolutional layer, “D” to indicate a dense layer, also called fully-connected, “L” to indicate an LSTM layer, and “M” to indicate a max pooling layer.
+% Categorical cross-entropy loss (pág. 32),
+%% está na pag 17
+
+% Pergunta: Porque compression and image processing files contain high entropy? What is the definition of high entropy?
+% \todo[inline]{definir entropia} - coloquei no cap 6
+
+% - Some of the errors could be explained by the inability of the models to distinguish high entropy data from random data. This could explain 1/3 of the observed errors (12.7% out of 37%). 
+% Pergunta: Could this be improved by improving the training process, for instance?
+% Se o modelo ficar ainda melhor em identificar estruturas, esses 12.7 vão diminuir. A menos que isso seja acompanhado por uma diminuição dos 40% de erro classificando 28 classes, o tipo de erro E1 vai ser ainda menos expressivo. Resumo: a quantidade de erro E1 foi menor que o esperado, melhorar o modelo não vai mudar isso.
+
+% - The remaining 2/3 of errors could be explained by different file types using the same data structures. (An analogy with speech recognition would be to label each syllable of a spoken word using the word as its label and then try to predict the whole word using only a syllable. In this case, spoken words with same syllable will be mispredicted with a high probability.
+% It is possible that existing models already reached the limit of what can be done without a revision in the labeling system, as was shown in Chapter 4, where the “CLD” model achieved results similar to other studies. 
+% Pergunta: How do you propose to review the labeling system, instead of proposing to improve existing models ?
+% I don't have a proposal for that. I have only gathered evidence that this is necessary, but I did not offer a solution.
+
+% Outra Pergunta: A tarefa de classificação de fragmentos poderia ser baseada em um processo de auto-aprendizado que buscaria encontrar padrões comuns que seriam potenciais candidatos para indicar que fragmentos com estes padrões pertenceriam a um "dado arquivo" ou a um "conjunto de arquivos"? Que técnicas de Machime Learnign poderiam ser utilizadas? Big Data?
+% Pois é, não sei.
+
+% - Definições de CNNs em relação a ANNs convencionais ? Vantagens?
+%% Acho que isso esta abordado no background
+
+% - Pág. 10.
+
+% - Pág. 12.
+
+% - Pág. 15: Why not Fuzzy Logic ???
+% How?!??!
+
+% - Pág. 17: 2 perguntas.
+
+% - Pág. 18: explicar melhor !!!
+%% mas é só isso mesmo, dividir a entrada em partes, processar as partes separadamente e juntar os resultados.
+
+% - Pág. 23: nã entendi!  rever o texto ...: Colocar um ponteiro para o cap. 6 !!
+%% esse paragrafo é um fechamento do related work falando nas suposicoes feitas pelos outros trabalhos e como essa suposicao pode estar errada. é um spoiler. No cap 6 isso fica mais claro, mas os cap 4 e 5 são as bases dessa conclusao, o cap sozinho, sem o 4 principalmente, nao é suficiente para embasar isso
+
+% - Pág. 27: acho que fica melhor assim: "..., 200 files from each one of the 28 file types were randomly selected, ..."
+%% done
+
+% - Pág. 28: Fig. 4.1.
+%% a origem nao importa muito
+
+% - Pág. 29: Fig. 4.3. So, error analysis is important since the diff. on fragment classification does not exceed 7% for all models.
+
+% Pág. 32: É importante ter uma figura que descreva em mais detalhes a arquitetura do model CLD, conforme apresentada aqui.
+%% está superestimando minhas habilidades artísticas... como que eu desenho uma camada convolucional seguida de uma camada lstm? ou a figura fica muito simples e nao esclarece nada, ou fica tao complicada que o texto que explica a figura é pior que a tabela que diz os parametros da rede. Eu prefiro a tabela do cap 4, é mais precisa e simples.
+
+% - Pág. 35: Fig. 5.1.
+%% a explicacao está no texto, pag 34
+
+% - Pág. 37: Why file types that hold compressed data or images are hard to classify?
+%% a ideia do capitulo é verificar que o fato é real, não achar a causa
+
+% - Pág. 37: Why ACCURACY decreases and PRECISION increases?
+%% troquei precision por variation in results
+% \todo[inline]{footnote on 5.3.1 - accuracy and precision}
+
+% - Pág. 39: Errors sources E1 – E5 ?
+%% ??
+
+% - Pág. 44.
+% que tipos de arquivos são esses?
+%% os outros trabalhos na literatura tb não seguem explicando cada um dos tipos de arquivos do govdocs1. Eu só me preocupei em verificar se eles realmente usavam compressão ou imagens também, sem entrar no mérito de explicar para que são usados
+
+% - Para outras 3 perguntas, ver: Future Work (pág. 47).
