@@ -47,5 +47,7 @@ Vulinović \textit{et al.} \cite{vulinovic_neural_2019}.
 
 This comparison has three important restrictions.
 Chen used 4096 bytes for the block size, while this work used 512 bytes only.
-Vulinović got an F1-score of 81\% for the Multilayer Perceptron (MLP) fed with byte histograms, a better result than the one obtained with a Convolutional Neural Network (CNN) fed with raw bytes, 61\%. But the comparison with the ``CLD'' model of this study was based on Vulinović results with the CNN, not the MLP, because it is a more similar solution, one that uses raw bytes instead of byte histograms. Additionally, his results use F1-score, while this work measured accuracy. 
+Vulinović got an F1-score\footnote{
+    In binary classification problems, F1-score is the harmonic mean between precision and recal. In this context, precision is the number of true positives divided by the sum between true positives and false positives, while recall is the number of true positives divided by the sum of true positives and false negatives.
+} of 81\% for the Multilayer Perceptron (MLP) fed with byte histograms, a better result than the one obtained with a Convolutional Neural Network (CNN) fed with raw bytes, 61\%. But the comparison with the ``CLD'' model of this study was based on Vulinović results with the CNN, not the MLP, because it is a more similar solution, one that uses raw bytes instead of byte histograms. Additionally, his results use F1-score, while this work measured accuracy. 
 
