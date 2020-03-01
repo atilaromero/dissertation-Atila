@@ -4,7 +4,7 @@ The results of this Chapter highlight the importance of the file types chosen to
 
 In Figure \ref{fig:nclasses}, a decreasing trend was observed. An increase in the number of classes appears to be correlated with a decrease in accuracy. Another relevant aspect of the graph is that the range of the results seems to be smaller when more classes are used.  
 
-This pattern is understandable: as the number of classes grows, the harder the classification problem is, leading to a decrease in accuracy. Meanwhile, the individual contributions of each class to the overall result diminish, leading to an increase in precision.
+This pattern is understandable: as the number of classes grows, the harder the classification problem is, leading to a decrease in accuracy. Meanwhile, the individual contributions of each class to the overall result diminish, leading to a decrease in variation between the different results for a given number of classes.
 
 This behavior is an important aspect to consider during the evaluation of file fragments studies. This observation is in agreement with Beebe \textit{et al.} \cite{beebe_sceadan:_2013} observation, that the studies that select fewer classes tend to yield higher results. 
 
@@ -37,7 +37,7 @@ and ``pps''.
 
 
 Answering the second research question ``\textbf{How does the accuracy of neural network models changes relative to the number of classes in file fragment classification?}'', 
-it was observed that an increase in the number of extensions selected to compose the training tends to decrease accuracy and increase precision. But the number of classes alone is not as important as the type of extension selected: some file types when included in the experiment have a much higher negative impact than others. This observation was demonstrated in the ``hard file types first'' and ``easy file types first'' of Figure \ref{fig:nclasses}, where the file types selected to compose were intentionally chosen, once to degrade results and once to improve them.
+it was observed that an increase in the number of extensions selected to compose the training tends to decrease accuracy and to decrease variation in results. But the number of classes alone is not as important as the type of extension selected: some file types when included in the experiment have a much higher negative impact than others. This observation was demonstrated in the ``hard file types first'' and ``easy file types first'' of Figure \ref{fig:nclasses}, where the file types selected to compose were intentionally chosen, once to degrade results and once to improve them.
 
 
 File types that contain images or that use compression were identified as those that have the highest negative effect on results, which suggests that their entropy may contribute to the error.
